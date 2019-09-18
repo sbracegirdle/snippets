@@ -11,45 +11,5 @@
 			"  ]",
 			"},"
 		]
-	},
-	//
-	// REACT STUFF
-	"react_component": {
-		"prefix": "react_component",
-		"body": [
-			"import React from 'react';",
-			"",
-			"const $1 = () => {",
-			"  return <div>Hello</div>;",
-			"};",
-			"",
-			"export default $1;"
-		]
-	},
-	"react_effect": {
-		"prefix": "react_effect",
-		"body": [
-			"useEffect(() => {",
-			"  someAsyncCall(); ",
-			"}, [myDep])"
-		]
-	},
-	//
-	// DYNAMODB STUFF
-	"dynamo_get": {
-		"prefix": "dynamo_get",
-		"body": [
-			"const result = await docClient",
-			".get({",
-			"  TableName: TEMPLATES_TABLE,",
-			"  Key: {",
-			"    id,",
-			"    tenantId",
-			"  }",
-			"})",
-			".promise();",
-			"",
-			"if (result && result.Item) doSomething();"
-		]
 	}
 }

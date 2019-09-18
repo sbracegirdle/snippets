@@ -1,44 +1,171 @@
 {
-	// Place your snippets for javascriptreact here. Each snippet is defined under a snippet name and has a prefix, body and 
-	// description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
-	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. Placeholders with the 
-	// same ids are connected.
-	// Example:
-	// "Print to console": {
-	// 	"prefix": "log",
-	// 	"body": [
-	// 		"console.log('$1');",
-	// 		"$2"
-	// 	],
-	// 	"description": "Log output to console"
-	// }
-	"React component": {
-		"prefix": "comp",
-		"body": "import React, { Component } from 'react';\n\nclass ${1:componentName} extends Component {\n\trender() {\n\t\treturn (\n\t\t\t<div>\n\t\t\t\t$0\n\t\t\t</div>\n\t\t);\n\t}\n}\n\nexport default ${1:componentName};"
-	},
-
-	"Functional component": {
-		"prefix": "compfunc",
-		"body": "import React from 'react';\n\nconst ${1:componentName} = () => {\n\treturn (\n\t\t<div>\n\t\t\t$0\n\t\t</div>\n\t);\n};\n\nexport default ${1:componentName};"
-	},
-
-	"describe": {
-		"prefix": "describe",
-		"body": "describe('${1}', () => {\n\t\n});"
-	},
-
-	"it": {
-		"prefix": "it",
-		"body": "it('should ${1}', () => {\n\t\n});"
-	},
-
-	"connect": {
-		"prefix": "connect",
-		"body": "import {connect} from 'react-redux';\n\nconst Connected${1} = connect(state => ({\n\n}), dispatch => ({\n\n}))(${1});\n\nexport default Connected${1};"
-	},
-
-	"ui_test": {
-		"prefix": "ui_test",
-		"body": "import testSetup from '../testutil/testSetup';\nimport React from 'react';\n\n// import thing from './place';\n\nconst {expect, shallow, mount, createStore, fetchMock, waitForAction} = testSetup;\n\ndescribe('ProfileEditDetails tests', () => {\n\tdescribe('businessNameNotInPersonalName', () => {\n\t\tit('empty personal name should be ok', () => {\n\t\t\texpect(businessNameNotInPersonalName('', '', 'Alpha Building')).to.be.ok;\n\t\t});\n\t});\n});\n"
-	}
+  "react_class": {
+    "prefix": "react_class",
+    "description": "",
+    "body": [
+      "import React, { Component } from 'react';",
+      "",
+      "class ${1:componentName} extends Component {",
+      "\trender() {",
+      "\t\treturn (",
+      "\t\t\t<div>",
+      "\t\t\t\t$0",
+      "\t\t\t</div>",
+      "\t\t);",
+      "\t}",
+      "}",
+      "",
+      "export default ${1:componentName};"
+    ]
+  },
+  "react_component": {
+    "prefix": "react_component",
+    "description": "",
+    "body": [
+      "import React from 'react';",
+      "",
+      "const ${1:componentName} = () => {",
+      "\treturn (",
+      "\t\t<div>",
+      "\t\t\t$0",
+      "\t\t</div>",
+      "\t);",
+      "};",
+      "",
+      "export default ${1:componentName};"
+    ]
+  },
+  "react_effect": {
+    "prefix": "react_effect",
+    "description": "",
+    "body": [
+      "useEffect(() => {",
+      "  someAsyncCall(); ",
+      "}, [myDep])"
+    ]
+  },
+  "redux_connect": {
+    "prefix": "connect",
+    "body": "import {connect} from 'react-redux';\n\nconst Connected${1} = connect(state => ({\n\n}), dispatch => ({\n\n}))(${1});\n\nexport default Connected${1};"
+  },
+  "mocha_describe": {
+    "prefix": "describe",
+    "body": "describe('${1}', () => {\n\t\n});"
+  },
+  "mocha_it": {
+    "prefix": "it",
+    "body": "it('should ${1}', () => {\n\t\n});"
+  },
+  "jest_describe": {
+    "prefix": "describe",
+    "body": "describe('${1}', () => {\n\t\n});"
+  },
+  "jest_it": {
+    "prefix": "it",
+    "body": "it('should ${1}', () => {\n\t\n});"
+  },
+  "mocha_test": {
+    "prefix": "mocha_test",
+    "body": "import testSetup from '../testutil/testSetup';\nimport React from 'react';\n\n// import thing from './place';\n\nconst {expect, shallow, mount, createStore, fetchMock, waitForAction} = testSetup;\n\ndescribe('ProfileEditDetails tests', () => {\n\tdescribe('businessNameNotInPersonalName', () => {\n\t\tit('empty personal name should be ok', () => {\n\t\t\texpect(businessNameNotInPersonalName('', '', 'Alpha Building')).to.be.ok;\n\t\t});\n\t});\n});\n"
+  },
+  "dynamo_get": {
+    "prefix": "dynamo_get",
+    "body": [
+      "const result = await docClient",
+      ".get({",
+      "  TableName: TEMPLATES_TABLE,",
+      "  Key: {",
+      "    id,",
+      "    tenantId",
+      "  }",
+      "})",
+      ".promise();",
+      "",
+      "if (result && result.Item) doSomething();"
+    ]
+  },
+  "dynamo_create_table": {
+    "prefix": "dynamo_create_table",
+    "description": "",
+    "body": [
+      "await dynamodb",
+      "    .createTable({",
+      "      TableName: TEMPLATES_TABLE,",
+      "      KeySchema: [{AttributeName: 'tenantId', KeyType: 'HASH'}, {AttributeName: 'id', KeyType: 'RANGE'}],",
+      "      AttributeDefinitions: [",
+      "        {AttributeName: 'tenantId', AttributeType: 'S'},",
+      "        {AttributeName: 'id', AttributeType: 'S'}",
+      "      ],",
+      "      ProvisionedThroughput: {",
+      "        ReadCapacityUnits: 5,",
+      "        WriteCapacityUnits: 5",
+      "      }",
+      "    })",
+      "    .promise();"
+    ]
+  },
+  "dynamo_delete_table": {
+    "prefix": "dynamo_delete_table",
+    "description": "",
+    "body": [
+      "await dynamodb.deleteTable({TableName: TEMPLATES_TABLE}).promise();"
+    ]
+  },
+  "dynamo_list_tables": {
+    "prefix": "dynamo_list_tables",
+    "description": "",
+    "body": [
+      "await dynamodb.listTables({}).promise();"
+    ]
+  },
+  "dynamo_connect": {
+    "prefix": "dynamo_connect",
+    "description": "",
+    "body": [
+      "const AWS = require('aws-sdk');",
+      "",
+      "AWS.config.update({",
+      "  region: 'us-west-2',",
+      "  endpoint: 'http://localhost:8000',",
+      "  accessKeyId: 'fakeMyKeyId',",
+      "  secretAccessKey: 'fakeSecretAccessKey'",
+      "});",
+      "",
+      "const TEMPLATES_TABLE = 'DesignerTemplates';",
+      "const dynamodb = new AWS.DynamoDB();",
+      "const docClient = new AWS.DynamoDB.DocumentClient();"
+    ]
+  },
+  "joi_schema": {
+    "prefix": "joi_schema",
+    "description": "",
+    "body": [
+      "const nodeSchema = Joi.object().keys({",
+      "  name: Joi.string().required(),",
+      "  props: Joi.object()",
+      "    .pattern(Joi.string(), Joi.string())",
+      "    .optional(),",
+      "  children: Joi.array()",
+      "    .items(Joi.object())",
+      "    .optional(),",
+      "  text: Joi.string().optional()",
+      "});"
+    ]
+  },
+  "joi_require": {
+    "prefix": "joi_require",
+    "description": "",
+    "body": [
+      "const Joi = require('@hapi/joi');"
+    ]
+  },
+  "joi_validate": {
+    "prefix": "joi_validate",
+    "description": "",
+    "body": [
+      "const result = Joi.validate(node, nodeSchema);",
+      "",
+      "  if (result.error) throw new InvalidTemplate(result.error);"
+    ]
+  }
 }
