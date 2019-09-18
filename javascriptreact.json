@@ -38,11 +38,7 @@
   "react_effect": {
     "prefix": "react_effect",
     "description": "",
-    "body": [
-      "useEffect(() => {",
-      "  someAsyncCall(); ",
-      "}, [myDep])"
-    ]
+    "body": ["useEffect(() => {", "  someAsyncCall(); ", "}, [myDep])"]
   },
   "redux_connect": {
     "prefix": "connect",
@@ -62,7 +58,8 @@
   },
   "jest_it": {
     "prefix": "it",
-    "body": "it('should ${1}', () => {\n\t\n});"
+    "description": "",
+    "body": ["it('should ${1}', () => {", "\t", "});"]
   },
   "mocha_test": {
     "prefix": "mocha_test",
@@ -114,9 +111,7 @@
   "dynamo_list_tables": {
     "prefix": "dynamo_list_tables",
     "description": "",
-    "body": [
-      "await dynamodb.listTables({}).promise();"
-    ]
+    "body": ["await dynamodb.listTables({}).promise();"]
   },
   "dynamo_connect": {
     "prefix": "dynamo_connect",
@@ -155,9 +150,7 @@
   "joi_require": {
     "prefix": "joi_require",
     "description": "",
-    "body": [
-      "const Joi = require('@hapi/joi');"
-    ]
+    "body": ["const Joi = require('@hapi/joi');"]
   },
   "joi_validate": {
     "prefix": "joi_validate",
@@ -167,5 +160,25 @@
       "",
       "  if (result.error) throw new InvalidTemplate(result.error);"
     ]
+  },
+  "express_app": {
+    "prefix": "express_app",
+    "description": "",
+    "body": [
+      "const express = require('express')",
+      "",
+      "const app = express();",
+      "const port = process.env.PORT || 3000;",
+      "",
+      "app.use(express.json());",
+      "app.use(express.urlencoded());",
+      "app.use(morgan('tiny'));",
+      "",
+      "app.listen(port, () => console.log(`report-designer-api listening on port ${port}!`));"
+    ]
+  },
+  "express_route": {
+    "prefix": "express_route",
+    "body": ["app.get('/foo/:id', (req, res) => res.send({foo: 'bar'}))"]
   }
 }

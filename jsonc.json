@@ -1,0 +1,53 @@
+{
+  "babelrc_react_node": {
+    "prefix": "babelrc_react_node",
+    "description": "",
+    "body": [
+      "{",
+      "  \"presets\": [",
+      "    [",
+      "      \"@babel/env\",",
+      "      {",
+      "        \"targets\": {",
+      "          \"node\": \"8\"",
+      "        },",
+      "        \"modules\": \"commonjs\"",
+      "      }",
+      "    ],",
+      "    \"@babel/react\"",
+      "  ]",
+      "}",
+      ""
+    ]
+  },
+  "eslintrc": {
+    "prefix": "eslintrc",
+    "description": "",
+    "body": [
+      "{",
+      "  \"extends\": [\"eslint:recommended\", \"plugin:react/recommended\"],",
+      "  \"parserOptions\": {",
+      "    \"ecmaVersion\": 2018",
+      "  },",
+      "  \"parser\": \"babel-eslint\",",
+      "  \"rules\": {",
+      "    \"linebreak-style\": [\"error\", \"unix\"],",
+      "    \"quotes\": [\"error\", \"single\", {\"allowTemplateLiterals\": true}],",
+      "    \"react/prop-types\": \"off\",",
+      "    \"react/display-name\": \"off\",",
+      "    \"react/jsx-key\": \"off\"",
+      "  },",
+      "  \"plugins\": [\"react\"],",
+      "  \"globals\": {",
+      "    \"module\": \"readonly\"",
+      "  },",
+      "  \"env\": {",
+      "    \"browser\": false,",
+      "    \"es6\": true,",
+      "    \"jest\": true,",
+      "    \"node\": true",
+      "  }",
+      "}"
+    ]
+  }
+}
