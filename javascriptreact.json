@@ -179,6 +179,6 @@
   },
   "express_route": {
     "prefix": "express_route",
-    "body": ["app.get('/foo/:id', (req, res) => res.send({foo: 'bar'}))"]
+    "body": ["app.get('/foo/:id', (req, res) => res.send({foo: 'bar'}));"]
   }
 }
