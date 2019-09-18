@@ -1,0 +1,115 @@
+{
+	"py_dict": {
+		"prefix": "py_dict",
+		"body": [
+			"my_dict = {",
+			"  \t\"my_key\": \"my_value\"",
+			"\t}"
+		]
+	},
+	"import_datasci": {
+		"prefix": "import_datasci",
+		"body": [
+			"import numpy as np",
+			"import pandas as pd",
+			"import matplotlib as plt",
+			"import seaborn as sns",
+			"",
+			"%matplotlib inline"
+		]
+	},
+	"pandas_csv": {
+		"prefix": "pandas_csv",
+		"body": [
+			"df = pd.read_csv('my_csv.csv')"
+		]
+	},
+	"pandas_info": {
+		"prefix": "pandas_info",
+		"body": [
+			"df.head()",
+			"df.info()",
+			"df.dtypes"
+		]
+	},
+	"pandas_sort": {
+		"prefix": "pandas_sort",
+		"body": [
+			"df.sort_values(by = 'foo')"
+		]
+	},
+	"pandas_group": {
+		"prefix": "pandas_group",
+		"body": [
+			"df_counted = df.groupby(['col1', 'col2']).count()"
+		]
+	},
+	"pandas_apply": {
+		"prefix": "pandas_apply",
+		"body": [
+			"df['sqrt_values'] = df['values'].apply(np.sqrt)"
+		]
+	},
+	"sklearn_linear": {
+		"prefix": "sklearn_linear",
+		"body": [
+			"from sklearn.linear_model import LinearRegression"
+		]
+	},
+	"sklearn_logistic": {
+		"prefix": "sklearn_logistic",
+		"body": [
+			"from sklearn.linear_model import LogisticRegression"
+		]
+	},
+	"sklearn_model": {
+		"prefix": "sklearn_model",
+		"body": [
+			"model = LinearRegression(normalize = True)"
+		]
+	},
+	"sklearn_train_test_split": {
+		"prefix": "sklearn_train_test_split",
+		"body": [
+			"# Where `X` is the data df and `y` is the labels df/series.",
+			"from sklearn.model_selection import train_test_split #previously from sklearn.cross_validation",
+			"X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)"
+		]
+	},
+	"sklearn_fit": {
+		"prefix": "sklearn_fit",
+		"body": [
+			"model.fit(X_train, y_train)"
+		]
+	},
+	"sklearn_predict": {
+		"prefix": "sklearn_predict",
+		"body": [
+			"predictions = model.predict(X_test)"
+		]
+	},
+	"sklearn_errors": {
+		"prefix": "sklearn_errors",
+		"body": [
+			"from sklearn import metrics",
+			"",
+			"metrics.mean_absolute_error(y_test, predictions)",
+			"metrics.mean_squared_error(y_test, predictions)",
+			"np.sqrt(metrics.mean_squared_error(y_test, predictions))"
+		]
+	},
+	"sklearn_classification": {
+		"prefix": "sklearn_classification",
+		"body": [
+			"from sklearn.metrics import classification_report",
+			"print(classification_report(y_test,predictions))"
+		]
+	},
+	"sklearn_confusion": {
+		"prefix": "sklearn_classification",
+		"body": [
+			"from sklearn.metrics import confusion_matrix",
+			"print(confusion_matrix(y_true, y_pred))"
+		]
+	}
+}
