@@ -1,0 +1,44 @@
+{
+	// Place your snippets for javascriptreact here. Each snippet is defined under a snippet name and has a prefix, body and 
+	// description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. Placeholders with the 
+	// same ids are connected.
+	// Example:
+	// "Print to console": {
+	// 	"prefix": "log",
+	// 	"body": [
+	// 		"console.log('$1');",
+	// 		"$2"
+	// 	],
+	// 	"description": "Log output to console"
+	// }
+	"React component": {
+		"prefix": "comp",
+		"body": "import React, { Component } from 'react';\n\nclass ${1:componentName} extends Component {\n\trender() {\n\t\treturn (\n\t\t\t<div>\n\t\t\t\t$0\n\t\t\t</div>\n\t\t);\n\t}\n}\n\nexport default ${1:componentName};"
+	},
+
+	"Functional component": {
+		"prefix": "compfunc",
+		"body": "import React from 'react';\n\nconst ${1:componentName} = () => {\n\treturn (\n\t\t<div>\n\t\t\t$0\n\t\t</div>\n\t);\n};\n\nexport default ${1:componentName};"
+	},
+
+	"describe": {
+		"prefix": "describe",
+		"body": "describe('${1}', () => {\n\t\n});"
+	},
+
+	"it": {
+		"prefix": "it",
+		"body": "it('should ${1}', () => {\n\t\n});"
+	},
+
+	"connect": {
+		"prefix": "connect",
+		"body": "import {connect} from 'react-redux';\n\nconst Connected${1} = connect(state => ({\n\n}), dispatch => ({\n\n}))(${1});\n\nexport default Connected${1};"
+	},
+
+	"ui_test": {
+		"prefix": "ui_test",
+		"body": "import testSetup from '../testutil/testSetup';\nimport React from 'react';\n\n// import thing from './place';\n\nconst {expect, shallow, mount, createStore, fetchMock, waitForAction} = testSetup;\n\ndescribe('ProfileEditDetails tests', () => {\n\tdescribe('businessNameNotInPersonalName', () => {\n\t\tit('empty personal name should be ok', () => {\n\t\t\texpect(businessNameNotInPersonalName('', '', 'Alpha Building')).to.be.ok;\n\t\t});\n\t});\n});\n"
+	}
+}
