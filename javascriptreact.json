@@ -38,7 +38,11 @@
   "react_effect": {
     "prefix": "react_effect",
     "description": "",
-    "body": ["useEffect(() => {", "  someAsyncCall(); ", "}, [myDep])"]
+    "body": [
+      "useEffect(() => {",
+      "  someAsyncCall(); ",
+      "}, [myDep])"
+    ]
   },
   "redux_connect": {
     "prefix": "connect",
@@ -59,7 +63,11 @@
   "jest_it": {
     "prefix": "it",
     "description": "",
-    "body": ["it('should ${1}', () => {", "\t", "});"]
+    "body": [
+      "it('should ${1}', () => {",
+      "\t",
+      "});"
+    ]
   },
   "mocha_test": {
     "prefix": "mocha_test",
@@ -111,7 +119,9 @@
   "dynamo_list_tables": {
     "prefix": "dynamo_list_tables",
     "description": "",
-    "body": ["await dynamodb.listTables({}).promise();"]
+    "body": [
+      "await dynamodb.listTables({}).promise();"
+    ]
   },
   "dynamo_connect": {
     "prefix": "dynamo_connect",
@@ -150,7 +160,9 @@
   "joi_require": {
     "prefix": "joi_require",
     "description": "",
-    "body": ["const Joi = require('@hapi/joi');"]
+    "body": [
+      "const Joi = require('@hapi/joi');"
+    ]
   },
   "joi_validate": {
     "prefix": "joi_validate",
@@ -179,6 +191,129 @@
   },
   "express_route": {
     "prefix": "express_route",
-    "body": ["app.get('/foo/:id', (req, res) => res.send({foo: 'bar'}));"]
-  }
+    "body": [
+      "app.get('/foo/:id', (req, res) => res.send({foo: 'bar'}));"
+    ]
+  },
+  "cdk_app": {
+    "prefix": "cdk_app",
+    "body": [
+      "import cdk = require('@aws-cdk/core');",
+      "",
+      "// ## CDK Quick ref: ",
+      "// npm install -g aws-cdk ",
+      "// cdk --version ",
+      "// cdk init --language LANGUAGE [TEMPLATE] ",
+      "// cdk init --language javascript ",
+      "// cdk init --language python sample-app ",
+      "// cdk ls ",
+      "// cdk diff ",
+      "// cdk deploy MyStack ",
+      "// cdk destroy ",
+      "",
+      "const app = new cdk.App();",
+      "new MyStack(app, 'MyStack');",
+      "app.synth();"
+    ]
+  },
+  "cdk_stack": {
+    "prefix": "cdk_stack",
+    "body": [
+      "import cdk = require('@aws-cdk/core');",
+      "",
+      "export class LambdaCronStack extends cdk.Stack {",
+      "  constructor(app: cdk.App, id: string) {",
+      "    super(app, id);",
+      "    ",
+      "    // Do things",
+      "  }"
+    ]
+  },
+  "cdk_lambda": {
+    "prefix": "cdk_lambda",
+    "body": [
+      "import lambda = require('@aws-cdk/aws-lambda');",
+      "",
+      "const lambdaFn = new lambda.Function(this, 'Singleton', { ",
+      "  code: new lambda.InlineCode(fs.readFileSync('lambda-handler.py', { encoding: 'utf-8' })),",
+      "  handler: 'index.main',",
+      "  timeout: cdk.Duration.seconds(300),",
+      "  runtime: lambda.Runtime.PYTHON_2_7",
+      "});"
+    ]
+  },
+  "cdk_events_lambda": {
+    "prefix": "cdk_events_lambda",
+    "body": [
+      "import events = require('@aws-cdk/aws-events');",
+      "import targets = require('@aws-cdk/aws-events-targets');",
+      "",
+      "const rule = new events.Rule(this, 'Rule', {",
+      "  schedule: events.Schedule.expression('cron(0 18 ? * MON-FRI *)')",
+      "});",
+      "",
+      "rule.addTarget(new targets.LambdaFunction(lambdaFn));"
+    ]
+  },
+  "cdk_bucket": {
+    "prefix": "cdk_bucket",
+    "body": [
+      "import s3 = require('@aws-cdk/aws-s3');",
+      "//...",
+      "const siteBucket = new s3.Bucket(this, 'SiteBucket', {",
+      "  bucketName: siteDomain,",
+      "  websiteIndexDocument: 'index.html',",
+      "  websiteErrorDocument: 'error.html',",
+      "  publicReadAccess: true,",
+      "  removalPolicy: cdk.RemovalPolicy.DESTROY,",
+      "});"
+    ]
+  },
+  "cdk_bucket_deploy": {
+    "prefix": "cdk_bucket_deploy",
+    "body": [
+      "import s3deploy = require('@aws-cdk/aws-s3-deployment');",
+      "//...",
+      "new s3deploy.BucketDeployment(this, 'DeployWithInvalidation', {",
+      "  source: s3deploy.Source.asset('./site-contents'),",
+      "  destinationBucket: siteBucket,",
+      "  distribution,",
+      "  distributionPaths: ['/*'],",
+      "});"
+    ]
+  },
+  "cdk_acm": {
+    "prefix": "cdk_acm",
+    "body": [
+      "import acm = require('@aws-cdk/aws-certificatemanager');",
+      "//...",
+      "const certificateArn = new acm.DnsValidatedCertificate(this, 'SiteCertificate', {",
+      "  domainName: siteDomain,",
+      "  hostedZone: zone",
+      "}).certificateArn;"
+    ]
+  },
+  "cdk_cloudfront": {
+    "prefix": "cdk_cloudfront",
+    "body": [
+      "import cloudfront = require('@aws-cdk/aws-cloudfront');",
+      "",
+      "const distribution = new cloudfront.CloudFrontWebDistribution(this, 'SiteDistribution', {",
+      "  aliasConfiguration: {",
+      "    acmCertRef: certificateArn,",
+      "    names: [ siteDomain ],",
+      "    sslMethod: cloudfront.SSLMethod.SNI,",
+      "    securityPolicy: cloudfront.SecurityPolicyProtocol.TLS_V1_1_2016,",
+      "  },",
+      "  originConfigs: [",
+      "    {",
+      "      s3OriginSource: {",
+      "        s3BucketSource: siteBucket",
+      "      },",
+      "      behaviors : [ {isDefaultBehavior: true}],",
+      "    }",
+      "  ]",
+      "});"
+    ]
+  },
 }
