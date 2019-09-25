@@ -2,14 +2,14 @@
 	"py_if": {
 		"prefix": "py_if",
 		"body": [
-			"if $1:",
+			"if ${1:condition}:",
 			"  $0"
 		]
 	},
-	"py_for_in": {
+	"py_for": {
 		"prefix": "py_for_if",
 		"body": [
-			"for $2 in $1:",
+			"for ${2:item} in ${1:iterable}:",
 			"  $0"
 		]
 	},

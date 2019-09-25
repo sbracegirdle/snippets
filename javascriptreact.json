@@ -1,11 +1,17 @@
 {
+  "el": {
+    "prefix": "el",
+    "body": [
+      "<${1:div}$2>$0</${1:div}>"
+    ]
+  },
   "react_class": {
     "prefix": "react_class",
     "description": "",
     "body": [
       "import React, { Component } from 'react';",
       "",
-      "class ${1:componentName} extends Component {",
+      "class ${1:ComponentName} extends Component {",
       "\trender() {",
       "\t\treturn (",
       "\t\t\t<div>",
@@ -15,7 +21,7 @@
       "\t}",
       "}",
       "",
-      "export default ${1:componentName};"
+      "export default ${1:ComponentName};"
     ]
   },
   "react_component": {
@@ -35,13 +41,26 @@
       "export default ${1:componentName};"
     ]
   },
-  "react_effect": {
-    "prefix": "react_effect",
+  "react_use_effect": {
+    "prefix": "react_use_effect",
     "description": "",
     "body": [
       "useEffect(() => {",
       "  someAsyncCall(); ",
       "}, [myDep])"
+    ]
+  },
+  "react_use_state": {
+    "prefix": "react_use_state",
+    "description": "",
+    "body": [
+      "const [${1:name}, set${1:name}] = useState(${2:defaultValue});"
+    ]
+  },
+  "react_use_memo": {
+    "prefix": "react_use_memo",
+    "body": [
+      "const ${1:name} = useMemo(() => ${3:computation}, [${2:dependency}])"
     ]
   },
   "redux_connect": {

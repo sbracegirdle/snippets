@@ -1,0 +1,142 @@
+{
+	"bash_shebang": {
+		"prefix": "bash_shebang",
+		"body": [
+			"#!/usr/bin/env bash"
+		]
+	},
+	"bash_if": {
+		"prefix": "bash_if",
+		"body": [
+			"if [[ ${1:\"${MODE}\" = \"value\"} ]]",
+			"then",
+			"\t$0",
+			"fi",
+		]
+	},
+	"bash_elif": {
+		"prefix": "bash_elif",
+		"body": [
+			"if [[ \"${MODE}\" = \"value\" ]]",
+			"then",
+			"\techo \"String is empty\"",
+			"elif [[ \"${MODE}\" = \"other\" ]]",
+			"then",
+			"\techo \"String is not empty\"",
+			"fi",
+		]
+	},
+	"bash_func": {
+		"prefix": "bash_func",
+		"body": [
+			"${1:my_function}() {",
+			"\t$0",
+			"}",
+			"",
+			"echo \"$(${1:my_function})\""
+		]
+	},
+	"bash_for": {
+		"prefix": "bash_for",
+		"body": [
+			"for i in ${1:/etc/rc.*}; do",
+			"\t$0",
+			"done"
+		]
+	},
+	"bash_exists": {
+		"prefix": "bash_exists",
+		"body": [
+			"[[ -e ${1:my_file} ]]"
+		]
+	},
+	"bash_is_dir": {
+		"prefix": "bash_is_dir",
+		"body": [
+			"[[ -d ${1:my_dir} ]]"
+		]
+	},
+	"bash_is_file": {
+		"prefix": "bash_is_file",
+		"body": [
+			"[[ -f ${1:my_file} ]]"
+		]
+	},
+	"bash_is_empty_str": {
+		"prefix": "bash_is_empty_str",
+		"body": [
+			"[[ -z \"${1:$MY_VAR}\" ]]"
+		]
+	},
+	"bash_and": {
+		"prefix": "bash_and",
+		"body": [
+			"[[ X ]] && [[ Y ]]"
+		]
+	},
+	"bash_or": {
+		"prefix": "bash_or",
+		"body": [
+			"[[ X ]] || [[ Y ]]"
+		]
+	},
+	"bash_not": {
+		"prefix": "bash_not",
+		"body": [
+			"[[ ! $1 ]]"
+		]
+	},
+	"bash_var": {
+		"prefix": "bash_var",
+		"body": [
+			"${1:MY_VAR}=\"${2:myvalue}\""
+		]
+	},
+	"bash_export_var": {
+		"prefix": "bash_export_var",
+		"body": [
+			"export ${1:MY_VAR}=\"${2:myvalue}\""
+		]
+	},
+	"bash_exit_error": {
+		"prefix": "bash_exit_error",
+		"body": [
+			"set -e"
+		]
+	},
+	"bash_var_command": {
+		"prefix": "bash_var_command",
+		"body": [
+			"${1:MY_VAR}=$(${1:command_with_list})"
+		]
+	},
+	"bash_import_var": {
+		"prefix": "bash_import_var",
+		"body": [
+			"set -o allexport",
+			". ${1:/my/path/vars.env}",
+			"set +o allexport"
+		]
+	},
+	"bash_echo_var": {
+		"prefix": "bash_echo_var",
+		"body": [
+			"echo \"${1:My var value is}: ${${2:SOME_VAR}}\""
+		]
+	},
+	"bash_array": {
+		"prefix": "bash_array",
+		"body": [
+			"Fruits=('Apple' 'Banana' 'Orange')",
+			"echo ${Fruits[0]}"
+		]
+	},
+	"bash_array_iter": {
+		"prefix": "bash_array_iter",
+		"body": [
+			"for i in \"${arrayName[@]}\"; do",
+			"\techo $i", 
+			"done"
+		]
+	},
+}

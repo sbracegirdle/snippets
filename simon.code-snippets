@@ -5,10 +5,20 @@
 		"prefix": "vscode_snippet",
 		"body": [
 			"\"$1\": {",
-			"  \"prefix\": \"$1\",",
-			"  \"body\": [",
-			"    \"$2\"",
-			"  ]",
+			"\t\"prefix\": \"$1\",",
+			"\t\"body\": [",
+			"\t\t\"$2\"",
+			"\t]",
+			"},"
+		]
+	},
+	"vscode_terminal_macro": {
+		"prefix": "vscode_terminal_macro",
+		"body": [
+			"{",
+			"\t\"key\": \"ctrl+u\",",
+			"\t\"command\": \"workbench.action.terminal.sendSequence\",",
+			"\t\"args\": { \"text\": \"$1\" }",
 			"},"
 		]
 	},
