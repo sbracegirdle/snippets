@@ -1,37 +1,52 @@
 {
+	"py_if": {
+		"prefix": "py_if",
+		"body": [
+			"if $1:",
+			"  $0"
+		]
+	},
+	"py_for_in": {
+		"prefix": "py_for_if",
+		"body": [
+			"for $2 in $1:",
+			"  $0"
+		]
+	},
 	"py_dict": {
 		"prefix": "py_dict",
 		"body": [
 			"my_dict = {",
-			"  \"my_key\": \"my_value\"",
-			"\t}"
+			"  \"$1\": \"$2\"",
+			"  $0",
+			"}"
 		]
 	},
 	"py_lambda": {
 		"prefix": "py_lambda",
 		"body": [
-			"lambda x: x ** 2"
+			"lambda x: $0"
 		]
 	},
 	"py_open_file": {
 		"prefix": "py_open_file",
 		"body": [
-			"with open('myfile.txt') as file:",
-			"  data = file.read()"
+			"with open($1) as file:",
+			"  data = file.read()$0"
 		]
 	},
 	"py_func": {
 		"prefix": "py_func",
 		"body": [
-			"def foo(arg1):",
-			"  # CODEHERE"
+			"def $1($2):",
+			"  $0"
 		]
 	},
 	"py_write_file": {
 		"prefix": "py_write_file",
 		"body": [
-			"with open('myfile.txt', 'w') as file:",
-			"  file.write('Hi there!')"
+			"with open($1, 'w') as file:",
+			"  file.write('Hi there!')$0"
 		]
 	},
 	"py_list_comp": {
@@ -44,7 +59,7 @@
 		"prefix": "py_main",
 		"body": [
 			"if __name__ == '__main__':",
-			"  print('CODE')"
+			"  $0"
 		]
 	},
 	"py_shebang": {
@@ -71,6 +86,31 @@
 			"map(lambda: x: x * 2, mylist)"
 		]
 	},
+	"py_list_push": {
+		"prefix": "py_list_push",
+		"body": [
+			".append('item')"
+		]
+	},
+	"py_list_find": {
+		"prefix": "py_list_find",
+		"body": [
+			".index(myval)"
+		]
+	},
+	"py_reduce": {
+		"prefix": "py_reduce",
+		"body": [
+			"from functools import reduce",
+			"reduce(lambda accum, item: accum * item, mylist, 4)"
+		]
+	},
+	"py_str_to_int": {
+		"prefix": "py_str_to_int",
+		"body": [
+			"int(str)"
+		]
+	},
 
 	"import_datasci": {
 		"prefix": "import_datasci",
@@ -81,6 +121,12 @@
 			"import seaborn as sns",
 			"",
 			"%matplotlib inline"
+		]
+	},
+	"pandas_json": {
+		"prefix": "pandas_json",
+		"body": [
+			"df = pd.read_json('my_json.json')"
 		]
 	},
 	"pandas_csv": {
@@ -153,8 +199,8 @@
 			"predictions = model.predict(X_test)"
 		]
 	},
-	"sklearn_errors": {
-		"prefix": "sklearn_errors",
+	"sklearn_metrics": {
+		"prefix": "sklearn_metrics",
 		"body": [
 			"from sklearn import metrics",
 			"",
@@ -171,7 +217,7 @@
 		]
 	},
 	"sklearn_confusion": {
-		"prefix": "sklearn_classification",
+		"prefix": "sklearn_confusion",
 		"body": [
 			"from sklearn.metrics import confusion_matrix",
 			"print(confusion_matrix(y_true, y_pred))"
