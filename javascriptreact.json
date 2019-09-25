@@ -63,6 +63,21 @@
       "const ${1:name} = useMemo(() => ${3:computation}, [${2:dependency}])"
     ]
   },
+  "react_use_ref": {
+    "prefix": "react_use_ref",
+    "body": [
+      "const ${1:myVar} = useRef(${2:null});"
+    ]
+  },
+  "react_use_callback": {
+    "prefix": "react_use_callback",
+    "body": [
+      "const ${1:memoizedCallback} = useCallback(",
+      "\t() => ${2:doSomething()},",
+      "\t[${3:myDep}],",
+      ");"
+    ]
+  },
   "redux_connect": {
     "prefix": "connect",
     "body": "import {connect} from 'react-redux';\n\nconst Connected${1} = connect(state => ({\n\n}), dispatch => ({\n\n}))(${1});\n\nexport default Connected${1};"
