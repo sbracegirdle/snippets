@@ -3,10 +3,75 @@
 		"prefix": "py_dict",
 		"body": [
 			"my_dict = {",
-			"  \t\"my_key\": \"my_value\"",
+			"  \"my_key\": \"my_value\"",
 			"\t}"
 		]
 	},
+	"py_lambda": {
+		"prefix": "py_lambda",
+		"body": [
+			"lambda x: x ** 2"
+		]
+	},
+	"py_open_file": {
+		"prefix": "py_open_file",
+		"body": [
+			"with open('myfile.txt') as file:",
+			"  data = file.read()"
+		]
+	},
+	"py_func": {
+		"prefix": "py_func",
+		"body": [
+			"def foo(arg1):",
+			"  # CODEHERE"
+		]
+	},
+	"py_write_file": {
+		"prefix": "py_write_file",
+		"body": [
+			"with open('myfile.txt', 'w') as file:",
+			"  file.write('Hi there!')"
+		]
+	},
+	"py_list_comp": {
+		"prefix": "py_list_comp",
+		"body": [
+			"[x * 2 for x in mylist if x > 2]"
+		]
+	},
+	"py_main": {
+		"prefix": "py_main",
+		"body": [
+			"if __name__ == '__main__':",
+			"  print('CODE')"
+		]
+	},
+	"py_shebang": {
+		"prefix": "py_shebang",
+		"body": [
+			"#!/usr/bin/python3"
+		]
+	},
+	"py_subprocess": {
+		"prefix": "py_subprocess",
+		"body": [
+			"output = subprocess.check_output(['mycmd', 'myarg'], universal_newlines=True)"
+		]
+	},
+	"py_filter": {
+		"prefix": "py_filter",
+		"body": [
+			"filter(lambda i: i < 5, mylist)"
+		]
+	},
+	"py_map": {
+		"prefix": "py_map",
+		"body": [
+			"map(lambda: x: x * 2, mylist)"
+		]
+	},
+
 	"import_datasci": {
 		"prefix": "import_datasci",
 		"body": [
