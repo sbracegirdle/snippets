@@ -103,5 +103,11 @@
 			"  }",
 			"}"
 		]
-	}
+	},
+	"jupyter_to_html": {
+		"prefix": "jupyter_to_html",
+		"body": [
+			"jupyter nbconvert --to html --no-input notebook.ipynb --output report.html"
+		]
+	},
 }

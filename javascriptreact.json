@@ -78,6 +78,72 @@
       ");"
     ]
   },
+  "import_react_intl": {
+    "prefix": "import_react_intl",
+    "body": [
+      "import {FormattedMessage} from 'react-intl';"
+    ]
+  },
+  "import_react_intl_provider": {
+    "prefix": "import_react_intl_provider",
+    "body": [
+      "import {IntlProvider} from 'react-intl'"
+    ]
+  },
+  "import_from": {
+    "prefix": "import_from",
+    "body": [
+      "import {${1:thing}} from '${2:library}';"
+    ]
+  },
+  "intl_provider": {
+    "prefix": "intl_provider",
+    "body": [
+      "<IntlProvider>$0</IntlProvider>"
+    ]
+  },
+  "intl_msg": {
+    "prefix": "intl_msg",
+    "body": [
+      "<FormattedMessage id=\"${1:app.greeting}\" defaultMessage=\"${2:My message}\" />",
+    ]
+  },
+  "msg": {
+    "prefix": "msg",
+    "body": [
+      "<FormattedMessage id=\"${1:app.greeting}\" defaultMessage=\"${2:My message}\" />",
+    ]
+  },
+  "intl_inject": {
+    "prefix": "intl_inject",
+    "body": [
+      "injectIntl(${1:MyComp})"
+    ]
+  },
+  "intl_get_msg": {
+    "prefix": "intl_get_msg",
+    "body": [
+      "intl: {formatMessage}"
+    ]
+  },
+  "msg_attr": {
+    "prefix": "msg_attr",
+    "body": [
+      "formatMessage({id: '${1:app.greeting}', defaultMessage: '${2:My message}'})"
+    ]
+  },
+  "formatted_msg": {
+    "prefix": "formatted_msg",
+    "body": [
+      "<FormattedMessage id=\"${1:app.greeting}\" defaultMessage=\"${2:My message}\" />",
+    ]
+  },
+  "formatted_msg_attr": {
+    "prefix": "formatted_msg_attr",
+    "body": [
+      "formatMessage({id: '${1:app.greeting}', defaultMessage: '${2:My message}'})"
+    ]
+  },
   "redux_connect": {
     "prefix": "connect",
     "body": "import {connect} from 'react-redux';\n\nconst Connected${1} = connect(state => ({\n\n}), dispatch => ({\n\n}))(${1});\n\nexport default Connected${1};"
