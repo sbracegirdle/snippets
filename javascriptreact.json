@@ -5,8 +5,20 @@
       "<${1:div}$2>$0</${1:div}>"
     ]
   },
+  "jest_test": {
+    "prefix": ["jest_test", "jest", "test"],
+    "body": [
+      "import ${1:mything} from '${2:mything}';",
+      "",
+      "describe('${3:something()}', () => {",
+      "  it('should ${4:do something}', () => {",
+      "    ${5:expect(something()).toBe([]);}",
+      "  });",
+      "});",
+    ]
+  },
   "react_class": {
-    "prefix": "react_class",
+    "prefix": ["react_class"],
     "description": "",
     "body": [
       "import React, { Component } from 'react';",
@@ -25,7 +37,7 @@
     ]
   },
   "react_component": {
-    "prefix": "react_component",
+    "prefix": ["react_component", "comp", "component"],
     "description": "",
     "body": [
       "import React from 'react';",
@@ -42,7 +54,7 @@
     ]
   },
   "react_use_effect": {
-    "prefix": "react_use_effect",
+    "prefix": ["react_use_effect", "use_effect"],
     "description": "",
     "body": [
       "useEffect(() => {",
@@ -51,26 +63,26 @@
     ]
   },
   "react_use_state": {
-    "prefix": "react_use_state",
+    "prefix": ["react_use_state", "use_state"],
     "description": "",
     "body": [
       "const [${1:name}, set${1:name}] = useState(${2:defaultValue});"
     ]
   },
   "react_use_memo": {
-    "prefix": "react_use_memo",
+    "prefix": ["react_use_memo", "use_memo"],
     "body": [
       "const ${1:name} = useMemo(() => ${3:computation}, [${2:dependency}])"
     ]
   },
   "react_use_ref": {
-    "prefix": "react_use_ref",
+    "prefix": ["react_use_ref", "use_ref"],
     "body": [
       "const ${1:myVar} = useRef(${2:null});"
     ]
   },
   "react_use_callback": {
-    "prefix": "react_use_callback",
+    "prefix": ["react_use_callback", "use_callback"],
     "body": [
       "const ${1:memoizedCallback} = useCallback(",
       "\t() => ${2:doSomething()},",
@@ -78,20 +90,70 @@
       ");"
     ]
   },
+  "cname": {
+    "prefix": ["cls", "cname", "class", "class_name"],
+    "body": [
+      "className={${1:thingClass}}"
+    ]
+  },
+  "cname_cond": {
+    "prefix": ["cname_cond", "ccond", "class_cond", "class_condition"],
+    "body": [
+      "className={`${${1:condition} ? ${2:thingClass} : ''`}"
+    ]
+  },
+  "shallow_renderer": {
+    "prefix": ["import_shallow_renderer", "import_shallow", "i_shallow", "shallow"],
+    "body": [
+      "import ShallowRenderer from 'react-test-renderer/shallow';"
+    ]
+  },
+  "jest_snapshot": {
+    "prefix": ["snapshot", "jest_snapshot", "shallow_snapshot"],
+    "body": [
+      "const renderer = new ShallowRenderer();",
+      "const result = renderer.render(<${1:MyComp} />);",
+      "expect(result).toMatchSnapshot();"
+    ]
+  },
+  "class_as": {
+    "prefix": "class_as",
+    "body": [
+      "${1:MyClass} as ${1:MyClass}Class"
+    ]
+  },
+  "import_css": {
+    "prefix": ["import_css", "import_module_css", "i_css"],
+    "body": [
+      "import ${1:{mything as mythingClass}} from './${2:mything}.module.css';"
+    ]
+  },
+  "import_react": {
+    "prefix": ["import_react", "react", "ir"],
+    "body": [
+      "import React from 'react';"
+    ]
+  },
+  "import_link": {
+    "prefix": ["import_link", "link", "il", "router"],
+    "body": [
+      "import {Link} from 'react-router-dom';"
+    ]
+  },
   "import_react_intl": {
-    "prefix": "import_react_intl",
+    "prefix": ["import_react_intl", "i_intl"],
     "body": [
       "import {FormattedMessage} from 'react-intl';"
     ]
   },
   "import_react_intl_provider": {
-    "prefix": "import_react_intl_provider",
+    "prefix": ["import_react_intl_provider", "i_intl_provider"],
     "body": [
       "import {IntlProvider} from 'react-intl'"
     ]
   },
   "import_from": {
-    "prefix": "import_from",
+    "prefix": ["import_from", "import", "i"],
     "body": [
       "import {${1:thing}} from '${2:library}';"
     ]
@@ -109,7 +171,7 @@
     ]
   },
   "msg": {
-    "prefix": "msg",
+    "prefix": ["msg", "formatted_msg"],
     "body": [
       "<FormattedMessage id=\"${1:app.greeting}\" defaultMessage=\"${2:My message}\" />",
     ]
@@ -121,25 +183,13 @@
     ]
   },
   "intl_get_msg": {
-    "prefix": "intl_get_msg",
+    "prefix": ["intl_get_msg", "intl_get_format_msg"],
     "body": [
       "intl: {formatMessage}"
     ]
   },
   "msg_attr": {
-    "prefix": "msg_attr",
-    "body": [
-      "formatMessage({id: '${1:app.greeting}', defaultMessage: '${2:My message}'})"
-    ]
-  },
-  "formatted_msg": {
-    "prefix": "formatted_msg",
-    "body": [
-      "<FormattedMessage id=\"${1:app.greeting}\" defaultMessage=\"${2:My message}\" />",
-    ]
-  },
-  "formatted_msg_attr": {
-    "prefix": "formatted_msg_attr",
+    "prefix": ["msg_attr", "format_msg"],
     "body": [
       "formatMessage({id: '${1:app.greeting}', defaultMessage: '${2:My message}'})"
     ]
@@ -149,23 +199,31 @@
     "body": "import {connect} from 'react-redux';\n\nconst Connected${1} = connect(state => ({\n\n}), dispatch => ({\n\n}))(${1});\n\nexport default Connected${1};"
   },
   "mocha_describe": {
-    "prefix": "describe",
+    "prefix": "mocha_describe",
     "body": "describe('${1}', () => {\n\t\n});"
   },
   "mocha_it": {
-    "prefix": "it",
-    "body": "it('should ${1}', () => {\n\t\n});"
+    "prefix": "mocha_it",
+    "body": "it('should ${1:do something}', () => {\n\t\n});"
+  },
+  "jest_expect": {
+    "prefix": ["jest_expect", "expect"],
+    "body": "expect(${1:myThing()}).toBe(${2:someOutput})"
+  },
+  "jest_expect_object": {
+    "prefix": ["jest_expect_object", "expect_object"],
+    "body": "expect(${1:myThing()}).toMatchObject(${2:{myObj}});"
   },
   "jest_describe": {
-    "prefix": "describe",
-    "body": "describe('${1}', () => {\n\t\n});"
+    "prefix": ["jest_describe", "describe"],
+    "body": "describe('${1:myThing()}', () => {$0});"
   },
   "jest_it": {
-    "prefix": "it",
+    "prefix": ["jest_it", "it"],
     "description": "",
     "body": [
-      "it('should ${1}', () => {",
-      "\t",
+      "it('should ${1:do something}', () => {",
+      "  $0",
       "});"
     ]
   },
