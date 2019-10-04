@@ -10,7 +10,7 @@
 		"prefix": ["flex_col", "col"],
 		"body": [
 			"display: flex;",
-			"flex-direction: col;"
+			"flex-direction: column;"
 		]
 	},
 	"flex_center": {
