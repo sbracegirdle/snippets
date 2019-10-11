@@ -42,13 +42,13 @@
     "body": [
       "import React from 'react';",
       "",
-      "const ${1:componentName} = () => {",
+      "function ${1:componentName} () {",
       "\treturn (",
       "\t\t<div>",
       "\t\t\t$0",
       "\t\t</div>",
       "\t);",
-      "};",
+      "}",
       "",
       "export default ${1:componentName};"
     ]
@@ -132,6 +132,12 @@
     "prefix": ["import_react", "react", "ir"],
     "body": [
       "import React from 'react';"
+    ]
+  },
+  "import_react_dom": {
+    "prefix": "import_react_dom",
+    "body": [
+      "import ReactDOM from 'react-dom';"
     ]
   },
   "import_link": {
@@ -472,6 +478,32 @@
       "    }",
       "  ]",
       "});"
+    ]
+  },
+  "react_popper": {
+    "prefix": "react_popper",
+    "body": [
+      "<Manager>",
+      "  <Reference innerRef={innerRef => (buttonRef.current = innerRef)}>",
+      "    {({ref}) => (",
+      "      <div ref={ref}></div>",
+      "    )}",
+      "  </Reference>",
+      "  {ReactDOM.createPortal(",
+      "    <Popper placement=\"bottom-start\">",
+      "      {({ref, style, placement}) => (",
+      "        <div ref={ref} style={style} data-placement={placement}></div>",
+      "      )}",
+      "    </Popper>,",
+      "    document.body",
+      "  )}",
+      "</Manager>"
+    ]
+  },
+  "import_react_popper": {
+    "prefix": "import_react_popper",
+    "body": [
+      "import {Manager, Reference, Popper} from 'react-popper';"
     ]
   },
 }
