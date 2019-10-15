@@ -110,4 +110,18 @@
 			"jupyter nbconvert --to html --no-input notebook.ipynb --output report.html"
 		]
 	},
+	"babel_cli": {
+		"prefix": "babel_cli",
+		"body": [
+			"babel src/ --out-dir build/ --copy-files"
+		]
+	},
+	"babel_install": {
+		"prefix": [
+			"babel_install"
+		],
+		"body": [
+			"npm install --save-dev @babel/core @babel/cli @babel/preset-react @babel/preset-env"
+		]
+	},
 }
