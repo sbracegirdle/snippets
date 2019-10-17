@@ -112,6 +112,28 @@
 		]
 	},
 
+	"import_psycopg": {
+		"prefix": ["import_psycopg", "psycopg_import"],
+		"body": [
+			"import psycopg2"
+		]
+	},
+	"psycopg_connect": {
+		"prefix": ["psycopg_connect", "connect"],
+		"body": [
+			"with psycopg2.connect(dbname='db', user='user', password='pass', host='host', port=5432, connect_timeout=3) as conn:",
+			"  $0"
+		]
+	},
+	"psycopg_query": {
+		"prefix": ["psycopg_query", "query", "fetchall", "psycopg_fetchall", "psycopg_fetch"],
+		"body": [
+			"with conn.cursor() as curs:",
+			"  curs.execute(${1:'sql'})",
+			"  data = curs.fetchall()"
+		]
+	},
+
 	"import_datasci": {
 		"prefix": "import_datasci",
 		"body": [
