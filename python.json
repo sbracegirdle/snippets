@@ -1,20 +1,30 @@
 {
 	"py_if": {
-		"prefix": "py_if",
+		"prefix": [
+			"py_if",
+			"if"
+		],
 		"body": [
 			"if ${1:condition}:",
 			"  $0"
 		]
 	},
 	"py_for": {
-		"prefix": "py_for_if",
+		"prefix": [
+			"py_for_in",
+			"forin",
+			"for_in"
+		],
 		"body": [
 			"for ${2:item} in ${1:iterable}:",
 			"  $0"
 		]
 	},
 	"py_dict": {
-		"prefix": "py_dict",
+		"prefix": [
+			"py_dict",
+			"dict"
+		],
 		"body": [
 			"my_dict = {",
 			"  \"$1\": \"$2\"",
@@ -23,101 +33,152 @@
 		]
 	},
 	"py_lambda": {
-		"prefix": "py_lambda",
+		"prefix": [
+			"py_lambda",
+			"lamb",
+			"lambda"
+		],
 		"body": [
 			"lambda x: $0"
 		]
 	},
 	"py_open_file": {
-		"prefix": "py_open_file",
+		"prefix": [
+			"py_open_file",
+			"open_file",
+			"read",
+			"open"
+		],
 		"body": [
 			"with open($1) as file:",
 			"  data = file.read()$0"
 		]
 	},
 	"py_func": {
-		"prefix": "py_func",
+		"prefix": [
+			"py_func",
+			"def",
+			"fun",
+			"func"
+		],
 		"body": [
 			"def $1($2):",
 			"  $0"
 		]
 	},
 	"py_write_file": {
-		"prefix": "py_write_file",
+		"prefix": [
+			"py_write_file",
+			"write",
+			"write_file"
+		],
 		"body": [
 			"with open($1, 'w') as file:",
 			"  file.write('Hi there!')$0"
 		]
 	},
 	"py_list_comp": {
-		"prefix": "py_list_comp",
+		"prefix": [
+			"py_list_comp",
+			"list_comp",
+			"listcomp",
+			"comp"
+		],
 		"body": [
 			"[x * 2 for x in mylist if x > 2]"
 		]
 	},
 	"py_main": {
-		"prefix": "py_main",
+		"prefix": [
+			"py_main",
+			"main"
+		],
 		"body": [
 			"if __name__ == '__main__':",
 			"  $0"
 		]
 	},
 	"py_shebang": {
-		"prefix": "py_shebang",
+		"prefix": [
+			"py_shebang",
+			"shebang"
+		],
 		"body": [
 			"#!/usr/bin/python3"
 		]
 	},
 	"py_subprocess": {
-		"prefix": "py_subprocess",
+		"prefix": [
+			"py_subprocess",
+			"checkoutput",
+			"subprocess"
+		],
 		"body": [
 			"output = subprocess.check_output(['mycmd', 'myarg'], universal_newlines=True)"
 		]
 	},
 	"py_filter": {
-		"prefix": "py_filter",
+		"prefix": [
+			"py_filter",
+			"filter"
+		],
 		"body": [
-			"filter(lambda i: i < 5, mylist)"
+			"filter(${1:lambda i: i < 5}, ${2:mylist})"
 		]
 	},
 	"py_map": {
-		"prefix": "py_map",
+		"prefix": [
+			"py_map",
+			"map"
+		],
 		"body": [
-			"map(lambda: x: x * 2, mylist)"
+			"map(${1:lambda: x: x * 2}, ${2:mylist})"
 		]
 	},
 	"py_list_push": {
-		"prefix": "py_list_push",
+		"prefix": [
+			"py_list_push",
+			"push",
+			"append"
+		],
 		"body": [
 			".append('item')"
 		]
 	},
 	"py_list_find": {
-		"prefix": "py_list_find",
+		"prefix": [
+			"py_list_find",
+			"find",
+			"index"
+		],
 		"body": [
 			".index(myval)"
 		]
 	},
 	"py_reduce": {
-		"prefix": "py_reduce",
+		"prefix": [
+			"py_reduce",
+			"reduce"
+		],
 		"body": [
 			"from functools import reduce",
 			"reduce(lambda accum, item: accum * item, mylist, 4)"
 		]
 	},
 	"py_str_to_int": {
-		"prefix": "py_str_to_int",
+		"prefix": [
+			"py_str_to_int"
+		],
 		"body": [
-			"int(str)"
+			"int(${1:str})"
 		]
 	},
-
 	"import_datasci": {
 		"prefix": "import_datasci",
 		"body": [
 			"import numpy as np",
 			"import pandas as pd",
-			"import matplotlib as plt",
+			"import matplotlib.pyplot as plt",
 			"import seaborn as sns",
 			"",
 			"%matplotlib inline"
@@ -221,6 +282,71 @@
 		"body": [
 			"from sklearn.metrics import confusion_matrix",
 			"print(confusion_matrix(y_true, y_pred))"
+		]
+	},
+	"import_torch": {
+		"prefix": [
+			"import_torch",
+			"import_pytorch",
+			"i_torch"
+		],
+		"body": [
+			"import torch"
+		]
+	},
+	"torch_share": {
+		"prefix": "torch_share",
+		"body": [
+			"torch.from_numpy(${1:np.array([1,2,3])})"
+		]
+	},
+	"torch_tensor": {
+		"prefix": [
+			"torch_tensor",
+			"tensor",
+			"torch_copy"
+		],
+		"body": [
+			"torch.tensor(${1:np.array([1,2,3])})"
+		]
+	},
+	"torch_empty": {
+		"prefix": "torch_empty",
+		"body": [
+			"torch.empty(${1:4}, ${2:3})"
+		]
+	},
+	"torch_rand": {
+		"prefix": "torch_rand",
+		"body": [
+			"torch.rand(${1:4}, ${2:3})"
+		]
+	},
+	"torch_shape": {
+		"prefix": [
+			"torch_shape",
+			"shape"
+		],
+		"body": [
+			"${1:x}.shape"
+		]
+	},
+	"torch_reshape": {
+		"prefix": [
+			"torch_reshape",
+			"reshape",
+			"view"
+		],
+		"body": [
+			"${1:x}.reshape(${2:rows}, ${3:cols})"
+		]
+	},
+	"torch_get": {
+		"prefix": [
+			"torch_get"
+		],
+		"body": [
+			"${1:x}[${2:row},${3:col}]"
 		]
 	}
 }

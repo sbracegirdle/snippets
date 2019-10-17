@@ -5,7 +5,7 @@
 		"prefix": "vscode_snippet",
 		"body": [
 			"\"$1\": {",
-			"\t\"prefix\": \"$1\",",
+			"\t\"prefix\": [\"$1\"],",
 			"\t\"body\": [",
 			"\t\t\"$2\"",
 			"\t]",
