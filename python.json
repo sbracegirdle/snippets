@@ -173,29 +173,39 @@
 			"int(${1:str})"
 		]
 	},
-
 	"import_psycopg": {
-		"prefix": ["import_psycopg", "psycopg_import"],
+		"prefix": [
+			"import_psycopg",
+			"psycopg_import"
+		],
 		"body": [
 			"import psycopg2"
 		]
 	},
 	"psycopg_connect": {
-		"prefix": ["psycopg_connect", "connect"],
+		"prefix": [
+			"psycopg_connect",
+			"connect"
+		],
 		"body": [
 			"with psycopg2.connect(dbname='db', user='user', password='pass', host='host', port=5432, connect_timeout=3) as conn:",
 			"  $0"
 		]
 	},
 	"psycopg_query": {
-		"prefix": ["psycopg_query", "query", "fetchall", "psycopg_fetchall", "psycopg_fetch"],
+		"prefix": [
+			"psycopg_query",
+			"query",
+			"fetchall",
+			"psycopg_fetchall",
+			"psycopg_fetch"
+		],
 		"body": [
 			"with conn.cursor() as curs:",
 			"  curs.execute(${1:'sql'})",
 			"  data = curs.fetchall()"
 		]
 	},
-
 	"import_datasci": {
 		"prefix": "import_datasci",
 		"body": [
@@ -371,5 +381,121 @@
 		"body": [
 			"${1:x}[${2:row},${3:col}]"
 		]
-	}
+	},
+	"cdk_usage_comment": {
+		"prefix": [
+			"cdk_usage_comment",
+			"cdk",
+			"cdk_usage",
+			"cdk_help",
+			"aws_help"
+		],
+		"body": [
+			"# CDK INSTALL: ",
+			"#   npm install -g aws-cdk ",
+			"#",
+			"# CDK CLI: ",
+			"#   cdk init ",
+			"#   cdk deploy ",
+			"#   cdk destroy ",
+			"#",
+			"# CDK requirements.txt: ",
+			"#   aws-cdk.aws-events",
+			"#   aws-cdk.aws-events-targets",
+			"#   aws-cdk.aws-lambda",
+			"#   aws-cdk.core"
+		]
+	},
+	"cdk_import": {
+		"prefix": [
+			"cdk_import"
+		],
+		"body": [
+			"from aws_cdk import (",
+			"  core,",
+			"  aws_lambda as _lambda,",
+			"  aws_apigateway as _apigw,",
+			"  aws_s3 as _s3",
+			")"
+		]
+	},
+	"cdk_app": {
+		"prefix": [
+			"cdk_app"
+		],
+		"body": [
+			"app = core.App()",
+			"ApiCorsLambdaStack(app, \"${1:MyStack}\")",
+			"app.synth()"
+		]
+	},
+	"cdk_stack": {
+		"prefix": [
+			"cdk_stack"
+		],
+		"body": [
+			"class ${1:MyStack}(core.Stack): ",
+			"  def __init__(self, scope: core.Construct, id: str, **kwargs) -> None:",
+			"    super().__init__(scope, id, **kwargs)",
+			"    $0"
+		]
+	},
+	"cdk_lambda": {
+		"prefix": [
+			"cdk_lambda"
+		],
+		"body": [
+			"lambdaFn = lambda_.Function(",
+			"  self,",
+			"  'Singleton',",
+			"  code=lambda_.InlineCode(handler_code),",
+			"  handler='index.main',",
+			"  timeout=core.Duration.seconds(300),",
+			"  runtime=lambda_.Runtime.PYTHON_3_7,",
+			")"
+		]
+	},
+	"cdk_cron": {
+		"prefix": [
+			"cdk_cron"
+		],
+		"body": [
+			"rule = events.Rule(",
+			"  self,",
+			"  'Rule',",
+			"  schedule=events.Schedule.cron(",
+			"    year='*',",
+			"    month='*',",
+			"    week_day='MON-FRI',",
+			"    hour='18',",
+			"    minute='0'",
+			"  ),",
+			")",
+			"rule.add_target(targets.LambdaFunction(lambdaFn))",
+		]
+	},
+	"cdk_s3": {
+		"prefix": [
+			"cdk_s3",
+			"bucket",
+			"cdk_bucket"
+		],
+		"body": [
+			"s3 = _s3.Bucket(self, 's3bucket')"
+		]
+	},
+	"autopep8": {
+		"prefix": [
+			"autopep8",
+			"pep8",
+			"autopep8_help",
+			"autopep8_comment",
+			"pep8_help",
+			"pep8_comment"
+		],
+		"body": [
+			"# pip install --upgrade autopep8",
+			"# autopep8 --in-place --aggressive --aggressive <filename>"
+		]
+	},
 }
