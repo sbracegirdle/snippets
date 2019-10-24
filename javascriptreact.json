@@ -146,6 +146,14 @@
       "import {Link} from 'react-router-dom';"
     ]
   },
+  "import_router": {
+    "prefix": ["import_router", "browser_router", "router"],
+    "body": [
+      "import {BrowserRouter} from 'react-router-dom'",
+      "",
+      "<BrowserRouter>$0</BrowserRouter>"
+    ]
+  },
   "import_react_intl": {
     "prefix": ["import_react_intl", "i_intl"],
     "body": [
@@ -504,6 +512,19 @@
     "prefix": "import_react_popper",
     "body": [
       "import {Manager, Reference, Popper} from 'react-popper';"
+    ]
+  },
+  "story": {
+    "prefix": ["story", "storybook"],
+    "body": [
+      "import React from 'react';",
+      "import {storiesOf} from '@storybook/react';",
+      "import {${1:MyComponent}} from '../index';",
+      "",
+      "storiesOf('${1:MyComponent}', module)",
+      "  .add('test', () => (",
+      "    <${1:MyComponent} />",
+      "  ));"
     ]
   },
 }
