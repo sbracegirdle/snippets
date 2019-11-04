@@ -1,0 +1,101 @@
+{
+	"dockerfile_template": {
+		"prefix": [
+			"dockerfile_template",
+			"template",
+			"dockerfile",
+			"ubuntu_template",
+			"ubuntu"
+		],
+		"body": [
+			"FROM ubuntu:${1:18.04}",
+			"",
+			"# Update repo",
+			"RUN apt-get update",
+			"",
+			"# Install stuff",
+			"RUN apt-get install -y ${2:stuff} && \\",
+			"\trm -rf /var/lib/apt/lists",
+			"",
+			"EXPOSE 80",
+			"",
+			"COPY start.sh /start.sh",
+			"CMD [\"./start.sh\"]",
+		]
+	},
+	"node_template": {
+		"prefix": [
+			"node_template",
+			"node"
+		],
+		"body": [
+			"FROM node:10",
+			"",
+			"# Create app directory",
+			"WORKDIR /usr/src/app",
+			"",
+			"# Install app dependencies",
+			"# A wildcard is used to ensure both package.json AND package-lock.json are copied",
+			"# where available (npm@5+)",
+			"COPY package*.json ./",
+			"",
+			"RUN npm install",
+			"# If you are building your code for production",
+			"# RUN npm ci --only=production",
+			"",
+			"# Bundle app source",
+			"COPY . .",
+			"",
+			"EXPOSE 8080",
+			"CMD [\"node\", \"server.js\"]"
+		]
+	},
+	"from_ubuntu": {
+		"prefix": [
+			"from_ubuntu",
+			"ubuntu"
+		],
+		"body": [
+			"FROM ubuntu:18.04"
+		]
+	},
+	"from_node": {
+		"prefix": [
+			"from_node",
+			"node"
+		],
+		"body": [
+			"FROM node:${1:10}"
+		]
+	},
+	"user": {
+		"prefix": [
+			"user",
+			"depriv",
+			"switch_user",
+			"add_user"
+		],
+		"body": [
+			"RUN groupadd -r ${1:mygrp} && useradd -r -g ${1:mygrp} ${2:myuser} && mkdir -p /home/${2:myuser}",
+			"USER ${2:myuser}"
+		]
+	},
+	"copy": {
+		"prefix": [
+			"copy"
+		],
+		"description": "Only used for copying directories / files (more explicit)",
+		"body": [
+			"COPY ${1:source} ${2:dest}"
+		]
+	},
+	"add": {
+		"prefix": [
+			"add"
+		],
+		"description": "Same as copy, but can also do tarballs and URLs (less recommended)",
+		"body": [
+			"COPY ${1:source} ${2:dest}"
+		]
+	}
+}

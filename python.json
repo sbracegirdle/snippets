@@ -108,13 +108,41 @@
 		]
 	},
 	"py_subprocess": {
+		"description": "Call a sub process and capture the output in a string",
 		"prefix": [
 			"py_subprocess",
 			"checkoutput",
 			"subprocess"
 		],
 		"body": [
-			"output = subprocess.check_output(['mycmd', 'myarg'], universal_newlines=True)"
+			"import subprocess",
+			"output = subprocess.check_output(['mycmd', 'myarg'])"
+		]
+	},
+	"py_subprocess_try": {
+		"description": "subprocess.check_output with catch for process error",
+		"prefix": [
+			"py_subprocess_try",
+			"py_subprocess_try_catch"
+		],
+		"body": [
+			"try:",
+			"\toutput = subprocess.check_output(RUN_SCRAPER, stderr=subprocess.STDOUT)",
+			"except subprocess.CalledProcessError as e:",
+			"\tprint(e.output)"
+		]
+	},
+	"py_bg_process": {
+		"prefix": [
+			"py_bg_process",
+			"bg_process",
+			"background"
+		],
+		"body": [
+			"import subprocess",
+			"ls_output = subprocess.Popen(['${1:sleep}', '30'])",
+			"# Dont run this if you want it to be non-blocking (background) ",
+			"# ls_output.communicate()  # Will block for 30 seconds"
 		]
 	},
 	"py_filter": {
@@ -485,6 +513,7 @@
 		]
 	},
 	"autopep8": {
+		"description": "Add comments to assist in installing pep8 and running pep8",
 		"prefix": [
 			"autopep8",
 			"pep8",
@@ -499,7 +528,11 @@
 		]
 	},
 	"args": {
-		"prefix": ["args", "py_args", "cli_args"],
+		"prefix": [
+			"args",
+			"py_args",
+			"cli_args"
+		],
 		"body": [
 			"import sys",
 			"print('This is the name of the script: ', sys.argv[0])",
@@ -508,7 +541,12 @@
 		]
 	},
 	"dir_files": {
-		"prefix": ["dir_files", "listdir", "list_dir", "dirfiles"],
+		"prefix": [
+			"dir_files",
+			"listdir",
+			"list_dir",
+			"dirfiles"
+		],
 		"body": [
 			"from os import listdir",
 			"from os.path import isfile, join",
