@@ -498,4 +498,21 @@
 			"# autopep8 --in-place --aggressive --aggressive <filename>"
 		]
 	},
+	"args": {
+		"prefix": ["args", "py_args", "cli_args"],
+		"body": [
+			"import sys",
+			"print('This is the name of the script: ', sys.argv[0])",
+			"print('Number of arguments: ', len(sys.argv))",
+			"print('The arguments are: ' , str(sys.argv))",
+		]
+	},
+	"dir_files": {
+		"prefix": ["dir_files", "listdir", "list_dir", "dirfiles"],
+		"body": [
+			"from os import listdir",
+			"from os.path import isfile, join",
+			"onlyfiles = [f for f in listdir(mypath) if isfile(join(mypath, f))]"
+		]
+	},
 }
