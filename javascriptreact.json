@@ -6,7 +6,11 @@
     ]
   },
   "jest_test": {
-    "prefix": ["jest_test", "jest", "test"],
+    "prefix": [
+      "jest_test",
+      "jest",
+      "test"
+    ],
     "body": [
       "import ${1:mything} from '${2:mything}';",
       "",
@@ -18,7 +22,9 @@
     ]
   },
   "react_class": {
-    "prefix": ["react_class"],
+    "prefix": [
+      "react_class"
+    ],
     "description": "",
     "body": [
       "import React, { Component } from 'react';",
@@ -37,7 +43,11 @@
     ]
   },
   "react_component": {
-    "prefix": ["react_component", "comp", "component"],
+    "prefix": [
+      "react_component",
+      "comp",
+      "component"
+    ],
     "description": "",
     "body": [
       "import React from 'react';",
@@ -54,7 +64,10 @@
     ]
   },
   "react_use_effect": {
-    "prefix": ["react_use_effect", "use_effect"],
+    "prefix": [
+      "react_use_effect",
+      "use_effect"
+    ],
     "description": "",
     "body": [
       "useEffect(() => {",
@@ -63,26 +76,38 @@
     ]
   },
   "react_use_state": {
-    "prefix": ["react_use_state", "use_state"],
+    "prefix": [
+      "react_use_state",
+      "use_state"
+    ],
     "description": "",
     "body": [
       "const [${1:name}, set${1:name}] = useState(${2:defaultValue});"
     ]
   },
   "react_use_memo": {
-    "prefix": ["react_use_memo", "use_memo"],
+    "prefix": [
+      "react_use_memo",
+      "use_memo"
+    ],
     "body": [
       "const ${1:name} = useMemo(() => ${3:computation}, [${2:dependency}])"
     ]
   },
   "react_use_ref": {
-    "prefix": ["react_use_ref", "use_ref"],
+    "prefix": [
+      "react_use_ref",
+      "use_ref"
+    ],
     "body": [
       "const ${1:myVar} = useRef(${2:null});"
     ]
   },
   "react_use_callback": {
-    "prefix": ["react_use_callback", "use_callback"],
+    "prefix": [
+      "react_use_callback",
+      "use_callback"
+    ],
     "body": [
       "const ${1:memoizedCallback} = useCallback(",
       "\t() => ${2:doSomething()},",
@@ -91,25 +116,44 @@
     ]
   },
   "cname": {
-    "prefix": ["cls", "cname", "class", "class_name"],
+    "prefix": [
+      "cls",
+      "cname",
+      "class",
+      "class_name"
+    ],
     "body": [
       "className={${1:thingClass}}"
     ]
   },
   "cname_cond": {
-    "prefix": ["cname_cond", "ccond", "class_cond", "class_condition"],
+    "prefix": [
+      "cname_cond",
+      "ccond",
+      "class_cond",
+      "class_condition"
+    ],
     "body": [
       "className={`${${1:condition} ? ${2:thingClass} : ''`}"
     ]
   },
   "shallow_renderer": {
-    "prefix": ["import_shallow_renderer", "import_shallow", "i_shallow", "shallow"],
+    "prefix": [
+      "import_shallow_renderer",
+      "import_shallow",
+      "i_shallow",
+      "shallow"
+    ],
     "body": [
       "import ShallowRenderer from 'react-test-renderer/shallow';"
     ]
   },
   "jest_snapshot": {
-    "prefix": ["snapshot", "jest_snapshot", "shallow_snapshot"],
+    "prefix": [
+      "snapshot",
+      "jest_snapshot",
+      "shallow_snapshot"
+    ],
     "body": [
       "const renderer = new ShallowRenderer();",
       "const result = renderer.render(<${1:MyComp} />);",
@@ -123,13 +167,21 @@
     ]
   },
   "import_css": {
-    "prefix": ["import_css", "import_module_css", "i_css"],
+    "prefix": [
+      "import_css",
+      "import_module_css",
+      "i_css"
+    ],
     "body": [
       "import ${1:{mything as mythingClass}} from './${2:mything}.module.css';"
     ]
   },
   "import_react": {
-    "prefix": ["import_react", "react", "ir"],
+    "prefix": [
+      "import_react",
+      "react",
+      "ir"
+    ],
     "body": [
       "import React from 'react';"
     ]
@@ -141,13 +193,22 @@
     ]
   },
   "import_link": {
-    "prefix": ["import_link", "link", "il", "router"],
+    "prefix": [
+      "import_link",
+      "link",
+      "il",
+      "router"
+    ],
     "body": [
       "import {Link} from 'react-router-dom';"
     ]
   },
   "import_router": {
-    "prefix": ["import_router", "browser_router", "router"],
+    "prefix": [
+      "import_router",
+      "browser_router",
+      "router"
+    ],
     "body": [
       "import {BrowserRouter} from 'react-router-dom'",
       "",
@@ -155,19 +216,29 @@
     ]
   },
   "import_react_intl": {
-    "prefix": ["import_react_intl", "i_intl"],
+    "prefix": [
+      "import_react_intl",
+      "i_intl"
+    ],
     "body": [
       "import {FormattedMessage} from 'react-intl';"
     ]
   },
   "import_react_intl_provider": {
-    "prefix": ["import_react_intl_provider", "i_intl_provider"],
+    "prefix": [
+      "import_react_intl_provider",
+      "i_intl_provider"
+    ],
     "body": [
       "import {IntlProvider} from 'react-intl'"
     ]
   },
   "import_from": {
-    "prefix": ["import_from", "import", "i"],
+    "prefix": [
+      "import_from",
+      "import",
+      "i"
+    ],
     "body": [
       "import {${1:thing}} from '${2:library}';"
     ]
@@ -185,7 +256,10 @@
     ]
   },
   "msg": {
-    "prefix": ["msg", "formatted_msg"],
+    "prefix": [
+      "msg",
+      "formatted_msg"
+    ],
     "body": [
       "<FormattedMessage id=\"${1:app.greeting}\" defaultMessage=\"${2:My message}\" />",
     ]
@@ -197,13 +271,19 @@
     ]
   },
   "intl_get_msg": {
-    "prefix": ["intl_get_msg", "intl_get_format_msg"],
+    "prefix": [
+      "intl_get_msg",
+      "intl_get_format_msg"
+    ],
     "body": [
       "intl: {formatMessage}"
     ]
   },
   "msg_attr": {
-    "prefix": ["msg_attr", "format_msg"],
+    "prefix": [
+      "msg_attr",
+      "format_msg"
+    ],
     "body": [
       "formatMessage({id: '${1:app.greeting}', defaultMessage: '${2:My message}'})"
     ]
@@ -221,19 +301,31 @@
     "body": "it('should ${1:do something}', () => {\n\t\n});"
   },
   "jest_expect": {
-    "prefix": ["jest_expect", "expect"],
+    "prefix": [
+      "jest_expect",
+      "expect"
+    ],
     "body": "expect(${1:myThing()}).toBe(${2:someOutput})"
   },
   "jest_expect_object": {
-    "prefix": ["jest_expect_object", "expect_object"],
+    "prefix": [
+      "jest_expect_object",
+      "expect_object"
+    ],
     "body": "expect(${1:myThing()}).toMatchObject(${2:{myObj}});"
   },
   "jest_describe": {
-    "prefix": ["jest_describe", "describe"],
+    "prefix": [
+      "jest_describe",
+      "describe"
+    ],
     "body": "describe('${1:myThing()}', () => {$0});"
   },
   "jest_it": {
-    "prefix": ["jest_it", "it"],
+    "prefix": [
+      "jest_it",
+      "it"
+    ],
     "description": "",
     "body": [
       "it('should ${1:do something}', () => {",
@@ -368,9 +460,15 @@
     ]
   },
   "cdk_app": {
-    "prefix": "cdk_app",
+    "prefix": [
+      "cdk",
+      "cdk_app",
+      "cdk_help",
+      "cdk_use",
+      "cdk_init"
+    ],
     "body": [
-      "import cdk = require('@aws-cdk/core');",
+      "const cdk = require('@aws-cdk/core');",
       "",
       "// ## CDK Quick ref: ",
       "// npm install -g aws-cdk ",
@@ -380,7 +478,9 @@
       "// cdk init --language python sample-app ",
       "// cdk ls ",
       "// cdk diff ",
-      "// cdk deploy MyStack ",
+      "// cdk synth // Create CFN template (good for testing) ",
+      "// cdk deploy",
+      "// cdk deploy MyStack",
       "// cdk destroy ",
       "",
       "const app = new cdk.App();",
@@ -391,20 +491,21 @@
   "cdk_stack": {
     "prefix": "cdk_stack",
     "body": [
-      "import cdk = require('@aws-cdk/core');",
+      "const cdk = require('@aws-cdk/core');",
       "",
       "export class LambdaCronStack extends cdk.Stack {",
       "  constructor(app: cdk.App, id: string) {",
       "    super(app, id);",
       "    ",
       "    // Do things",
-      "  }"
+      "  }",
+      "}"
     ]
   },
   "cdk_lambda": {
     "prefix": "cdk_lambda",
     "body": [
-      "import lambda = require('@aws-cdk/aws-lambda');",
+      "const lambda = require('@aws-cdk/aws-lambda');",
       "",
       "const lambdaFn = new lambda.Function(this, 'Singleton', { ",
       "  code: new lambda.InlineCode(fs.readFileSync('lambda-handler.py', { encoding: 'utf-8' })),",
@@ -417,8 +518,8 @@
   "cdk_events_lambda": {
     "prefix": "cdk_events_lambda",
     "body": [
-      "import events = require('@aws-cdk/aws-events');",
-      "import targets = require('@aws-cdk/aws-events-targets');",
+      "const events = require('@aws-cdk/aws-events');",
+      "const targets = require('@aws-cdk/aws-events-targets');",
       "",
       "const rule = new events.Rule(this, 'Rule', {",
       "  schedule: events.Schedule.expression('cron(0 18 ? * MON-FRI *)')",
@@ -430,7 +531,7 @@
   "cdk_bucket": {
     "prefix": "cdk_bucket",
     "body": [
-      "import s3 = require('@aws-cdk/aws-s3');",
+      "const s3 = require('@aws-cdk/aws-s3');",
       "//...",
       "const siteBucket = new s3.Bucket(this, 'SiteBucket', {",
       "  bucketName: siteDomain,",
@@ -444,7 +545,7 @@
   "cdk_bucket_deploy": {
     "prefix": "cdk_bucket_deploy",
     "body": [
-      "import s3deploy = require('@aws-cdk/aws-s3-deployment');",
+      "const s3deploy = require('@aws-cdk/aws-s3-deployment');",
       "//...",
       "new s3deploy.BucketDeployment(this, 'DeployWithInvalidation', {",
       "  source: s3deploy.Source.asset('./site-contents'),",
@@ -457,7 +558,7 @@
   "cdk_acm": {
     "prefix": "cdk_acm",
     "body": [
-      "import acm = require('@aws-cdk/aws-certificatemanager');",
+      "const acm = require('@aws-cdk/aws-certificatemanager');",
       "//...",
       "const certificateArn = new acm.DnsValidatedCertificate(this, 'SiteCertificate', {",
       "  domainName: siteDomain,",
@@ -468,7 +569,7 @@
   "cdk_cloudfront": {
     "prefix": "cdk_cloudfront",
     "body": [
-      "import cloudfront = require('@aws-cdk/aws-cloudfront');",
+      "const cloudfront = require('@aws-cdk/aws-cloudfront');",
       "",
       "const distribution = new cloudfront.CloudFrontWebDistribution(this, 'SiteDistribution', {",
       "  aliasConfiguration: {",
@@ -486,6 +587,85 @@
       "    }",
       "  ]",
       "});"
+    ]
+  },
+  "cdk_ecs": {
+    "prefix": [
+      "cdk_ecs"
+    ],
+    "body": [
+      "const ec2 = require('@aws-cdk/aws-ec2');",
+      "const ecs = require('@aws-cdk/aws-ecs');",
+      "",
+      "const vpc = new ec2.Vpc(this, 'MyVpc', { maxAzs: 2 });",
+      "const cluster = new ecs.Cluster(this, 'Ec2Cluster', { vpc });",
+      "",
+      "// create a task definition with CloudWatch Logs",
+      "const logging = new ecs.AwsLogDriver({",
+      "  streamPrefix: 'myapp',",
+      "})",
+      "",
+      "const taskDef = new ecs.FargateTaskDefinition(this, 'MyTaskDefinition', {",
+      "  memoryLimitMiB: 512,",
+      "  cpu: 256, // 1 vCPU = 1024 ",
+      "})",
+      "",
+      "taskDef.addContainer('AppContainer', {",
+      "  image: ecs.ContainerImage.fromRegistry('amazon/amazon-ecs-sample'),",
+      "  logging,",
+      "})",
+      "",
+      "// Instantiate ECS Service with just cluster and image",
+      "new ecs.FargateService(this, 'FargateService', {",
+      "  cluster,",
+      "  taskDefinition: taskDef",
+      "});"
+    ]
+  },
+  "cdk_ecs_fargate_scheduled": {
+    "prefix": [
+      "cdk_ecs_fargate_scheduled",
+      "cdk_ecs_fargate"
+    ],
+    "body": [
+      "const vpc = new ec2.Vpc(this, \"ScraperVPC\", { maxAzs: 1 });",
+      "const cluster = new ecs.Cluster(this, \"ScraperCluster\", { vpc });",
+      "",
+      "const logDriver = new ecs.AwsLogDriver({",
+      "  streamPrefix: \"bankstack-scraper\"",
+      "});",
+      "",
+      "const ecsScheduledTask = new ecsPatterns.ScheduledFargateTask(",
+      "  this,",
+      "  \"ScraperScheduledTask\",",
+      "  {",
+      "    cluster,",
+      "    vpc,",
+      "    desiredTaskCount: 1,",
+      "    schedule: autoscaling.Schedule.expression(\"rate(1 day)\"),",
+      "    scheduledFargateTaskImageOptions: {",
+      "      image: ecs.ContainerImage.fromRegistry(",
+      "        \"438831467415.dkr.ecr.ap-southeast-2.amazonaws.com/bankstack-scraper\"",
+      "      ),",
+      "      // environment: { name: \"TRIGGER\", value: \"CloudWatch Events\" }, ENV VARS",
+      "      // TODO secret",
+      "      memoryLimitMiB: 1024,",
+      "      cpu: 512, // 1 vCPU = 1024",
+      "      logDriver",
+      "    }",
+      "  }",
+      ");"
+    ]
+  },
+  "cdk_secret": {
+    "prefix": [
+      "cdk_secret",
+      "cdk_secret_value"
+    ],
+    "body": [
+      "const sm = require(\"@aws-cdk/aws-secretsmanager\");",
+      "",
+      "sm.Secret.fromSecretArn(this, \"BankUNSecretImported\", \"arn\");"
     ]
   },
   "react_popper": {
@@ -515,7 +695,10 @@
     ]
   },
   "story": {
-    "prefix": ["story", "storybook"],
+    "prefix": [
+      "story",
+      "storybook"
+    ],
     "body": [
       "import React from 'react';",
       "import {storiesOf} from '@storybook/react';",
