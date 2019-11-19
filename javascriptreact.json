@@ -493,11 +493,23 @@
     "body": [
       "const cdk = require('@aws-cdk/core');",
       "",
-      "export class LambdaCronStack extends cdk.Stack {",
-      "  constructor(app: cdk.App, id: string) {",
-      "    super(app, id);",
-      "    ",
+      "class LambdaCronStack extends cdk.Stack {",
+      "  constructor(app, id, props) {",
+      "    super(app, id, props);",
+      "",
       "    // Do things",
+      "  }",
+      "}"
+    ]
+  },
+  "cdk_construct": {
+    "prefix": ["cdk_construct", "cdk_custom_construct"],
+    "body": [
+      "class ${1:MyConstruct} extends cdk.Construct {",
+      "  constructor(scope, id, props = {}) {",
+      "    super(scope, id, props);",
+      "",
+      "    // Create things here e.g. this.myThing = new Something();",
       "  }",
       "}"
     ]
