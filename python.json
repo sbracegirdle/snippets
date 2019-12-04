@@ -490,6 +490,7 @@
 		]
 	},
 	"import_torch": {
+		"description": "Pytorch import",
 		"prefix": [
 			"import_torch",
 			"import_pytorch",
@@ -499,13 +500,18 @@
 			"import torch"
 		]
 	},
-	"torch_share": {
-		"prefix": "torch_share",
+	"torch_from_numpy": {
+		"description": "Pytorch tensor from numpy",
+		"prefix": [
+			"torch_from_numpy",
+			"torch_numpy"
+		],
 		"body": [
 			"torch.from_numpy(${1:np.array([1,2,3])})"
 		]
 	},
 	"torch_tensor": {
+		"description": "Pytorch tensor from numpy",
 		"prefix": [
 			"torch_tensor",
 			"tensor",
@@ -516,18 +522,21 @@
 		]
 	},
 	"torch_empty": {
+		"description": "Pytorch empty tensor",
 		"prefix": "torch_empty",
 		"body": [
 			"torch.empty(${1:4}, ${2:3})"
 		]
 	},
 	"torch_rand": {
+		"description": "Pytorch random tensor",
 		"prefix": "torch_rand",
 		"body": [
 			"torch.rand(${1:4}, ${2:3})"
 		]
 	},
 	"torch_shape": {
+		"description": "Pytorch get shape",
 		"prefix": [
 			"torch_shape",
 			"shape"
@@ -537,6 +546,7 @@
 		]
 	},
 	"torch_reshape": {
+		"description": "Pytorch reshape",
 		"prefix": [
 			"torch_reshape",
 			"reshape",
@@ -547,6 +557,7 @@
 		]
 	},
 	"torch_get": {
+		"description": "Pytorch -- get row and col",
 		"prefix": [
 			"torch_get"
 		],
@@ -555,6 +566,7 @@
 		]
 	},
 	"cdk_usage_comment": {
+		"description": "AWS CDK usage / help",
 		"prefix": [
 			"cdk_usage_comment",
 			"cdk",
@@ -579,6 +591,7 @@
 		]
 	},
 	"cdk_import": {
+		"description": "AWS CDK Import",
 		"prefix": [
 			"cdk_import"
 		],
@@ -592,6 +605,7 @@
 		]
 	},
 	"cdk_app": {
+		"description": "AWS CDK App",
 		"prefix": [
 			"cdk_app"
 		],
@@ -602,6 +616,7 @@
 		]
 	},
 	"cdk_stack": {
+		"description": "AWS CDK Stack",
 		"prefix": [
 			"cdk_stack"
 		],
@@ -613,6 +628,7 @@
 		]
 	},
 	"cdk_lambda": {
+		"description": "AWS CDK Lambda",
 		"prefix": [
 			"cdk_lambda"
 		],
@@ -628,6 +644,7 @@
 		]
 	},
 	"cdk_cron": {
+		"description": "AWS CDK Cron rule",
 		"prefix": [
 			"cdk_cron"
 		],
@@ -647,6 +664,7 @@
 		]
 	},
 	"cdk_s3": {
+		"description": "AWS CDK S3 bucket",
 		"prefix": [
 			"cdk_s3",
 			"bucket",
@@ -672,6 +690,7 @@
 		]
 	},
 	"args": {
+		"description": "Get STDIO / CLI args",
 		"prefix": [
 			"args",
 			"py_args",
@@ -685,6 +704,7 @@
 		]
 	},
 	"dir_files": {
+		"description": "List all files in dir",
 		"prefix": [
 			"dir_files",
 			"listdir",
@@ -698,12 +718,28 @@
 		]
 	},
 	"jupyter_cell": {
+		"description": "Jupyter inline cell (VSCode)",
 		"prefix": [
 			"jupyter_cell",
 			"cell"
 		],
 		"body": [
 			"#%%"
+		]
+	},
+	"jinja": {
+		"description": "Jinja html template file",
+		"prefix": [
+			"jinja",
+			"jinja_html",
+			"html",
+			"html_template"
+		],
+		"body": [
+			"from jinja2 import Environment, FileSystemLoader",
+			"env = Environment(loader=FileSystemLoader('.'))",
+			"template = env.get_template('myreport.html')",
+			"html_out = template.render({\"my_df_table\": df.to_html()})"
 		]
 	},
 }
