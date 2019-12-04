@@ -294,24 +294,34 @@
 		]
 	},
 	"pandas_sort": {
-		"prefix": "pandas_sort",
+		"description": "Pandas sort",
+		"prefix": [
+			"pandas_sort",
+			"sort"
+		],
 		"body": [
 			"df.sort_values(by='foo')"
 		]
 	},
 	"pandas_group": {
+		"description": "Pandas group by",
 		"prefix": "pandas_group",
 		"body": [
 			"df_counted = df.groupby(['col1', 'col2']).count()"
 		]
 	},
 	"pandas_apply": {
-		"prefix": "pandas_apply",
+		"description": "Pandas apply (map)",
+		"prefix": [
+			"pandas_apply",
+			"pandas_map"
+		],
 		"body": [
 			"df['sqrt_values'] = df['values'].apply(np.sqrt)"
 		]
 	},
 	"sns_iris": {
+		"description": "Iris dataset (Seaborn)",
 		"prefix": [
 			"data_iris",
 			"sns_iris",
@@ -322,6 +332,7 @@
 		]
 	},
 	"sns_pairgrid": {
+		"description": "Seaborn grid of regression pairs",
 		"prefix": [
 			"pairgrid",
 			"sns_pairgrid",
@@ -346,6 +357,7 @@
 		]
 	},
 	"sns_bar": {
+		"description": "Seaborn bar plot",
 		"prefix": [
 			"barplot",
 			"sns_bar",
@@ -358,6 +370,7 @@
 		]
 	},
 	"sns_countplot": {
+		"description": "Seaborn count plot",
 		"prefix": [
 			"countplot",
 			"sns_countplot",
@@ -368,6 +381,7 @@
 		]
 	},
 	"sns_dist": {
+		"description": "Seaborn dist plot",
 		"prefix": [
 			"dist",
 			"distribution",
@@ -381,6 +395,7 @@
 		]
 	},
 	"sns_lineplot": {
+		"description": "Seaborn line plot",
 		"prefix": [
 			"sns_lineplot",
 			"lineplot",
@@ -391,6 +406,7 @@
 		]
 	},
 	"sns_heatmap": {
+		"description": "Seaborn heatmap",
 		"prefix": [
 			"sns_heatmap",
 			"heatmap",
@@ -401,6 +417,7 @@
 		]
 	},
 	"sns_regression": {
+		"description": "Seaborn regression plot",
 		"prefix": [
 			"sns_regression",
 			"regression_plot",
