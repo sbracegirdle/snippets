@@ -245,6 +245,34 @@
 			"%matplotlib inline"
 		]
 	},
+	"pandas_pivot": {
+		"prefix": [
+			"pandas_pivot"
+		],
+		"body": [
+			"df.pivot_table(values='passenger', index='month', 'columns='year', aggfunc=len)"
+		]
+	},
+	"pandas_dataframe": {
+		"prefix": [
+			"pandas_dataframe",
+			"dataframe"
+		],
+		"body": [
+			"df = pd.DataFrame(data={'col1': [1, 2], 'col2': [3, 4]})"
+		]
+	},
+	"pandas_dataframe_numpy": {
+		"prefix": [
+			"pandas_dataframe_numpy",
+			"dataframe_numpy",
+			"dataframe_array"
+		],
+		"body": [
+			"df = pd.DataFrame(np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]]),",
+			"\tcolumns=['a', 'b', 'c'])"
+		]
+	},
 	"pandas_json": {
 		"prefix": "pandas_json",
 		"body": [
@@ -268,7 +296,7 @@
 	"pandas_sort": {
 		"prefix": "pandas_sort",
 		"body": [
-			"df.sort_values(by = 'foo')"
+			"df.sort_values(by='foo')"
 		]
 	},
 	"pandas_group": {
@@ -281,6 +309,105 @@
 		"prefix": "pandas_apply",
 		"body": [
 			"df['sqrt_values'] = df['values'].apply(np.sqrt)"
+		]
+	},
+	"sns_iris": {
+		"prefix": [
+			"data_iris",
+			"sns_iris",
+			"seaborn_iris"
+		],
+		"body": [
+			"iris = sns.load_dataset('iris')"
+		]
+	},
+	"sns_pairgrid": {
+		"prefix": [
+			"pairgrid",
+			"sns_pairgrid",
+			"seaborn_pairgrid",
+			"pairgrid",
+			"sns_grid",
+			"seaborn_grid"
+		],
+		"body": [
+			"g = sns.PairGrid(df)",
+			"g.map(plt.scatter)"
+		]
+	},
+	"sns_pairplot": {
+		"prefix": [
+			"pairplot",
+			"sns_pairplot",
+			"seaborn_pairplot"
+		],
+		"body": [
+			"sns.pairplot(df)"
+		]
+	},
+	"sns_bar": {
+		"prefix": [
+			"barplot",
+			"sns_bar",
+			"sns_barplot",
+			"seaborn_bar",
+			"seaborn_barplot"
+		],
+		"body": [
+			"sns.barplot(x='sex', y='survived', hue='class', data=df)"
+		]
+	},
+	"sns_countplot": {
+		"prefix": [
+			"countplot",
+			"sns_countplot",
+			"seaborn_countplot"
+		],
+		"body": [
+			"sns.countplot(x='sex', data=df)"
+		]
+	},
+	"sns_dist": {
+		"prefix": [
+			"dist",
+			"distribution",
+			"sns_dist",
+			"seaborn_dist",
+			"sns_distribution",
+			"seaborn_distribution"
+		],
+		"body": [
+			"sns.distplot(df['bill'])"
+		]
+	},
+	"sns_lineplot": {
+		"prefix": [
+			"sns_lineplot",
+			"lineplot",
+			"seaborn_lineplot"
+		],
+		"body": [
+			"sns.lineplot(x='timepoint', y='signal', data=df)"
+		]
+	},
+	"sns_heatmap": {
+		"prefix": [
+			"sns_heatmap",
+			"heatmap",
+			"seaborn_heatmap"
+		],
+		"body": [
+			"sns.heatmap(df)"
+		]
+	},
+	"sns_regression": {
+		"prefix": [
+			"sns_regression",
+			"regression_plot",
+			"seaborn_regression"
+		],
+		"body": [
+			"sns.regplot(x='timepoint', y='signal', data=df)"
 		]
 	},
 	"sklearn_linear": {
@@ -551,6 +678,15 @@
 			"from os import listdir",
 			"from os.path import isfile, join",
 			"onlyfiles = [f for f in listdir(mypath) if isfile(join(mypath, f))]"
+		]
+	},
+	"jupyter_cell": {
+		"prefix": [
+			"jupyter_cell",
+			"cell"
+		],
+		"body": [
+			"#%%"
 		]
 	},
 }
