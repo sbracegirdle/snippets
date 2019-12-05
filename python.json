@@ -1,7 +1,6 @@
 {
-	"py_if": {
+	"if": {
 		"prefix": [
-			"py_if",
 			"if"
 		],
 		"body": [
@@ -9,9 +8,8 @@
 			"  $0"
 		]
 	},
-	"py_for": {
+	"for_in": {
 		"prefix": [
-			"py_for_in",
 			"forin",
 			"for_in"
 		],
@@ -20,9 +18,8 @@
 			"  $0"
 		]
 	},
-	"py_dict": {
+	"dict": {
 		"prefix": [
-			"py_dict",
 			"dict"
 		],
 		"body": [
@@ -32,9 +29,8 @@
 			"}"
 		]
 	},
-	"py_lambda": {
+	"lambda": {
 		"prefix": [
-			"py_lambda",
 			"lamb",
 			"lambda"
 		],
@@ -42,9 +38,8 @@
 			"lambda x: $0"
 		]
 	},
-	"py_open_file": {
+	"open_file": {
 		"prefix": [
-			"py_open_file",
 			"open_file",
 			"read",
 			"open"
@@ -54,9 +49,8 @@
 			"  data = file.read()$0"
 		]
 	},
-	"py_func": {
+	"func": {
 		"prefix": [
-			"py_func",
 			"def",
 			"fun",
 			"func"
@@ -66,9 +60,8 @@
 			"  $0"
 		]
 	},
-	"py_write_file": {
+	"write_file": {
 		"prefix": [
-			"py_write_file",
 			"write",
 			"write_file"
 		],
@@ -77,20 +70,32 @@
 			"  file.write('Hi there!')$0"
 		]
 	},
-	"py_list_comp": {
+	"list_comp": {
+		"description": "List comprehension",
 		"prefix": [
-			"py_list_comp",
+			"comprehension",
 			"list_comp",
 			"listcomp",
 			"comp"
 		],
 		"body": [
-			"[x * 2 for x in mylist if x > 2]"
+			"[${2:x * 2} for x in ${1:mylist}]"
 		]
 	},
-	"py_main": {
+	"list_comp_conditional": {
+		"description": "Conditional list comprehension",
 		"prefix": [
-			"py_main",
+			"comprehension_conditional",
+			"list_comp_conditional",
+			"listcomp_conditional",
+			"comp_conditional"
+		],
+		"body": [
+			"[${3:x * 2} for x in ${1:mylist} ${2:if x > 2}]"
+		]
+	},
+	"main": {
+		"prefix": [
 			"main"
 		],
 		"body": [
@@ -98,32 +103,30 @@
 			"  $0"
 		]
 	},
-	"py_shebang": {
+	"shebang": {
 		"prefix": [
-			"py_shebang",
 			"shebang"
 		],
 		"body": [
 			"#!/usr/bin/python3"
 		]
 	},
-	"py_subprocess": {
+	"subprocess": {
 		"description": "Call a sub process and capture the output in a string",
 		"prefix": [
-			"py_subprocess",
-			"checkoutput",
-			"subprocess"
+			"subprocess",
+			"check_output"
 		],
 		"body": [
 			"import subprocess",
 			"output = subprocess.check_output(['mycmd', 'myarg'])"
 		]
 	},
-	"py_subprocess_try": {
+	"subprocess_try": {
 		"description": "subprocess.check_output with catch for process error",
 		"prefix": [
-			"py_subprocess_try",
-			"py_subprocess_try_catch"
+			"subprocess_try",
+			"subprocess_try_catch"
 		],
 		"body": [
 			"try:",
@@ -132,11 +135,11 @@
 			"\tprint(e.output)"
 		]
 	},
-	"py_bg_process": {
+	"bg_process": {
 		"prefix": [
-			"py_bg_process",
 			"bg_process",
-			"background"
+			"background",
+			"subprocess"
 		],
 		"body": [
 			"import subprocess",
@@ -145,27 +148,25 @@
 			"# ls_output.communicate()  # Will block for 30 seconds"
 		]
 	},
-	"py_filter": {
+	"filter": {
 		"prefix": [
-			"py_filter",
 			"filter"
 		],
 		"body": [
 			"filter(${1:lambda i: i < 5}, ${2:mylist})"
 		]
 	},
-	"py_map": {
+	"map": {
 		"prefix": [
-			"py_map",
 			"map"
 		],
 		"body": [
 			"map(${1:lambda: x: x * 2}, ${2:mylist})"
 		]
 	},
-	"py_list_push": {
+	"list_push": {
 		"prefix": [
-			"py_list_push",
+			"list_push",
 			"push",
 			"append"
 		],
@@ -173,9 +174,9 @@
 			".append('item')"
 		]
 	},
-	"py_list_find": {
+	"list_find": {
 		"prefix": [
-			"py_list_find",
+			"list_find",
 			"find",
 			"index"
 		],
@@ -183,7 +184,7 @@
 			".index(myval)"
 		]
 	},
-	"py_reduce": {
+	"reduce": {
 		"prefix": [
 			"py_reduce",
 			"reduce"
@@ -193,9 +194,77 @@
 			"reduce(lambda accum, item: accum * item, mylist, 4)"
 		]
 	},
-	"py_str_to_int": {
+	"path_join": {
+		"prefix": ["path_join", "join", "os_join"],
+		"description": "Join paths intelligently",
+		"body": [
+			"import os",
+			"os.path.join(path)"
+		]
+	},
+	"starts_with": {
+		"prefix": ["starts_with", "startswith"],
+		"description": "String starts with",
+		"body": [
+			"str.startswith(prefix)"
+		]
+	},
+	"ends_with": {
+		"prefix": ["ends_with", "endswith"],
+		"description": "String ends with",
+		"body": [
+			"str.endswith(suffix)"
+		]
+	},
+	"import_json": {
 		"prefix": [
-			"py_str_to_int"
+			"json",
+			"import_json"
+		],
+		"description": "Import json",
+		"body": [
+			"import json"
+		]
+	},
+	"json_dumps": {
+		"prefix": [
+			"json_dumps",
+			"dumps_json"
+		],
+		"description": "JSON dumps dict to string",
+		"body": [
+			"mystr = json.dumps(${1:data}, sort_keys=True, indent=4)"
+		]
+	},
+	"json_write": {
+		"prefix": [
+			"json_write",
+			"write_json",
+			"json_dump_file",
+			"dump_json_file"
+		],
+		"description": "JSON write to file",
+		"body": [
+			"with open('${1:data.txt}', 'w') as f:",
+			"\tjson.dump(${2:data}, f)"
+		]
+	},
+	"json_load": {
+		"prefix": [
+			"json_load",
+			"load_json",
+			"json_read",
+			"read_json"
+		],
+		"description": "JSON load from file",
+		"body": [
+			"with open('data.txt') as json_file:",
+			"\tdata = json.load(json_file)"
+		]
+	},
+	"to_int": {
+		"prefix": [
+			"to_int"
 		],
 		"body": [
 			"int(${1:str})"
@@ -243,6 +312,13 @@
 			"import seaborn as sns",
 			"",
 			"%matplotlib inline"
+		]
+	},
+	"pandas_fillna": {
+		"prefix": ["pandas_fillna", "fillna", "fill_na"],
+		"description": "Pandas fill / clear NAs",
+		"body": [
+			"df.fillna(0)"
 		]
 	},
 	"pandas_pivot": {
@@ -740,6 +816,29 @@
 			"env = Environment(loader=FileSystemLoader('.'))",
 			"template = env.get_template('myreport.html')",
 			"html_out = template.render({\"my_df_table\": df.to_html()})"
+		]
+	},
+	"import_yml": {
+		"prefix": [
+			"import_yml",
+			"import_yaml"
+		],
+		"description": "Import pyyaml library",
+		"body": [
+			"import yaml"
+		]
+	},
+	"yml": {
+		"prefix": [
+			"yml",
+			"yaml",
+			"load_yml",
+			"load_yaml"
+		],
+		"description": "Load a yaml file",
+		"body": [
+			"with open('example.yaml', 'r') as f:",
+			"\tprint(yaml.safe_load(f))"
 		]
 	},
 }
