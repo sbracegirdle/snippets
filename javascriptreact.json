@@ -722,4 +722,91 @@
       "  ));"
     ]
   },
+  "horizon_import_util": {
+    "prefix": ["horizon_import_util", "import_util"],
+    "description": "Horizon -- Import utility components",
+    "body": [
+      "import {Grid, GridCell, CardCell, FlexBox, Box, Page, Footer} from 'lux-components';"
+    ]
+  },
+  "horizon_use_from_breakpoint": {
+    "prefix": ["horizon_use_from_breakpoint", "use_from_breakpoint"],
+    "body": [
+      "import {useFromBreakpoint} from 'lux-components';",
+      "",
+      "const fromBreakpoint = useFromBreakpoint();"
+    ]
+  },
+  "horizon_from_breakpoint": {
+    "prefix": ["horizon_from_breakpoint", "from_breakpoint"],
+    "body": [
+      "fromBreakpoint(${1:'phone_value'}, ${2:'landscape_portrait_value'}, ${3:'landscape_tablet_value'}, ${4:'laptop_value'}, ${5:'desktop_value'});"
+    ]
+  },
+  "horizon_page": {
+    "prefix": ["horizon_page", "page"],
+    "description": "Horizon -- Page",
+    "body": [
+      "<Page",
+      "  footer={${1:<Footer />}}",
+      "  overflow={false}",
+      "  fill",
+      "  padded>$0</Page>"
+    ]
+  },
+  "horizon_footer": {
+    "prefix": ["horizon_footer", "footer"],
+    "description": "Horizon -- Footer",
+    "body": [
+      "<Footer visible={true} showSave={true} showCancel={true} onSave={() => {}} onCancel={() => {}} />"
+    ]
+  },
+  "horizon_box": {
+    "prefix": ["horizon_box"],
+    "description": "Horizon -- Box utility comp",
+    "body": [
+      "<Box>$0</Box>"
+    ]
+  },
+  "horizon_flex_row": {
+    "prefix": ["horizon_flex", "horizon_flex_row", "flex_row"],
+    "description": "Horizon -- Flexbox row",
+    "body": [
+      "<FlexBox row center>$0</FlexBox>"
+    ]
+  },
+  "horizon_flex_col": {
+    "prefix": ["horizon_flex", "horizon_flex_col", "flex_col"],
+    "description": "Horizon -- Flexbox column",
+    "body": [
+      "<FlexBox col center>$0</FlexBox>"
+    ]
+  },
+  "horizon_grid": {
+    "prefix": ["horizon_grid", "grid"],
+    "description": "Horizon -- Grid",
+    "body": [
+      "<Grid gap=\"large\" gridTemplateRows=\"repeat(3, 1fr)\">$0</Grid>"
+    ]
+  },
+  "horizon_grid_cell": {
+    "prefix": ["horizon_grid_cell", "grid_cell", "cell"],
+    "description": "Horizon -- Grid cell",
+    "body": [
+      "<GridCell",
+      "  col=\"1 / 4\"",
+      "  row=\"1 / span 1\"",
+      "  padding=\"large\">$0</GridCell>",
+    ]
+  },
+  "horizon_card_cell": {
+    "prefix": ["horizon_card", "card_cell", "card"],
+    "description": "Horizon -- Card cell",
+    "body": [
+      "<CardCell",
+      "  col=\"1 / 4\"",
+      "  row=\"1 / span 1\"",
+      "  padding=\"large\">$0</CardCell>",
+    ]
+  }
 }

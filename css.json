@@ -1,4 +1,59 @@
 {
+	// --phone: 0px;
+  // --tablet_portrait: 576px;
+  // --tablet_landscape: 768px;
+  // --laptop: 992px;
+	// --desktop: 1200px;
+	"breakpoints": {
+		"prefix": ["breakpoints", "list_breakpoints", "all_breakpoints"],
+		"body": [
+			"@media (min-width: 0px) {} /* phone */",
+			"@media (min-width: 576px) {} /* tablet_portrait */",
+			"@media (min-width: 768px) {} /* tablet_landscape */",
+			"@media (min-width: 992px) {} /* laptop */",
+			"@media (min-width: 1200px) {} /* desktop+ */"
+		]
+	},
+	"breakpoint_phone": {
+		"prefix": ["breakpoint_phone", "phone"],
+		"body": [
+			"@media (min-width: 0px) {",
+			"\\t$0",
+			"}"
+		]
+	},
+	"breakpoint_tablet_portrait": {
+		"prefix": ["breakpoint_tablet_portrait", "tablet_portrait"],
+		"body": [
+			"@media (min-width: 576px) {",
+			"\\t$0",
+			"}"
+		]
+	},
+	"breakpoint_tablet": {
+		"prefix": ["breakpoint_tablet", "tablet", "breakpoint_tablet_landscape", "tablet_landscape"],
+		"body": [
+			"@media (min-width: 768px) {",
+			"\\t$0",
+			"}"
+		]
+	},
+	"breakpoint_laptop": {
+		"prefix": ["breakpoint_laptop", "laptop"],
+		"body": [
+			"@media (min-width: 992px) {",
+			"\\t$0",
+			"}"
+		]
+	},
+	"breakpoint_desktop": {
+		"prefix": ["breakpoint_desktop", "desktop"],
+		"body": [
+			"@media (min-width: 1200px) {",
+			"\\t$0",
+			"}"
+		]
+	},
 	"flex_row": {
 		"prefix": ["flex_row", "row"],
 		"body": [
