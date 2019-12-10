@@ -3,6 +3,7 @@
 		"prefix": [
 			"if"
 		],
+		"description": "If statement",
 		"body": [
 			"if ${1:condition}:",
 			"  $0"
@@ -13,6 +14,7 @@
 			"forin",
 			"for_in"
 		],
+		"description": "For in loop",
 		"body": [
 			"for ${2:item} in ${1:iterable}:",
 			"  $0"
@@ -22,6 +24,7 @@
 		"prefix": [
 			"dict"
 		],
+		"description": "Create a dictionary",
 		"body": [
 			"my_dict = {",
 			"  \"$1\": \"$2\"",
@@ -29,11 +32,40 @@
 			"}"
 		]
 	},
+	"dict_copy": {
+		"prefix": ["dict_copy"],
+		"description": "Copy a dictionary",
+		"body": [
+			"new_dict = dict(old_dict)"
+		]
+	},
+	"dict_setdefault": {
+		"prefix": ["dict_setdefault", "dict_set_default", "set_default", "setdefault"],
+		"description": "Assign a default value to a key if not set",
+		"body": [
+			"${1:mydict}.setdefault(${2:key}, ${3:default_value})"
+		]
+	},
+	"dict_get": {
+		"prefix": ["dict_get_default", "get_key_default"],
+		"description": "Dictionary get a key with default",
+		"body": [
+			"${1:mydict}.get(${2:key}, ${3:default_value})"
+		]
+	},
+	"dict_keys": {
+		"prefix": ["dict_keys", "keys"],
+		"description": "Dictionary get keys",
+		"body": [
+			"${1:mydict}.keys()"
+		]
+	},
 	"lambda": {
 		"prefix": [
 			"lamb",
 			"lambda"
 		],
+		"description": "Lambda function",
 		"body": [
 			"lambda x: $0"
 		]
@@ -44,6 +76,7 @@
 			"read",
 			"open"
 		],
+		"description": "Open a file",
 		"body": [
 			"with open($1) as file:",
 			"  data = file.read()$0"
@@ -55,6 +88,7 @@
 			"fun",
 			"func"
 		],
+		"description": "Function",
 		"body": [
 			"def $1($2):",
 			"  $0"
@@ -65,9 +99,17 @@
 			"write",
 			"write_file"
 		],
+		"description": "Write to a file",
 		"body": [
 			"with open($1, 'w') as file:",
 			"  file.write('Hi there!')$0"
+		]
+	},
+	"to_list": {
+		"prefix": ["to_list", "list", "to_array"],
+		"description": "Convert things to lists",
+		"body": [
+			"list(${1:mything})"
 		]
 	},
 	"list_comp": {
@@ -394,6 +436,21 @@
 		],
 		"body": [
 			"df['sqrt_values'] = df['values'].apply(np.sqrt)"
+		]
+	},
+	"pandas_iter": {
+		"prefix": ["pandas_iter", "dataframe_iter", "pandas_iterate", "dataframe_iterate", "iterate_items"],
+		"description": "Pandas iterative dataframe items",
+		"body": [
+			"for idx, row in df.T.iteritems():",
+			"\tprint(val['teams_0'])"
+		]
+	},
+	"pandas_datetime": {
+		"prefix": ["pandas_datetime", "dataframe_datetime", "dataframe_to_datetime", "pandas_to_datetime", "to_datetime"],
+		"description": "Pandas convert col to date time",
+		"body": [
+			"df['start_date'] = pd.to_datetime(df['dates_0'])"
 		]
 	},
 	"sns_iris": {
