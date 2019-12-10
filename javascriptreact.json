@@ -218,10 +218,22 @@
   "import_react_intl": {
     "prefix": [
       "import_react_intl",
+      "import_format_message",
       "i_intl"
     ],
+    "description": "React Intl; Import FormattedMessage",
     "body": [
       "import {FormattedMessage} from 'react-intl';"
+    ]
+  },
+  "import_formatted_date": {
+    "prefix": [
+      "import_react_intl_date",
+      "import_format_date"
+    ],
+    "description": "React Intl; Import FormattedDate",
+    "body": [
+      "import {FormattedDate} from 'react-intl';"
     ]
   },
   "import_react_intl_provider": {
@@ -249,19 +261,23 @@
       "<IntlProvider>$0</IntlProvider>"
     ]
   },
-  "intl_msg": {
-    "prefix": "intl_msg",
+  "msg": {
+    "prefix": [
+      "msg",
+      "formatted_msg",
+      "format_msg",
+      "intl_msg"
+    ],
+    "description": "React Intl; FormattedMessage",
     "body": [
       "<FormattedMessage id=\"${1:app.greeting}\" defaultMessage=\"${2:My message}\" />",
     ]
   },
-  "msg": {
-    "prefix": [
-      "msg",
-      "formatted_msg"
-    ],
+  "intl_formatted_date": {
+    "prefix": ["intl_formatted_date", "intl_date", "formatted_date", "format_date"],
+    "description": "React Intl; FormattedDate",
     "body": [
-      "<FormattedMessage id=\"${1:app.greeting}\" defaultMessage=\"${2:My message}\" />",
+      "<FormattedDate value={new Date(text)} />"
     ]
   },
   "intl_inject": {
