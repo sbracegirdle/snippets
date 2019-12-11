@@ -365,10 +365,12 @@
 	},
 	"pandas_pivot": {
 		"prefix": [
-			"pandas_pivot"
+			"pandas_pivot",
+			"pivot"
 		],
+		"description": "Pandas pivot table",
 		"body": [
-			"df.pivot_table(values='passenger', index='month', 'columns='year', aggfunc=len)"
+			"df.pivot_table(values='passenger', index='month', columns='year', aggfunc=len)"
 		]
 	},
 	"pandas_dataframe": {
@@ -376,8 +378,9 @@
 			"pandas_dataframe",
 			"dataframe"
 		],
+		"description": "Pandas dataframe",
 		"body": [
-			"df = pd.DataFrame(data={'col1': [1, 2], 'col2': [3, 4]})"
+			"pd.DataFrame(data=${1:my_dict})"
 		]
 	},
 	"pandas_dataframe_numpy": {
@@ -386,6 +389,7 @@
 			"dataframe_numpy",
 			"dataframe_array"
 		],
+		"description": "Pandas dataframe from numpy array",
 		"body": [
 			"df = pd.DataFrame(np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]]),",
 			"\tcolumns=['a', 'b', 'c'])"
@@ -393,18 +397,21 @@
 	},
 	"pandas_json": {
 		"prefix": "pandas_json",
+		"description": "Pandas dataframe from JSON file",
 		"body": [
 			"df = pd.read_json('my_json.json')"
 		]
 	},
 	"pandas_csv": {
 		"prefix": "pandas_csv",
+		"description": "Pandas dataframe from CSV file",
 		"body": [
 			"df = pd.read_csv('my_csv.csv')"
 		]
 	},
 	"pandas_info": {
 		"prefix": "pandas_info",
+		"description": "Pandas dataframe info",
 		"body": [
 			"df.head()",
 			"df.info()",
@@ -451,6 +458,15 @@
 		"description": "Pandas convert col to date time",
 		"body": [
 			"df['start_date'] = pd.to_datetime(df['dates_0'])"
+		]
+	},
+	"figsize": {
+		"prefix": ["figsize", "plotsize"],
+		"description": "Matplotlib/Seaborn figure size",
+		"body": [
+			"plt.figure(figsize=(${1:14}, ${2:4}))",
+			"${3:sns.countplot(x='team', data=df)}",
+			"plt.show()"
 		]
 	},
 	"sns_iris": {

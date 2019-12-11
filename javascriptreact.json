@@ -295,11 +295,11 @@
       "intl: {formatMessage}"
     ]
   },
-  "msg_attr": {
+  "format_msg_func": {
     "prefix": [
-      "msg_attr",
-      "format_msg"
+      "format_msg_func"
     ],
+    "description": "React Intl; formatMessage function",
     "body": [
       "formatMessage({id: '${1:app.greeting}', defaultMessage: '${2:My message}'})"
     ]
