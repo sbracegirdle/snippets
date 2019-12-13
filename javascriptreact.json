@@ -48,7 +48,7 @@
       "comp",
       "component"
     ],
-    "description": "",
+    "description": "React component (full)",
     "body": [
       "import React from 'react';",
       "",
@@ -61,6 +61,26 @@
       "};",
       "",
       "export default ${1:componentName};"
+    ]
+  },
+  "react_component_inline": {
+    "prefix": [
+      "react_component_inline",
+      "comp_inline",
+      "comp_private",
+      "comp_func",
+      "component_inline",
+      "component_functional"
+    ],
+    "description": "React inline functional component",
+    "body": [
+      "const ${1:componentName} = () => {",
+      "\treturn (",
+      "\t\t<div>",
+      "\t\t\t$0",
+      "\t\t</div>",
+      "\t);",
+      "};"
     ]
   },
   "react_use_effect": {
