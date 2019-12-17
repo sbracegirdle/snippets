@@ -358,7 +358,7 @@
 	},
 	"pandas_fillna": {
 		"prefix": ["pandas_fillna", "fillna", "fill_na"],
-		"description": "Pandas fill / clear NAs",
+		"description": "Pandas; fill / clear NAs",
 		"body": [
 			"df.fillna(0)"
 		]
@@ -368,7 +368,7 @@
 			"pandas_pivot",
 			"pivot"
 		],
-		"description": "Pandas pivot table",
+		"description": "Pandas; pivot table",
 		"body": [
 			"df.pivot_table(values='passenger', index='month', columns='year', aggfunc=len)"
 		]
@@ -378,7 +378,7 @@
 			"pandas_dataframe",
 			"dataframe"
 		],
-		"description": "Pandas dataframe",
+		"description": "Pandas; dataframe",
 		"body": [
 			"pd.DataFrame(data=${1:my_dict})"
 		]
@@ -389,7 +389,7 @@
 			"dataframe_numpy",
 			"dataframe_array"
 		],
-		"description": "Pandas dataframe from numpy array",
+		"description": "Pandas; dataframe from numpy array",
 		"body": [
 			"df = pd.DataFrame(np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]]),",
 			"\tcolumns=['a', 'b', 'c'])"
@@ -397,21 +397,21 @@
 	},
 	"pandas_json": {
 		"prefix": "pandas_json",
-		"description": "Pandas dataframe from JSON file",
+		"description": "Pandas; dataframe from JSON file",
 		"body": [
 			"df = pd.read_json('my_json.json')"
 		]
 	},
 	"pandas_csv": {
 		"prefix": "pandas_csv",
-		"description": "Pandas dataframe from CSV file",
+		"description": "Pandas; dataframe from CSV file",
 		"body": [
 			"df = pd.read_csv('my_csv.csv')"
 		]
 	},
 	"pandas_info": {
 		"prefix": "pandas_info",
-		"description": "Pandas dataframe info",
+		"description": "Pandas; dataframe info",
 		"body": [
 			"df.head()",
 			"df.info()",
@@ -419,7 +419,7 @@
 		]
 	},
 	"pandas_sort": {
-		"description": "Pandas sort",
+		"description": "Pandas; sort",
 		"prefix": [
 			"pandas_sort",
 			"sort"
@@ -429,14 +429,14 @@
 		]
 	},
 	"pandas_group": {
-		"description": "Pandas group by",
+		"description": "Pandas; group by",
 		"prefix": "pandas_group",
 		"body": [
 			"df_counted = df.groupby(['col1', 'col2']).count()"
 		]
 	},
 	"pandas_apply": {
-		"description": "Pandas apply (map)",
+		"description": "Pandas; apply (map)",
 		"prefix": [
 			"pandas_apply",
 			"pandas_map"
@@ -447,7 +447,7 @@
 	},
 	"pandas_iter": {
 		"prefix": ["pandas_iter", "dataframe_iter", "pandas_iterate", "dataframe_iterate", "iterate_items"],
-		"description": "Pandas iterative dataframe items",
+		"description": "Pandas; iterate dataframe items",
 		"body": [
 			"for idx, row in df.T.iteritems():",
 			"\tprint(val['teams_0'])"
@@ -455,9 +455,46 @@
 	},
 	"pandas_datetime": {
 		"prefix": ["pandas_datetime", "dataframe_datetime", "dataframe_to_datetime", "pandas_to_datetime", "to_datetime"],
-		"description": "Pandas convert col to date time",
+		"description": "Pandas; convert col to date time",
 		"body": [
 			"df['start_date'] = pd.to_datetime(df['dates_0'])"
+		]
+	},
+	"pandas_categorical": {
+		"prefix": ["pandas_categorical", "categorical_column"],
+		"description": "Pandas; categorical column",
+		"body": [
+			"df['${1:my_column}'] = pd.Categorical(df['${1:my_column}'])"
+		]
+	},
+	"pandas_one_hot": {
+		"prefix": ["pandas_one_hot", "one_hot", "pandas_dummies", "categorical_encode"],
+		"description": "Pandas; one-hot encode (dummies)",
+		"body": [
+			"df_dummies = pd.get_dummies(df['${1:my_category}'], prefix='${1:my_category}') # where categorical column",
+			"df = pd.concat([df, df_dummies], axis=1)"
+		]
+	},
+	"pandas_columns": {
+		"prefix": ["pandas_columns", "iterate_columns"],
+		"description": "Pandas; iterate columns",
+		"body": [
+			"for col in df.columns:",
+			"\tprint(col) "
+		]
+	},
+	"pandas_drop_columns": {
+		"prefix": ["pandas_drop_columns", "drop_columns", "pandas_delete_columns", "delete_columns"],
+		"description": "Pandas; drop columns",
+		"body": [
+			"df = df.drop([${1:my_column}], axis=1)"
+		]
+	},
+	"pandas_copy": {
+		"prefix": ["pandas_copy"],
+		"description": "Pandas; copy dataframe",
+		"body": [
+			"df_copy = df.copy()"
 		]
 	},
 	"figsize": {
@@ -576,26 +613,52 @@
 			"sns.regplot(x='timepoint', y='signal', data=df)"
 		]
 	},
-	"sklearn_linear": {
-		"prefix": "sklearn_linear",
+	"sklearn_import_preprocessing": {
+		"prefix": ["sklearn_import_preprocessing", "import_preprocessing"],
+		"description": "Scikit-learn; Import pre-processing",
+		"body": [
+			"from sklearn import preprocessing"
+		]
+	},
+	"sklearn_scaler": {
+		"prefix": ["sklearn_scaler"],
+		"description": "Scikit-learn; scale data (zero mean, variance)",
+		"body": [
+			"X_train_scaled = preprocessing.scale(X_train)"
+		]
+	},
+	"sklearn_min_max_scaler": {
+		"prefix": ["sklearn_min_max_scaler", "min_max_scaler"],
+		"description": "Scikit-learn; Min-max scaler",
+		"body": [
+			"min_max_scaler = preprocessing.MinMaxScaler()",
+			"X_train_minmax = min_max_scaler.fit_transform(X_train)"
+		]
+	},
+	"sklearn_import_linear": {
+		"prefix": ["sklearn_import_linear", "import_linear"],
+		"description": "Scikit-learn; Import Linear Regression",
 		"body": [
 			"from sklearn.linear_model import LinearRegression"
 		]
 	},
-	"sklearn_logistic": {
-		"prefix": "sklearn_logistic",
+	"sklearn_import_logistic": {
+		"prefix": ["sklearn_import_logistic", "import_logistic"],
+		"description": "Scikit-learn; Import Logistic Regression",
 		"body": [
 			"from sklearn.linear_model import LogisticRegression"
 		]
 	},
-	"sklearn_model": {
-		"prefix": "sklearn_model",
+	"sklearn_linear": {
+		"prefix": ["sklearn_linear"],
+		"description": "Scikit-learn; LinearRegression model",
 		"body": [
 			"model = LinearRegression(normalize = True)"
 		]
 	},
 	"sklearn_train_test_split": {
-		"prefix": "sklearn_train_test_split",
+		"prefix": ["sklearn_train_test_split", "train_test_split"],
+		"description": "Scikit-learn; train-test split",
 		"body": [
 			"# Where `X` is the data df and `y` is the labels df/series.",
 			"from sklearn.model_selection import train_test_split #previously from sklearn.cross_validation",
@@ -604,18 +667,21 @@
 	},
 	"sklearn_fit": {
 		"prefix": "sklearn_fit",
+		"description": "Scikit-learn; fit model",
 		"body": [
 			"model.fit(X_train, y_train)"
 		]
 	},
 	"sklearn_predict": {
 		"prefix": "sklearn_predict",
+		"description": "Scikit-learn; predict values",
 		"body": [
 			"predictions = model.predict(X_test)"
 		]
 	},
 	"sklearn_metrics": {
-		"prefix": "sklearn_metrics",
+		"prefix": ["sklearn_metrics"],
+		"description": "Scikit-learn; metrics",
 		"body": [
 			"from sklearn import metrics",
 			"",
@@ -625,21 +691,49 @@
 		]
 	},
 	"sklearn_classification": {
-		"prefix": "sklearn_classification",
+		"prefix": ["sklearn_classification", "classification_report"],
+		"description": "Scikit-learn; classification report",
 		"body": [
 			"from sklearn.metrics import classification_report",
 			"print(classification_report(y_test,predictions))"
 		]
 	},
 	"sklearn_confusion": {
-		"prefix": "sklearn_confusion",
+		"prefix": ["sklearn_confusion", "confusion_matrix"],
+		"description": "Scikit-learn; confusion matrix",
 		"body": [
 			"from sklearn.metrics import confusion_matrix",
 			"print(confusion_matrix(y_true, y_pred))"
 		]
 	},
+	"sklearn_ordinal_encoder": {
+		"prefix": ["sklearn_ordinal_encoder", "ordinal_encoder", "sklearn_categorical"],
+		"description": "Scikit-learn; ordinal encoder",
+		"body": [
+			"enc = preprocessing.OrdinalEncoder()",
+			"enc.fit(X)",
+			"enc.transform(X)"
+		]
+	},
+	"sklearn_onehot_encoder": {
+		"prefix": ["sklearn_onehot_encoder", "one_hot_encoder", "sklearn_categorical"],
+		"description": "Scikit-learn; one-hot encoder",
+		"body": [
+			"enc = preprocessing.OneHotEncoder()",
+			"enc.fit(X)",
+			"enc.transform(X).toarray()"
+		]
+	},
+	"sklearn_shuffle": {
+		"prefix": ["sklearn_shuffle"],
+		"description": "scikit-learn; shuffle dataset",
+		"body": [
+			"from sklearn.utils import shuffle",
+			"df = shuffle(df)"
+		]
+	},
 	"import_torch": {
-		"description": "Pytorch import",
+		"description": "Pytorch; import",
 		"prefix": [
 			"import_torch",
 			"import_pytorch",
@@ -650,7 +744,7 @@
 		]
 	},
 	"torch_from_numpy": {
-		"description": "Pytorch tensor from numpy",
+		"description": "Pytorch; tensor from numpy",
 		"prefix": [
 			"torch_from_numpy",
 			"torch_numpy"
@@ -660,7 +754,7 @@
 		]
 	},
 	"torch_tensor": {
-		"description": "Pytorch tensor from numpy",
+		"description": "Pytorch; tensor from numpy",
 		"prefix": [
 			"torch_tensor",
 			"tensor",
@@ -671,21 +765,21 @@
 		]
 	},
 	"torch_empty": {
-		"description": "Pytorch empty tensor",
+		"description": "Pytorch; empty tensor",
 		"prefix": "torch_empty",
 		"body": [
 			"torch.empty(${1:4}, ${2:3})"
 		]
 	},
 	"torch_rand": {
-		"description": "Pytorch random tensor",
+		"description": "Pytorch; random tensor",
 		"prefix": "torch_rand",
 		"body": [
 			"torch.rand(${1:4}, ${2:3})"
 		]
 	},
 	"torch_shape": {
-		"description": "Pytorch get shape",
+		"description": "Pytorch; get shape",
 		"prefix": [
 			"torch_shape",
 			"shape"
@@ -695,7 +789,7 @@
 		]
 	},
 	"torch_reshape": {
-		"description": "Pytorch reshape",
+		"description": "Pytorch; reshape",
 		"prefix": [
 			"torch_reshape",
 			"reshape",
@@ -706,7 +800,7 @@
 		]
 	},
 	"torch_get": {
-		"description": "Pytorch -- get row and col",
+		"description": "Pytorch; get row and col",
 		"prefix": [
 			"torch_get"
 		],
