@@ -202,8 +202,9 @@
 		"prefix": [
 			"map"
 		],
+		"description": "Python map list values",
 		"body": [
-			"map(${1:lambda: x: x * 2}, ${2:mylist})"
+			"list(map(${1:lambda x: x * 2}, ${2:mylist}))"
 		]
 	},
 	"list_push": {
@@ -395,6 +396,13 @@
 			"\tcolumns=['a', 'b', 'c'])"
 		]
 	},
+	"pandas_dataframe_arrays": {
+		"prefix": ["pandas_dataframe_arrays", "dataframe_from_arrays"],
+		"description": "Pandas; dataframe from array pairs",
+		"body": [
+			"pd.DataFrame({'label': np.array(labels), 'images': np.array(images)}, columns=['labels', 'images'])"
+		]
+	},
 	"pandas_json": {
 		"prefix": "pandas_json",
 		"description": "Pandas; dataframe from JSON file",
@@ -518,7 +526,7 @@
 		]
 	},
 	"sns_pairgrid": {
-		"description": "Seaborn grid of regression pairs",
+		"description": "Seaborn; grid of regression pairs",
 		"prefix": [
 			"pairgrid",
 			"sns_pairgrid",
@@ -543,7 +551,7 @@
 		]
 	},
 	"sns_bar": {
-		"description": "Seaborn bar plot",
+		"description": "Seaborn; bar plot",
 		"prefix": [
 			"barplot",
 			"sns_bar",
@@ -556,7 +564,7 @@
 		]
 	},
 	"sns_countplot": {
-		"description": "Seaborn count plot",
+		"description": "Seaborn; count plot",
 		"prefix": [
 			"countplot",
 			"sns_countplot",
@@ -567,7 +575,7 @@
 		]
 	},
 	"sns_dist": {
-		"description": "Seaborn dist plot",
+		"description": "Seaborn; distribution plot",
 		"prefix": [
 			"dist",
 			"distribution",
@@ -581,7 +589,7 @@
 		]
 	},
 	"sns_lineplot": {
-		"description": "Seaborn line plot",
+		"description": "Seaborn; line plot",
 		"prefix": [
 			"sns_lineplot",
 			"lineplot",
@@ -592,7 +600,7 @@
 		]
 	},
 	"sns_heatmap": {
-		"description": "Seaborn heatmap",
+		"description": "Seaborn; heatmap",
 		"prefix": [
 			"sns_heatmap",
 			"heatmap",
@@ -602,8 +610,16 @@
 			"sns.heatmap(df)"
 		]
 	},
+	"sns_heatmap_confusion": {
+		"prefix": ["sns_heatmap_confusion", "heatmap_confusion_matrix"],
+		"description": "Seaborn; heatmap confusion matrix",
+		"body": [
+			"df_test_results = pd.DataFrame({'predictions': np.array(predictions), 'actuals': np.array(y_test)}, columns=['predictions', 'actuals'])",
+			"sns.heatmap(df_test_results.pivot_table(values='predictions', index='actuals', columns='predictions', aggfunc=len))"
+		]
+	},
 	"sns_regression": {
-		"description": "Seaborn regression plot",
+		"description": "Seaborn; regression plot",
 		"prefix": [
 			"sns_regression",
 			"regression_plot",
@@ -743,6 +759,13 @@
 			"import torch"
 		]
 	},
+	"torch_from_dataframe": {
+		"prefix": ["torch_from_dataframe", "tensor_from_dataframe"],
+		"description": "Pytorch; tensor from dataframe",
+		"body": [
+			"torch_tensor = torch.tensor(df.values)"
+		]
+	},
 	"torch_from_numpy": {
 		"description": "Pytorch; tensor from numpy",
 		"prefix": [
@@ -806,6 +829,24 @@
 		],
 		"body": [
 			"${1:x}[${2:row},${3:col}]"
+		]
+	},
+	"torch_model": {
+		"prefix": ["torch_model", "torch_ann"],
+		"description": "Pytorch; basic multilayer perception ANN",
+		"body": [
+			"class MultilayerPerceptron(nn.Module):",
+			"\tdef __init__(self, in_sz=784, out_sz=10, layers=[120,84]):",
+			"\t\t\tsuper().__init__()",
+			"\t\t\tself.fc1 = nn.Linear(in_sz,layers[0])",
+			"\t\t\tself.fc2 = nn.Linear(layers[0],layers[1])",
+			"\t\t\tself.fc3 = nn.Linear(layers[1],out_sz)",
+			"\t",
+			"\tdef forward(self,X):",
+			"\t\t\tX = F.relu(self.fc1(X))",
+			"\t\t\tX = F.relu(self.fc2(X))",
+			"\t\t\tX = self.fc3(X)",
+			"\t\t\treturn F.log_softmax(X, dim=1)"
 		]
 	},
 	"cdk_usage_comment": {
