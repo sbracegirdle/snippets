@@ -844,5 +844,19 @@
       "  row=\"1 / span 1\"",
       "  padding=\"large\">$0</CardCell>",
     ]
+  },
+  "eslint_disable_line": {
+    "prefix": ["eslint_disable_line"],
+    "description": "ESLint; disable line",
+    "body": [
+      "// eslint-disable-line no-use-before-define"
+    ]
+  },
+  "eslint_disable_next_line": {
+    "prefix": ["eslint_disable_next_line"],
+    "description": "ESLint; disable next line",
+    "body": [
+      "// eslint-disable-mext-line no-use-before-define"
+    ]
   }
 }
