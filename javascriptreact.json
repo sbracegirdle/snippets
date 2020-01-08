@@ -212,27 +212,53 @@
       "import ReactDOM from 'react-dom';"
     ]
   },
-  "import_link": {
+  "router_link": {
     "prefix": [
+      "router_link",
       "import_link",
       "link",
       "il",
       "router"
     ],
+    "description": "React-router; import link",
     "body": [
       "import {Link} from 'react-router-dom';"
     ]
   },
-  "import_router": {
-    "prefix": [
-      "import_router",
-      "browser_router",
-      "router"
-    ],
+  "router_switch": {
+    "prefix": ["router_switch", "router_routes"],
+    "description": "React-router; routes switch",
     "body": [
-      "import {BrowserRouter} from 'react-router-dom'",
+      "<Switch>",
+      "  <Route exact path=\"/\">",
+      "    <Home />",
+      "  </Route>",
       "",
-      "<BrowserRouter>$0</BrowserRouter>"
+      "  <Route path=\"/users\">",
+      "    <Users />",
+      "  </Route>",
+      "  <Redirect from=\"/accounts\" to=\"/users\" />",
+      "",
+      "  <Route>",
+      "    <NoMatch />",
+      "  </Route>",
+      "</Switch>"
+    ]
+  },
+  "router_setup": {
+    "prefix": [
+      "react_router",
+      "router_history",
+      "history",
+      "router_setup"
+    ],
+    "description": "React-router; setup router",
+    "body": [
+      "import { Router } from \"react-router\";",
+      "import { createBrowserHistory } from \"history\";",
+      "const history = createBrowserHistory();",
+      "",
+      "<Router history={history}></Router>"
     ]
   },
   "import_react_intl": {
@@ -844,5 +870,26 @@
       "  row=\"1 / span 1\"",
       "  padding=\"large\">$0</CardCell>",
     ]
-  }
+  },
+  "import_use_shared_state": {
+    "prefix": ["import_use_shared_state", "import_hook_shared_state", "import_shared_state"],
+    "description": "hook-shared-state; import",
+    "body": [
+      "import {useSharedState} from 'hook-shared-state';"
+    ]
+  },
+  "use_shared_state": {
+    "prefix": ["use_shared_state", "hook_shared_state", "shared_state"],
+    "description": "hook-shared-state; useSharedState",
+    "body": [
+      "const [${1:email}, set${1:email}] = useSharedState('${1:email}');"
+    ]
+  },
+  "install_use_shared_state": {
+    "prefix": ["install_use_shared_state", "install_shared_state", "install_hook_shared_state"],
+    "description": "hook-shared-state; install",
+    "body": [
+      "npm i --save hook-shared-state"
+    ]
+  },
 }
