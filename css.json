@@ -152,4 +152,36 @@
 			"padding: ${1:10}px;"
 		]
 	},
+	"stylelint_disable": {
+		"prefix": ["stylelint_disable", "disable_line", "styline_disable_line"],
+		"description": "Stylelint; disable next line",
+		"body": [
+			"/* stylelint-disable-next-line */"
+		]
+	},
+	"styleline_config": {
+		"prefix": ["styleline_config"],
+		"description": "Stylelint; config",
+		"body": [
+			"{",
+			"\t\"extends\": \"stylelint-config-recommended\",",
+			"\t\"plugins\": [",
+			"\t\t\"stylelint-declaration-use-variable\"",
+			"\t],",
+			"\t\"rules\": {",
+			"\t\t\"block-no-empty\": null,",
+			"\t\t\"no-descending-specificity\": null,",
+			"\t\t\"sh-waqar/declaration-use-variable\": [[\"/color/\", \"font-family\", \"border-radius\", \"background\", { ignoreValues: [\"none\", \"transparent\", \"inherit\", 0, \"0\", \"100%\"] }]],",
+			"\t\t\"selector-pseudo-class-no-unknown\": [true, {ignorePseudoClasses: [\"global\"]}]",
+			"\t}",
+			"}"
+		]
+	},
+	"var": {
+		"prefix": ["var"],
+		"description": "CSS variable",
+		"body": [
+			"var(${1:--my-var})"
+		]
+	},
 }
