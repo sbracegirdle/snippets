@@ -348,6 +348,7 @@
 	},
 	"import_datasci": {
 		"prefix": "import_datasci",
+		"description": "Common datascience imports",
 		"body": [
 			"import numpy as np",
 			"import pandas as pd",
@@ -475,6 +476,20 @@
 			"df['${1:my_column}'] = pd.Categorical(df['${1:my_column}'])"
 		]
 	},
+	"pandas_categorical_codes": {
+		"prefix": ["pandas_categorical_codes"],
+		"description": "Pandas; get codes from categorical column",
+		"body": [
+			"df['target'] = df['species'].cat.codes"
+		]
+	},
+	"pandas_categorical_categories": {
+		"prefix": ["pandas_categorical_categories"],
+		"description": "Pandas; get categories from categorical column",
+		"body": [
+			"list(iris['species'].cat.categories)"
+		]
+	},
 	"pandas_one_hot": {
 		"prefix": ["pandas_one_hot", "one_hot", "pandas_dummies", "categorical_encode"],
 		"description": "Pandas; one-hot encode (dummies)",
@@ -597,6 +612,14 @@
 		],
 		"body": [
 			"sns.lineplot(x='timepoint', y='signal', data=df)"
+		]
+	},
+	"sns_lineplot_simple": {
+		"prefix": ["sns_lineplot_simple"],
+		"description": "Seaborn; line plot simple list of numbers",
+		"body": [
+			"dfloss = pd.DataFrame({'idx': np.array(range(len(losses))), 'loss': np.array(losses)}, columns=['idx', 'loss'])",
+			"sns.lineplot(x='idx', y='loss', data=dfloss)"
 		]
 	},
 	"sns_heatmap": {
@@ -833,9 +856,9 @@
 	},
 	"torch_model": {
 		"prefix": ["torch_model", "torch_ann"],
-		"description": "Pytorch; basic multilayer perception ANN",
+		"description": "Pytorch; basic ANN",
 		"body": [
-			"class MultilayerPerceptron(nn.Module):",
+			"class Model(nn.Module):",
 			"\tdef __init__(self, in_sz=784, out_sz=10, layers=[120,84]):",
 			"\t\t\tsuper().__init__()",
 			"\t\t\tself.fc1 = nn.Linear(in_sz,layers[0])",
