@@ -1,1075 +1,1264 @@
 {
-	"if": {
-		"prefix": [
-			"if"
-		],
-		"description": "If statement",
-		"body": [
-			"if ${1:condition}:",
-			"  $0"
-		]
-	},
-	"for_in": {
-		"prefix": [
-			"forin",
-			"for_in"
-		],
-		"description": "For in loop",
-		"body": [
-			"for ${2:item} in ${1:iterable}:",
-			"  $0"
-		]
-	},
-	"dict": {
-		"prefix": [
-			"dict"
-		],
-		"description": "Create a dictionary",
-		"body": [
-			"my_dict = {",
-			"  \"$1\": \"$2\"",
-			"  $0",
-			"}"
-		]
-	},
-	"dict_copy": {
-		"prefix": ["dict_copy"],
-		"description": "Copy a dictionary",
-		"body": [
-			"new_dict = dict(old_dict)"
-		]
-	},
-	"dict_setdefault": {
-		"prefix": ["dict_setdefault", "dict_set_default", "set_default", "setdefault"],
-		"description": "Assign a default value to a key if not set",
-		"body": [
-			"${1:mydict}.setdefault(${2:key}, ${3:default_value})"
-		]
-	},
-	"dict_get": {
-		"prefix": ["dict_get_default", "get_key_default"],
-		"description": "Dictionary get a key with default",
-		"body": [
-			"${1:mydict}.get(${2:key}, ${3:default_value})"
-		]
-	},
-	"dict_keys": {
-		"prefix": ["dict_keys", "keys"],
-		"description": "Dictionary get keys",
-		"body": [
-			"${1:mydict}.keys()"
-		]
-	},
-	"lambda": {
-		"prefix": [
-			"lamb",
-			"lambda"
-		],
-		"description": "Lambda function",
-		"body": [
-			"lambda x: $0"
-		]
-	},
-	"open_file": {
-		"prefix": [
-			"open_file",
-			"read",
-			"open"
-		],
-		"description": "Open a file",
-		"body": [
-			"with open($1) as file:",
-			"  data = file.read()$0"
-		]
-	},
-	"func": {
-		"prefix": [
-			"def",
-			"fun",
-			"func"
-		],
-		"description": "Function",
-		"body": [
-			"def $1($2):",
-			"  $0"
-		]
-	},
-	"write_file": {
-		"prefix": [
-			"write",
-			"write_file"
-		],
-		"description": "Write to a file",
-		"body": [
-			"with open($1, 'w') as file:",
-			"  file.write('Hi there!')$0"
-		]
-	},
-	"to_list": {
-		"prefix": ["to_list", "list", "to_array"],
-		"description": "Convert things to lists",
-		"body": [
-			"list(${1:mything})"
-		]
-	},
-	"list_comp": {
-		"description": "List comprehension",
-		"prefix": [
-			"comprehension",
-			"list_comp",
-			"listcomp",
-			"comp"
-		],
-		"body": [
-			"[${2:x * 2} for x in ${1:mylist}]"
-		]
-	},
-	"list_comp_conditional": {
-		"description": "Conditional list comprehension",
-		"prefix": [
-			"comprehension_conditional",
-			"list_comp_conditional",
-			"listcomp_conditional",
-			"comp_conditional"
-		],
-		"body": [
-			"[${3:x * 2} for x in ${1:mylist} ${2:if x > 2}]"
-		]
-	},
-	"main": {
-		"prefix": [
-			"main"
-		],
-		"body": [
-			"if __name__ == '__main__':",
-			"  $0"
-		]
-	},
-	"shebang": {
-		"prefix": [
-			"shebang"
-		],
-		"body": [
-			"#!/usr/bin/python3"
-		]
-	},
-	"subprocess": {
-		"description": "Call a sub process and capture the output in a string",
-		"prefix": [
-			"subprocess",
-			"check_output"
-		],
-		"body": [
-			"import subprocess",
-			"output = subprocess.check_output(['mycmd', 'myarg'])"
-		]
-	},
-	"subprocess_try": {
-		"description": "subprocess.check_output with catch for process error",
-		"prefix": [
-			"subprocess_try",
-			"subprocess_try_catch"
-		],
-		"body": [
-			"try:",
-			"\toutput = subprocess.check_output(RUN_SCRAPER, stderr=subprocess.STDOUT)",
-			"except subprocess.CalledProcessError as e:",
-			"\tprint(e.output)"
-		]
-	},
-	"bg_process": {
-		"prefix": [
-			"bg_process",
-			"background",
-			"subprocess"
-		],
-		"body": [
-			"import subprocess",
-			"ls_output = subprocess.Popen(['${1:sleep}', '30'])",
-			"# Dont run this if you want it to be non-blocking (background) ",
-			"# ls_output.communicate()  # Will block for 30 seconds"
-		]
-	},
-	"filter": {
-		"prefix": [
-			"filter"
-		],
-		"body": [
-			"filter(${1:lambda i: i < 5}, ${2:mylist})"
-		]
-	},
-	"map": {
-		"prefix": [
-			"map"
-		],
-		"description": "Python map list values",
-		"body": [
-			"list(map(${1:lambda x: x * 2}, ${2:mylist}))"
-		]
-	},
-	"list_push": {
-		"prefix": [
-			"list_push",
-			"push",
-			"append"
-		],
-		"body": [
-			".append('item')"
-		]
-	},
-	"list_find": {
-		"prefix": [
-			"list_find",
-			"find",
-			"index"
-		],
-		"body": [
-			".index(myval)"
-		]
-	},
-	"reduce": {
-		"prefix": [
-			"py_reduce",
-			"reduce"
-		],
-		"body": [
-			"from functools import reduce",
-			"reduce(lambda accum, item: accum * item, mylist, 4)"
-		]
-	},
-	"path_join": {
-		"prefix": ["path_join", "join", "os_join"],
-		"description": "Join paths intelligently",
-		"body": [
-			"import os",
-			"os.path.join(path)"
-		]
-	},
-	"starts_with": {
-		"prefix": ["starts_with", "startswith"],
-		"description": "String starts with",
-		"body": [
-			"str.startswith(prefix)"
-		]
-	},
-	"ends_with": {
-		"prefix": ["ends_with", "endswith"],
-		"description": "String ends with",
-		"body": [
-			"str.endswith(suffix)"
-		]
-	},
-	"import_json": {
-		"prefix": [
-			"json",
-			"import_json"
-		],
-		"description": "Import json",
-		"body": [
-			"import json"
-		]
-	},
-	"json_dumps": {
-		"prefix": [
-			"json_dumps",
-			"dumps_json"
-		],
-		"description": "JSON dumps dict to string",
-		"body": [
-			"mystr = json.dumps(${1:data}, sort_keys=True, indent=4)"
-		]
-	},
-	"json_write": {
-		"prefix": [
-			"json_write",
-			"write_json",
-			"json_dump_file",
-			"dump_json_file"
-		],
-		"description": "JSON write to file",
-		"body": [
-			"with open('${1:data.txt}', 'w') as f:",
-			"\tjson.dump(${2:data}, f)"
-		]
-	},
-	"json_load": {
-		"prefix": [
-			"json_load",
-			"load_json",
-			"json_read",
-			"read_json"
-		],
-		"description": "JSON load from file",
-		"body": [
-			"with open('data.txt') as json_file:",
-			"\tdata = json.load(json_file)"
-		]
-	},
-	"to_int": {
-		"prefix": [
-			"to_int"
-		],
-		"body": [
-			"int(${1:str})"
-		]
-	},
-	"import_psycopg": {
-		"prefix": [
-			"import_psycopg",
-			"psycopg_import"
-		],
-		"body": [
-			"import psycopg2"
-		]
-	},
-	"psycopg_connect": {
-		"prefix": [
-			"psycopg_connect",
-			"connect"
-		],
-		"body": [
-			"with psycopg2.connect(dbname='db', user='user', password='pass', host='host', port=5432, connect_timeout=3) as conn:",
-			"  $0"
-		]
-	},
-	"psycopg_query": {
-		"prefix": [
-			"psycopg_query",
-			"query",
-			"fetchall",
-			"psycopg_fetchall",
-			"psycopg_fetch"
-		],
-		"body": [
-			"with conn.cursor() as curs:",
-			"  curs.execute(${1:'sql'})",
-			"  data = curs.fetchall()"
-		]
-	},
-	"import_datasci": {
-		"prefix": "import_datasci",
-		"description": "Common datascience imports",
-		"body": [
-			"import numpy as np",
-			"import pandas as pd",
-			"import matplotlib.pyplot as plt",
-			"import seaborn as sns",
-			"",
-			"%matplotlib inline"
-		]
-	},
-	"pandas_fillna": {
-		"prefix": ["pandas_fillna", "fillna", "fill_na"],
-		"description": "Pandas; fill / clear NAs",
-		"body": [
-			"df.fillna(0)"
-		]
-	},
-	"pandas_pivot": {
-		"prefix": [
-			"pandas_pivot",
-			"pivot"
-		],
-		"description": "Pandas; pivot table",
-		"body": [
-			"df.pivot_table(values='passenger', index='month', columns='year', aggfunc=len)"
-		]
-	},
-	"pandas_dataframe": {
-		"prefix": [
-			"pandas_dataframe",
-			"dataframe"
-		],
-		"description": "Pandas; dataframe",
-		"body": [
-			"pd.DataFrame(data=${1:my_dict})"
-		]
-	},
-	"pandas_dataframe_numpy": {
-		"prefix": [
-			"pandas_dataframe_numpy",
-			"dataframe_numpy",
-			"dataframe_array"
-		],
-		"description": "Pandas; dataframe from numpy array",
-		"body": [
-			"df = pd.DataFrame(np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]]),",
-			"\tcolumns=['a', 'b', 'c'])"
-		]
-	},
-	"pandas_dataframe_arrays": {
-		"prefix": ["pandas_dataframe_arrays", "dataframe_from_arrays"],
-		"description": "Pandas; dataframe from array pairs",
-		"body": [
-			"pd.DataFrame({'label': np.array(labels), 'images': np.array(images)}, columns=['labels', 'images'])"
-		]
-	},
-	"pandas_json": {
-		"prefix": "pandas_json",
-		"description": "Pandas; dataframe from JSON file",
-		"body": [
-			"df = pd.read_json('my_json.json')"
-		]
-	},
-	"pandas_csv": {
-		"prefix": "pandas_csv",
-		"description": "Pandas; dataframe from CSV file",
-		"body": [
-			"df = pd.read_csv('my_csv.csv')"
-		]
-	},
-	"pandas_info": {
-		"prefix": "pandas_info",
-		"description": "Pandas; dataframe info",
-		"body": [
-			"df.head()",
-			"df.info()",
-			"df.dtypes"
-		]
-	},
-	"pandas_sort": {
-		"description": "Pandas; sort",
-		"prefix": [
-			"pandas_sort",
-			"sort"
-		],
-		"body": [
-			"df.sort_values(by='foo')"
-		]
-	},
-	"pandas_group": {
-		"description": "Pandas; group by",
-		"prefix": "pandas_group",
-		"body": [
-			"df_counted = df.groupby(['col1', 'col2']).count()"
-		]
-	},
-	"pandas_apply": {
-		"description": "Pandas; apply (map)",
-		"prefix": [
-			"pandas_apply",
-			"pandas_map"
-		],
-		"body": [
-			"df['sqrt_values'] = df['values'].apply(np.sqrt)"
-		]
-	},
-	"pandas_iter": {
-		"prefix": ["pandas_iter", "dataframe_iter", "pandas_iterate", "dataframe_iterate", "iterate_items"],
-		"description": "Pandas; iterate dataframe items",
-		"body": [
-			"for idx, row in df.T.iteritems():",
-			"\tprint(val['teams_0'])"
-		]
-	},
-	"pandas_datetime": {
-		"prefix": ["pandas_datetime", "dataframe_datetime", "dataframe_to_datetime", "pandas_to_datetime", "to_datetime"],
-		"description": "Pandas; convert col to date time",
-		"body": [
-			"df['start_date'] = pd.to_datetime(df['dates_0'])"
-		]
-	},
-	"pandas_categorical": {
-		"prefix": ["pandas_categorical", "categorical_column"],
-		"description": "Pandas; categorical column",
-		"body": [
-			"df['${1:my_column}'] = pd.Categorical(df['${1:my_column}'])"
-		]
-	},
-	"pandas_categorical_codes": {
-		"prefix": ["pandas_categorical_codes"],
-		"description": "Pandas; get codes from categorical column",
-		"body": [
-			"df['target'] = df['species'].cat.codes"
-		]
-	},
-	"pandas_categorical_categories": {
-		"prefix": ["pandas_categorical_categories"],
-		"description": "Pandas; get categories from categorical column",
-		"body": [
-			"list(iris['species'].cat.categories)"
-		]
-	},
-	"pandas_one_hot": {
-		"prefix": ["pandas_one_hot", "one_hot", "pandas_dummies", "categorical_encode"],
-		"description": "Pandas; one-hot encode (dummies)",
-		"body": [
-			"df_dummies = pd.get_dummies(df['${1:my_category}'], prefix='${1:my_category}') # where categorical column",
-			"df = pd.concat([df, df_dummies], axis=1)"
-		]
-	},
-	"pandas_columns": {
-		"prefix": ["pandas_columns", "iterate_columns"],
-		"description": "Pandas; iterate columns",
-		"body": [
-			"for col in df.columns:",
-			"\tprint(col) "
-		]
-	},
-	"pandas_drop_columns": {
-		"prefix": ["pandas_drop_columns", "drop_columns", "pandas_delete_columns", "delete_columns"],
-		"description": "Pandas; drop columns",
-		"body": [
-			"df = df.drop([${1:my_column}], axis=1)"
-		]
-	},
-	"pandas_copy": {
-		"prefix": ["pandas_copy"],
-		"description": "Pandas; copy dataframe",
-		"body": [
-			"df_copy = df.copy()"
-		]
-	},
-	"figsize": {
-		"prefix": ["figsize", "plotsize"],
-		"description": "Matplotlib/Seaborn figure size",
-		"body": [
-			"plt.figure(figsize=(${1:14}, ${2:4}))",
-			"${3:sns.countplot(x='team', data=df)}",
-			"plt.show()"
-		]
-	},
-	"sns_iris": {
-		"description": "Iris dataset (Seaborn)",
-		"prefix": [
-			"data_iris",
-			"sns_iris",
-			"seaborn_iris"
-		],
-		"body": [
-			"iris = sns.load_dataset('iris')"
-		]
-	},
-	"sns_pairgrid": {
-		"description": "Seaborn; grid of regression pairs",
-		"prefix": [
-			"pairgrid",
-			"sns_pairgrid",
-			"seaborn_pairgrid",
-			"pairgrid",
-			"sns_grid",
-			"seaborn_grid"
-		],
-		"body": [
-			"g = sns.PairGrid(df)",
-			"g.map(plt.scatter)"
-		]
-	},
-	"sns_pairplot": {
-		"prefix": [
-			"pairplot",
-			"sns_pairplot",
-			"seaborn_pairplot"
-		],
-		"body": [
-			"sns.pairplot(df)"
-		]
-	},
-	"sns_bar": {
-		"description": "Seaborn; bar plot",
-		"prefix": [
-			"barplot",
-			"sns_bar",
-			"sns_barplot",
-			"seaborn_bar",
-			"seaborn_barplot"
-		],
-		"body": [
-			"sns.barplot(x='sex', y='survived', hue='class', data=df)"
-		]
-	},
-	"sns_countplot": {
-		"description": "Seaborn; count plot",
-		"prefix": [
-			"countplot",
-			"sns_countplot",
-			"seaborn_countplot"
-		],
-		"body": [
-			"sns.countplot(x='sex', data=df)"
-		]
-	},
-	"sns_dist": {
-		"description": "Seaborn; distribution plot",
-		"prefix": [
-			"dist",
-			"distribution",
-			"sns_dist",
-			"seaborn_dist",
-			"sns_distribution",
-			"seaborn_distribution"
-		],
-		"body": [
-			"sns.distplot(df['bill'])"
-		]
-	},
-	"sns_lineplot": {
-		"description": "Seaborn; line plot",
-		"prefix": [
-			"sns_lineplot",
-			"lineplot",
-			"seaborn_lineplot"
-		],
-		"body": [
-			"sns.lineplot(x='timepoint', y='signal', data=df)"
-		]
-	},
-	"sns_lineplot_simple": {
-		"prefix": ["sns_lineplot_simple"],
-		"description": "Seaborn; line plot simple list of numbers",
-		"body": [
-			"dfloss = pd.DataFrame({'idx': np.array(range(len(losses))), 'loss': np.array(losses)}, columns=['idx', 'loss'])",
-			"sns.lineplot(x='idx', y='loss', data=dfloss)"
-		]
-	},
-	"sns_heatmap": {
-		"description": "Seaborn; heatmap",
-		"prefix": [
-			"sns_heatmap",
-			"heatmap",
-			"seaborn_heatmap"
-		],
-		"body": [
-			"sns.heatmap(df)"
-		]
-	},
-	"sns_heatmap_confusion": {
-		"prefix": ["sns_heatmap_confusion", "heatmap_confusion_matrix"],
-		"description": "Seaborn; heatmap confusion matrix",
-		"body": [
-			"df_test_results = pd.DataFrame({'predictions': np.array(predictions), 'actuals': np.array(y_test)}, columns=['predictions', 'actuals'])",
-			"sns.heatmap(df_test_results.pivot_table(values='predictions', index='actuals', columns='predictions', aggfunc=len))"
-		]
-	},
-	"sns_regression": {
-		"description": "Seaborn; regression plot",
-		"prefix": [
-			"sns_regression",
-			"regression_plot",
-			"seaborn_regression"
-		],
-		"body": [
-			"sns.regplot(x='timepoint', y='signal', data=df)"
-		]
-	},
-	"sklearn_import_preprocessing": {
-		"prefix": ["sklearn_import_preprocessing", "import_preprocessing"],
-		"description": "Scikit-learn; Import pre-processing",
-		"body": [
-			"from sklearn import preprocessing"
-		]
-	},
-	"sklearn_scaler": {
-		"prefix": ["sklearn_scaler"],
-		"description": "Scikit-learn; scale data (zero mean, variance)",
-		"body": [
-			"X_train_scaled = preprocessing.scale(X_train)"
-		]
-	},
-	"sklearn_min_max_scaler": {
-		"prefix": ["sklearn_min_max_scaler", "min_max_scaler"],
-		"description": "Scikit-learn; Min-max scaler",
-		"body": [
-			"min_max_scaler = preprocessing.MinMaxScaler()",
-			"X_train_minmax = min_max_scaler.fit_transform(X_train)"
-		]
-	},
-	"sklearn_import_linear": {
-		"prefix": ["sklearn_import_linear", "import_linear"],
-		"description": "Scikit-learn; Import Linear Regression",
-		"body": [
-			"from sklearn.linear_model import LinearRegression"
-		]
-	},
-	"sklearn_import_logistic": {
-		"prefix": ["sklearn_import_logistic", "import_logistic"],
-		"description": "Scikit-learn; Import Logistic Regression",
-		"body": [
-			"from sklearn.linear_model import LogisticRegression"
-		]
-	},
-	"sklearn_linear": {
-		"prefix": ["sklearn_linear"],
-		"description": "Scikit-learn; LinearRegression model",
-		"body": [
-			"model = LinearRegression(normalize = True)"
-		]
-	},
-	"sklearn_train_test_split": {
-		"prefix": ["sklearn_train_test_split", "train_test_split"],
-		"description": "Scikit-learn; train-test split",
-		"body": [
-			"# Where `X` is the data df and `y` is the labels df/series.",
-			"from sklearn.model_selection import train_test_split #previously from sklearn.cross_validation",
-			"X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)"
-		]
-	},
-	"sklearn_fit": {
-		"prefix": "sklearn_fit",
-		"description": "Scikit-learn; fit model",
-		"body": [
-			"model.fit(X_train, y_train)"
-		]
-	},
-	"sklearn_predict": {
-		"prefix": "sklearn_predict",
-		"description": "Scikit-learn; predict values",
-		"body": [
-			"predictions = model.predict(X_test)"
-		]
-	},
-	"sklearn_metrics": {
-		"prefix": ["sklearn_metrics"],
-		"description": "Scikit-learn; metrics",
-		"body": [
-			"from sklearn import metrics",
-			"",
-			"metrics.mean_absolute_error(y_test, predictions)",
-			"metrics.mean_squared_error(y_test, predictions)",
-			"np.sqrt(metrics.mean_squared_error(y_test, predictions))"
-		]
-	},
-	"sklearn_classification": {
-		"prefix": ["sklearn_classification", "classification_report"],
-		"description": "Scikit-learn; classification report",
-		"body": [
-			"from sklearn.metrics import classification_report",
-			"print(classification_report(y_test,predictions))"
-		]
-	},
-	"sklearn_confusion": {
-		"prefix": ["sklearn_confusion", "confusion_matrix"],
-		"description": "Scikit-learn; confusion matrix",
-		"body": [
-			"from sklearn.metrics import confusion_matrix",
-			"print(confusion_matrix(y_true, y_pred))"
-		]
-	},
-	"sklearn_ordinal_encoder": {
-		"prefix": ["sklearn_ordinal_encoder", "ordinal_encoder", "sklearn_categorical"],
-		"description": "Scikit-learn; ordinal encoder",
-		"body": [
-			"enc = preprocessing.OrdinalEncoder()",
-			"enc.fit(X)",
-			"enc.transform(X)"
-		]
-	},
-	"sklearn_onehot_encoder": {
-		"prefix": ["sklearn_onehot_encoder", "one_hot_encoder", "sklearn_categorical"],
-		"description": "Scikit-learn; one-hot encoder",
-		"body": [
-			"enc = preprocessing.OneHotEncoder()",
-			"enc.fit(X)",
-			"enc.transform(X).toarray()"
-		]
-	},
-	"sklearn_shuffle": {
-		"prefix": ["sklearn_shuffle"],
-		"description": "scikit-learn; shuffle dataset",
-		"body": [
-			"from sklearn.utils import shuffle",
-			"df = shuffle(df)"
-		]
-	},
-	"import_torch": {
-		"description": "Pytorch; import",
-		"prefix": [
-			"import_torch",
-			"import_pytorch",
-			"i_torch"
-		],
-		"body": [
-			"import torch"
-		]
-	},
-	"torch_from_dataframe": {
-		"prefix": ["torch_from_dataframe", "tensor_from_dataframe"],
-		"description": "Pytorch; tensor from dataframe",
-		"body": [
-			"torch_tensor = torch.tensor(df.values)"
-		]
-	},
-	"torch_from_numpy": {
-		"description": "Pytorch; tensor from numpy",
-		"prefix": [
-			"torch_from_numpy",
-			"torch_numpy"
-		],
-		"body": [
-			"torch.from_numpy(${1:np.array([1,2,3])})"
-		]
-	},
-	"torch_tensor": {
-		"description": "Pytorch; tensor from numpy",
-		"prefix": [
-			"torch_tensor",
-			"tensor",
-			"torch_copy"
-		],
-		"body": [
-			"torch.tensor(${1:np.array([1,2,3])})"
-		]
-	},
-	"torch_empty": {
-		"description": "Pytorch; empty tensor",
-		"prefix": "torch_empty",
-		"body": [
-			"torch.empty(${1:4}, ${2:3})"
-		]
-	},
-	"torch_rand": {
-		"description": "Pytorch; random tensor",
-		"prefix": "torch_rand",
-		"body": [
-			"torch.rand(${1:4}, ${2:3})"
-		]
-	},
-	"torch_shape": {
-		"description": "Pytorch; get shape",
-		"prefix": [
-			"torch_shape",
-			"shape"
-		],
-		"body": [
-			"${1:x}.shape"
-		]
-	},
-	"torch_reshape": {
-		"description": "Pytorch; reshape",
-		"prefix": [
-			"torch_reshape",
-			"reshape",
-			"view"
-		],
-		"body": [
-			"${1:x}.reshape(${2:rows}, ${3:cols})"
-		]
-	},
-	"torch_get": {
-		"description": "Pytorch; get row and col",
-		"prefix": [
-			"torch_get"
-		],
-		"body": [
-			"${1:x}[${2:row},${3:col}]"
-		]
-	},
-	"torch_model": {
-		"prefix": ["torch_model", "torch_ann"],
-		"description": "Pytorch; basic ANN",
-		"body": [
-			"class Model(nn.Module):",
-			"\tdef __init__(self, in_sz=784, out_sz=10, layers=[120,84]):",
-			"\t\t\tsuper().__init__()",
-			"\t\t\tself.fc1 = nn.Linear(in_sz,layers[0])",
-			"\t\t\tself.fc2 = nn.Linear(layers[0],layers[1])",
-			"\t\t\tself.fc3 = nn.Linear(layers[1],out_sz)",
-			"\t",
-			"\tdef forward(self,X):",
-			"\t\t\tX = F.relu(self.fc1(X))",
-			"\t\t\tX = F.relu(self.fc2(X))",
-			"\t\t\tX = self.fc3(X)",
-			"\t\t\treturn F.log_softmax(X, dim=1)"
-		]
-	},
-	"cdk_usage_comment": {
-		"description": "AWS CDK usage / help",
-		"prefix": [
-			"cdk_usage_comment",
-			"cdk",
-			"cdk_usage",
-			"cdk_help",
-			"aws_help"
-		],
-		"body": [
-			"# CDK INSTALL: ",
-			"#   npm install -g aws-cdk ",
-			"#",
-			"# CDK CLI: ",
-			"#   cdk init ",
-			"#   cdk deploy ",
-			"#   cdk destroy ",
-			"#",
-			"# CDK requirements.txt: ",
-			"#   aws-cdk.aws-events",
-			"#   aws-cdk.aws-events-targets",
-			"#   aws-cdk.aws-lambda",
-			"#   aws-cdk.core"
-		]
-	},
-	"cdk_import": {
-		"description": "AWS CDK Import",
-		"prefix": [
-			"cdk_import"
-		],
-		"body": [
-			"from aws_cdk import (",
-			"  core,",
-			"  aws_lambda as _lambda,",
-			"  aws_apigateway as _apigw,",
-			"  aws_s3 as _s3",
-			")"
-		]
-	},
-	"cdk_app": {
-		"description": "AWS CDK App",
-		"prefix": [
-			"cdk_app"
-		],
-		"body": [
-			"app = core.App()",
-			"ApiCorsLambdaStack(app, \"${1:MyStack}\")",
-			"app.synth()"
-		]
-	},
-	"cdk_stack": {
-		"description": "AWS CDK Stack",
-		"prefix": [
-			"cdk_stack"
-		],
-		"body": [
-			"class ${1:MyStack}(core.Stack): ",
-			"  def __init__(self, scope: core.Construct, id: str, **kwargs) -> None:",
-			"    super().__init__(scope, id, **kwargs)",
-			"    $0"
-		]
-	},
-	"cdk_lambda": {
-		"description": "AWS CDK Lambda",
-		"prefix": [
-			"cdk_lambda"
-		],
-		"body": [
-			"lambdaFn = lambda_.Function(",
-			"  self,",
-			"  'Singleton',",
-			"  code=lambda_.InlineCode(handler_code),",
-			"  handler='index.main',",
-			"  timeout=core.Duration.seconds(300),",
-			"  runtime=lambda_.Runtime.PYTHON_3_7,",
-			")"
-		]
-	},
-	"cdk_cron": {
-		"description": "AWS CDK Cron rule",
-		"prefix": [
-			"cdk_cron"
-		],
-		"body": [
-			"rule = events.Rule(",
-			"  self,",
-			"  'Rule',",
-			"  schedule=events.Schedule.cron(",
-			"    year='*',",
-			"    month='*',",
-			"    week_day='MON-FRI',",
-			"    hour='18',",
-			"    minute='0'",
-			"  ),",
-			")",
-			"rule.add_target(targets.LambdaFunction(lambdaFn))",
-		]
-	},
-	"cdk_s3": {
-		"description": "AWS CDK S3 bucket",
-		"prefix": [
-			"cdk_s3",
-			"bucket",
-			"cdk_bucket"
-		],
-		"body": [
-			"s3 = _s3.Bucket(self, 's3bucket')"
-		]
-	},
-	"autopep8": {
-		"description": "Add comments to assist in installing pep8 and running pep8",
-		"prefix": [
-			"autopep8",
-			"pep8",
-			"autopep8_help",
-			"autopep8_comment",
-			"pep8_help",
-			"pep8_comment"
-		],
-		"body": [
-			"# pip install --upgrade autopep8",
-			"# autopep8 --in-place --aggressive --aggressive <filename>"
-		]
-	},
-	"args": {
-		"description": "Get STDIO / CLI args",
-		"prefix": [
-			"args",
-			"py_args",
-			"cli_args"
-		],
-		"body": [
-			"import sys",
-			"print('This is the name of the script: ', sys.argv[0])",
-			"print('Number of arguments: ', len(sys.argv))",
-			"print('The arguments are: ' , str(sys.argv))",
-		]
-	},
-	"dir_files": {
-		"description": "List all files in dir",
-		"prefix": [
-			"dir_files",
-			"listdir",
-			"list_dir",
-			"dirfiles"
-		],
-		"body": [
-			"from os import listdir",
-			"from os.path import isfile, join",
-			"onlyfiles = [f for f in listdir(mypath) if isfile(join(mypath, f))]"
-		]
-	},
-	"jupyter_cell": {
-		"description": "Jupyter inline cell (VSCode)",
-		"prefix": [
-			"jupyter_cell",
-			"cell"
-		],
-		"body": [
-			"#%%"
-		]
-	},
-	"jinja": {
-		"description": "Jinja html template file",
-		"prefix": [
-			"jinja",
-			"jinja_html",
-			"html",
-			"html_template"
-		],
-		"body": [
-			"from jinja2 import Environment, FileSystemLoader",
-			"env = Environment(loader=FileSystemLoader('.'))",
-			"template = env.get_template('myreport.html')",
-			"html_out = template.render({\"my_df_table\": df.to_html()})"
-		]
-	},
-	"import_yml": {
-		"prefix": [
-			"import_yml",
-			"import_yaml"
-		],
-		"description": "Import pyyaml library",
-		"body": [
-			"import yaml"
-		]
-	},
-	"yml": {
-		"prefix": [
-			"yml",
-			"yaml",
-			"load_yml",
-			"load_yaml"
-		],
-		"description": "Load a yaml file",
-		"body": [
-			"with open('example.yaml', 'r') as f:",
-			"\tprint(yaml.safe_load(f))"
-		]
-	},
+  "if": {
+    "prefix": [
+      "if"
+    ],
+    "description": "If statement",
+    "body": [
+      "if ${1:condition}:",
+      "  $0"
+    ]
+  },
+  "for_in": {
+    "prefix": [
+      "forin",
+      "for_in"
+    ],
+    "description": "For in loop",
+    "body": [
+      "for ${2:item} in ${1:iterable}:",
+      "  $0"
+    ]
+  },
+  "dict": {
+    "prefix": [
+      "dict"
+    ],
+    "description": "Create a dictionary",
+    "body": [
+      "my_dict = {",
+      "  \"$1\": \"$2\"",
+      "  $0",
+      "}"
+    ]
+  },
+  "dict_copy": {
+    "prefix": [
+      "dict_copy"
+    ],
+    "description": "Copy a dictionary",
+    "body": [
+      "new_dict = dict(old_dict)"
+    ]
+  },
+  "dict_setdefault": {
+    "prefix": [
+      "dict_setdefault",
+      "dict_set_default",
+      "set_default",
+      "setdefault"
+    ],
+    "description": "Assign a default value to a key if not set",
+    "body": [
+      "${1:mydict}.setdefault(${2:key}, ${3:default_value})"
+    ]
+  },
+  "dict_get": {
+    "prefix": [
+      "dict_get_default",
+      "get_key_default"
+    ],
+    "description": "Dictionary get a key with default",
+    "body": [
+      "${1:mydict}.get(${2:key}, ${3:default_value})"
+    ]
+  },
+  "dict_keys": {
+    "prefix": [
+      "dict_keys",
+      "keys"
+    ],
+    "description": "Dictionary get keys",
+    "body": [
+      "${1:mydict}.keys()"
+    ]
+  },
+  "lambda": {
+    "prefix": [
+      "lamb",
+      "lambda"
+    ],
+    "description": "Lambda function",
+    "body": [
+      "lambda x: $0"
+    ]
+  },
+  "open_file": {
+    "prefix": [
+      "open_file",
+      "read",
+      "open"
+    ],
+    "description": "Open a file",
+    "body": [
+      "with open($1) as file:",
+      "  data = file.read()$0"
+    ]
+  },
+  "func": {
+    "prefix": [
+      "def",
+      "fun",
+      "func"
+    ],
+    "description": "Function",
+    "body": [
+      "def $1($2):",
+      "  $0"
+    ]
+  },
+  "write_file": {
+    "prefix": [
+      "write",
+      "write_file"
+    ],
+    "description": "Write to a file",
+    "body": [
+      "with open($1, 'w') as file:",
+      "  file.write('Hi there!')$0"
+    ]
+  },
+  "to_list": {
+    "prefix": [
+      "to_list",
+      "list",
+      "to_array"
+    ],
+    "description": "Convert things to lists",
+    "body": [
+      "list(${1:mything})"
+    ]
+  },
+  "list_comp": {
+    "description": "List comprehension",
+    "prefix": [
+      "comprehension",
+      "list_comp",
+      "listcomp",
+      "comp"
+    ],
+    "body": [
+      "[${2:x * 2} for x in ${1:mylist}]"
+    ]
+  },
+  "list_comp_conditional": {
+    "description": "Conditional list comprehension",
+    "prefix": [
+      "comprehension_conditional",
+      "list_comp_conditional",
+      "listcomp_conditional",
+      "comp_conditional"
+    ],
+    "body": [
+      "[${3:x * 2} for x in ${1:mylist} ${2:if x > 2}]"
+    ]
+  },
+  "main": {
+    "prefix": [
+      "main"
+    ],
+    "body": [
+      "if __name__ == '__main__':",
+      "  $0"
+    ]
+  },
+  "shebang": {
+    "prefix": [
+      "shebang"
+    ],
+    "body": [
+      "#!/usr/bin/python3"
+    ]
+  },
+  "subprocess": {
+    "description": "Call a sub process and capture the output in a string",
+    "prefix": [
+      "subprocess",
+      "check_output"
+    ],
+    "body": [
+      "import subprocess",
+      "output = subprocess.check_output(['mycmd', 'myarg'])"
+    ]
+  },
+  "subprocess_try": {
+    "description": "subprocess.check_output with catch for process error",
+    "prefix": [
+      "subprocess_try",
+      "subprocess_try_catch"
+    ],
+    "body": [
+      "try:",
+      "\toutput = subprocess.check_output(RUN_SCRAPER, stderr=subprocess.STDOUT)",
+      "except subprocess.CalledProcessError as e:",
+      "\tprint(e.output)"
+    ]
+  },
+  "bg_process": {
+    "prefix": [
+      "bg_process",
+      "background",
+      "subprocess"
+    ],
+    "body": [
+      "import subprocess",
+      "ls_output = subprocess.Popen(['${1:sleep}', '30'])",
+      "# Dont run this if you want it to be non-blocking (background) ",
+      "# ls_output.communicate()  # Will block for 30 seconds"
+    ]
+  },
+  "filter": {
+    "prefix": [
+      "filter"
+    ],
+    "body": [
+      "filter(${1:lambda i: i < 5}, ${2:mylist})"
+    ]
+  },
+  "map": {
+    "prefix": [
+      "map"
+    ],
+    "description": "Python map list values",
+    "body": [
+      "list(map(${1:lambda x: x * 2}, ${2:mylist}))"
+    ]
+  },
+  "list_push": {
+    "prefix": [
+      "list_push",
+      "push",
+      "append"
+    ],
+    "body": [
+      ".append('item')"
+    ]
+  },
+  "list_find": {
+    "prefix": [
+      "list_find",
+      "find",
+      "index"
+    ],
+    "body": [
+      ".index(myval)"
+    ]
+  },
+  "reduce": {
+    "prefix": [
+      "py_reduce",
+      "reduce"
+    ],
+    "body": [
+      "from functools import reduce",
+      "reduce(lambda accum, item: accum * item, mylist, 4)"
+    ]
+  },
+  "path_join": {
+    "prefix": [
+      "path_join",
+      "join",
+      "os_join"
+    ],
+    "description": "Join paths intelligently",
+    "body": [
+      "import os",
+      "os.path.join(path)"
+    ]
+  },
+  "starts_with": {
+    "prefix": [
+      "starts_with",
+      "startswith"
+    ],
+    "description": "String starts with",
+    "body": [
+      "str.startswith(prefix)"
+    ]
+  },
+  "ends_with": {
+    "prefix": [
+      "ends_with",
+      "endswith"
+    ],
+    "description": "String ends with",
+    "body": [
+      "str.endswith(suffix)"
+    ]
+  },
+  "import_json": {
+    "prefix": [
+      "json",
+      "import_json"
+    ],
+    "description": "Import json",
+    "body": [
+      "import json"
+    ]
+  },
+  "json_dumps": {
+    "prefix": [
+      "json_dumps",
+      "dumps_json"
+    ],
+    "description": "JSON dumps dict to string",
+    "body": [
+      "mystr = json.dumps(${1:data}, sort_keys=True, indent=4)"
+    ]
+  },
+  "json_write": {
+    "prefix": [
+      "json_write",
+      "write_json",
+      "json_dump_file",
+      "dump_json_file"
+    ],
+    "description": "JSON write to file",
+    "body": [
+      "with open('${1:data.txt}', 'w') as f:",
+      "\tjson.dump(${2:data}, f)"
+    ]
+  },
+  "json_load": {
+    "prefix": [
+      "json_load",
+      "load_json",
+      "json_read",
+      "read_json"
+    ],
+    "description": "JSON load from file",
+    "body": [
+      "with open('data.txt') as json_file:",
+      "\tdata = json.load(json_file)"
+    ]
+  },
+  "to_int": {
+    "prefix": [
+      "to_int"
+    ],
+    "body": [
+      "int(${1:str})"
+    ]
+  },
+  "import_psycopg": {
+    "prefix": [
+      "import_psycopg",
+      "psycopg_import"
+    ],
+    "body": [
+      "import psycopg2"
+    ]
+  },
+  "psycopg_connect": {
+    "prefix": [
+      "psycopg_connect",
+      "connect"
+    ],
+    "body": [
+      "with psycopg2.connect(dbname='db', user='user', password='pass', host='host', port=5432, connect_timeout=3) as conn:",
+      "  $0"
+    ]
+  },
+  "psycopg_query": {
+    "prefix": [
+      "psycopg_query",
+      "query",
+      "fetchall",
+      "psycopg_fetchall",
+      "psycopg_fetch"
+    ],
+    "body": [
+      "with conn.cursor() as curs:",
+      "  curs.execute(${1:'sql'})",
+      "  data = curs.fetchall()"
+    ]
+  },
+  "import_datasci": {
+    "prefix": "import_datasci",
+    "description": "Common datascience imports",
+    "body": [
+      "import numpy as np",
+      "import pandas as pd",
+      "import matplotlib.pyplot as plt",
+      "import seaborn as sns",
+      "",
+      "%matplotlib inline"
+    ]
+  },
+  "pandas_fillna": {
+    "prefix": [
+      "pandas_fillna",
+      "fillna",
+      "fill_na"
+    ],
+    "description": "Pandas; fill / clear NAs",
+    "body": [
+      "df.fillna(0)"
+    ]
+  },
+  "pandas_pivot": {
+    "prefix": [
+      "pandas_pivot",
+      "pivot"
+    ],
+    "description": "Pandas; pivot table",
+    "body": [
+      "df.pivot_table(values='passenger', index='month', columns='year', aggfunc=len)"
+    ]
+  },
+  "pandas_dataframe": {
+    "prefix": [
+      "pandas_dataframe",
+      "dataframe"
+    ],
+    "description": "Pandas; dataframe",
+    "body": [
+      "pd.DataFrame(data=${1:my_dict})"
+    ]
+  },
+  "pandas_dataframe_numpy": {
+    "prefix": [
+      "pandas_dataframe_numpy",
+      "dataframe_numpy",
+      "dataframe_array"
+    ],
+    "description": "Pandas; dataframe from numpy array",
+    "body": [
+      "df = pd.DataFrame(np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]]),",
+      "\tcolumns=['a', 'b', 'c'])"
+    ]
+  },
+  "pandas_dataframe_arrays": {
+    "prefix": [
+      "pandas_dataframe_arrays",
+      "dataframe_from_arrays"
+    ],
+    "description": "Pandas; dataframe from array pairs",
+    "body": [
+      "pd.DataFrame({'label': np.array(labels), 'images': np.array(images)}, columns=['labels', 'images'])"
+    ]
+  },
+  "pandas_json": {
+    "prefix": "pandas_json",
+    "description": "Pandas; dataframe from JSON file",
+    "body": [
+      "df = pd.read_json('my_json.json')"
+    ]
+  },
+  "pandas_csv": {
+    "prefix": "pandas_csv",
+    "description": "Pandas; dataframe from CSV file",
+    "body": [
+      "df = pd.read_csv('my_csv.csv')"
+    ]
+  },
+  "pandas_info": {
+    "prefix": "pandas_info",
+    "description": "Pandas; dataframe info",
+    "body": [
+      "df.head()",
+      "df.info()",
+      "df.dtypes"
+    ]
+  },
+  "pandas_sort": {
+    "description": "Pandas; sort",
+    "prefix": [
+      "pandas_sort",
+      "sort"
+    ],
+    "body": [
+      "df.sort_values(by='foo')"
+    ]
+  },
+  "pandas_group": {
+    "description": "Pandas; group by",
+    "prefix": "pandas_group",
+    "body": [
+      "df_counted = df.groupby(['col1', 'col2']).count()"
+    ]
+  },
+  "pandas_apply": {
+    "description": "Pandas; apply (map)",
+    "prefix": [
+      "pandas_apply",
+      "pandas_map"
+    ],
+    "body": [
+      "df['sqrt_values'] = df['values'].apply(np.sqrt)"
+    ]
+  },
+  "pandas_iter": {
+    "prefix": [
+      "pandas_iter",
+      "dataframe_iter",
+      "pandas_iterate",
+      "dataframe_iterate",
+      "iterate_items"
+    ],
+    "description": "Pandas; iterate dataframe items",
+    "body": [
+      "for idx, row in df.T.iteritems():",
+      "\tprint(val['teams_0'])"
+    ]
+  },
+  "pandas_datetime": {
+    "prefix": [
+      "pandas_datetime",
+      "dataframe_datetime",
+      "dataframe_to_datetime",
+      "pandas_to_datetime",
+      "to_datetime"
+    ],
+    "description": "Pandas; convert col to date time",
+    "body": [
+      "df['start_date'] = pd.to_datetime(df['dates_0'])"
+    ]
+  },
+  "pandas_categorical": {
+    "prefix": [
+      "pandas_categorical",
+      "categorical_column"
+    ],
+    "description": "Pandas; categorical column",
+    "body": [
+      "df['${1:my_column}'] = pd.Categorical(df['${1:my_column}'])"
+    ]
+  },
+  "pandas_categorical_codes": {
+    "prefix": [
+      "pandas_categorical_codes"
+    ],
+    "description": "Pandas; get codes from categorical column",
+    "body": [
+      "df['target'] = df['species'].cat.codes"
+    ]
+  },
+  "pandas_categorical_categories": {
+    "prefix": [
+      "pandas_categorical_categories"
+    ],
+    "description": "Pandas; get categories from categorical column",
+    "body": [
+      "list(iris['species'].cat.categories)"
+    ]
+  },
+  "pandas_one_hot": {
+    "prefix": [
+      "pandas_one_hot",
+      "one_hot",
+      "pandas_dummies",
+      "categorical_encode"
+    ],
+    "description": "Pandas; one-hot encode (dummies)",
+    "body": [
+      "df_dummies = pd.get_dummies(df['${1:my_category}'], prefix='${1:my_category}') # where categorical column",
+      "df = pd.concat([df, df_dummies], axis=1)"
+    ]
+  },
+  "pandas_columns": {
+    "prefix": [
+      "pandas_columns",
+      "iterate_columns"
+    ],
+    "description": "Pandas; iterate columns",
+    "body": [
+      "for col in df.columns:",
+      "\tprint(col) "
+    ]
+  },
+  "pandas_drop_columns": {
+    "prefix": [
+      "pandas_drop_columns",
+      "drop_columns",
+      "pandas_delete_columns",
+      "delete_columns"
+    ],
+    "description": "Pandas; drop columns",
+    "body": [
+      "df = df.drop([${1:my_column}], axis=1)"
+    ]
+  },
+  "pandas_copy": {
+    "prefix": [
+      "pandas_copy"
+    ],
+    "description": "Pandas; copy dataframe",
+    "body": [
+      "df_copy = df.copy()"
+    ]
+  },
+  "figsize": {
+    "prefix": [
+      "figsize",
+      "plotsize"
+    ],
+    "description": "Matplotlib/Seaborn figure size",
+    "body": [
+      "plt.figure(figsize=(${1:14}, ${2:4}))",
+      "${3:sns.countplot(x='team', data=df)}",
+      "plt.show()"
+    ]
+  },
+  "sns_iris": {
+    "description": "Iris dataset (Seaborn)",
+    "prefix": [
+      "data_iris",
+      "sns_iris",
+      "seaborn_iris"
+    ],
+    "body": [
+      "iris = sns.load_dataset('iris')"
+    ]
+  },
+  "sns_pairgrid": {
+    "description": "Seaborn; grid of regression pairs",
+    "prefix": [
+      "pairgrid",
+      "sns_pairgrid",
+      "seaborn_pairgrid",
+      "pairgrid",
+      "sns_grid",
+      "seaborn_grid"
+    ],
+    "body": [
+      "g = sns.PairGrid(df)",
+      "g.map(plt.scatter)"
+    ]
+  },
+  "sns_pairplot": {
+    "prefix": [
+      "pairplot",
+      "sns_pairplot",
+      "seaborn_pairplot"
+    ],
+    "body": [
+      "sns.pairplot(df)"
+    ]
+  },
+  "sns_bar": {
+    "description": "Seaborn; bar plot",
+    "prefix": [
+      "barplot",
+      "sns_bar",
+      "sns_barplot",
+      "seaborn_bar",
+      "seaborn_barplot"
+    ],
+    "body": [
+      "sns.barplot(x='sex', y='survived', hue='class', data=df)"
+    ]
+  },
+  "sns_countplot": {
+    "description": "Seaborn; count plot",
+    "prefix": [
+      "countplot",
+      "sns_countplot",
+      "seaborn_countplot"
+    ],
+    "body": [
+      "sns.countplot(x='sex', data=df)"
+    ]
+  },
+  "sns_dist": {
+    "description": "Seaborn; distribution plot",
+    "prefix": [
+      "dist",
+      "distribution",
+      "sns_dist",
+      "seaborn_dist",
+      "sns_distribution",
+      "seaborn_distribution"
+    ],
+    "body": [
+      "sns.distplot(df['bill'])"
+    ]
+  },
+  "sns_lineplot": {
+    "description": "Seaborn; line plot",
+    "prefix": [
+      "sns_lineplot",
+      "lineplot",
+      "seaborn_lineplot"
+    ],
+    "body": [
+      "sns.lineplot(x='timepoint', y='signal', data=df)"
+    ]
+  },
+  "sns_lineplot_simple": {
+    "prefix": [
+      "sns_lineplot_simple"
+    ],
+    "description": "Seaborn; line plot simple list of numbers",
+    "body": [
+      "dfloss = pd.DataFrame({'idx': np.array(range(len(losses))), 'loss': np.array(losses)}, columns=['idx', 'loss'])",
+      "sns.lineplot(x='idx', y='loss', data=dfloss)"
+    ]
+  },
+  "sns_heatmap": {
+    "description": "Seaborn; heatmap",
+    "prefix": [
+      "sns_heatmap",
+      "heatmap",
+      "seaborn_heatmap"
+    ],
+    "body": [
+      "sns.heatmap(df)"
+    ]
+  },
+  "sns_heatmap_confusion": {
+    "prefix": [
+      "sns_heatmap_confusion",
+      "heatmap_confusion_matrix"
+    ],
+    "description": "Seaborn; heatmap confusion matrix",
+    "body": [
+      "df_test_results = pd.DataFrame({'predictions': np.array(predictions), 'actuals': np.array(y_test)}, columns=['predictions', 'actuals'])",
+      "sns.heatmap(df_test_results.pivot_table(values='predictions', index='actuals', columns='predictions', aggfunc=len))"
+    ]
+  },
+  "sns_regression": {
+    "description": "Seaborn; regression plot",
+    "prefix": [
+      "sns_regression",
+      "regression_plot",
+      "seaborn_regression"
+    ],
+    "body": [
+      "sns.regplot(x='timepoint', y='signal', data=df)"
+    ]
+  },
+  "sklearn_import_preprocessing": {
+    "prefix": [
+      "sklearn_import_preprocessing",
+      "import_preprocessing"
+    ],
+    "description": "Scikit-learn; Import pre-processing",
+    "body": [
+      "from sklearn import preprocessing"
+    ]
+  },
+  "sklearn_scaler": {
+    "prefix": [
+      "sklearn_scaler"
+    ],
+    "description": "Scikit-learn; scale data (zero mean, variance)",
+    "body": [
+      "X_train_scaled = preprocessing.scale(X_train)"
+    ]
+  },
+  "sklearn_min_max_scaler": {
+    "prefix": [
+      "sklearn_min_max_scaler",
+      "min_max_scaler"
+    ],
+    "description": "Scikit-learn; Min-max scaler",
+    "body": [
+      "min_max_scaler = preprocessing.MinMaxScaler()",
+      "X_train_minmax = min_max_scaler.fit_transform(X_train)"
+    ]
+  },
+  "sklearn_import_linear": {
+    "prefix": [
+      "sklearn_import_linear",
+      "import_linear"
+    ],
+    "description": "Scikit-learn; Import Linear Regression",
+    "body": [
+      "from sklearn.linear_model import LinearRegression"
+    ]
+  },
+  "sklearn_import_logistic": {
+    "prefix": [
+      "sklearn_import_logistic",
+      "import_logistic"
+    ],
+    "description": "Scikit-learn; Import Logistic Regression",
+    "body": [
+      "from sklearn.linear_model import LogisticRegression"
+    ]
+  },
+  "sklearn_linear": {
+    "prefix": [
+      "sklearn_linear"
+    ],
+    "description": "Scikit-learn; LinearRegression model",
+    "body": [
+      "model = LinearRegression(normalize = True)"
+    ]
+  },
+  "sklearn_train_test_split": {
+    "prefix": [
+      "sklearn_train_test_split",
+      "train_test_split"
+    ],
+    "description": "Scikit-learn; train-test split",
+    "body": [
+      "# Where `X` is the data df and `y` is the labels df/series.",
+      "from sklearn.model_selection import train_test_split #previously from sklearn.cross_validation",
+      "X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)"
+    ]
+  },
+  "sklearn_fit": {
+    "prefix": "sklearn_fit",
+    "description": "Scikit-learn; fit model",
+    "body": [
+      "model.fit(X_train, y_train)"
+    ]
+  },
+  "sklearn_predict": {
+    "prefix": "sklearn_predict",
+    "description": "Scikit-learn; predict values",
+    "body": [
+      "predictions = model.predict(X_test)"
+    ]
+  },
+  "sklearn_metrics": {
+    "prefix": ["sklearn_metrics"],
+    "description": "Scikit-learn; metrics",
+    "body": [
+      "from sklearn import metrics",
+      "",
+      "print('MAE: ', metrics.mean_absolute_error(y_test, predictions))",
+      "print('MSE: ', metrics.mean_squared_error(y_test, predictions))",
+      "print('RMSE: ', np.sqrt(metrics.mean_squared_error(y_test, predictions)))",
+      "print('RMSLE: ', metrics.mean_squared_log_error(y_test, predictions))",
+      ""
+    ]
+  },
+  "sklearn_classification": {
+    "prefix": [
+      "sklearn_classification",
+      "classification_report"
+    ],
+    "description": "Scikit-learn; classification report",
+    "body": [
+      "from sklearn.metrics import classification_report",
+      "print(classification_report(y_test,predictions))"
+    ]
+  },
+  "sklearn_confusion": {
+    "prefix": [
+      "sklearn_confusion",
+      "confusion_matrix"
+    ],
+    "description": "Scikit-learn; confusion matrix",
+    "body": [
+      "from sklearn.metrics import confusion_matrix",
+      "print(confusion_matrix(y_true, y_pred))"
+    ]
+  },
+  "sklearn_ordinal_encoder": {
+    "prefix": [
+      "sklearn_ordinal_encoder",
+      "ordinal_encoder",
+      "sklearn_categorical"
+    ],
+    "description": "Scikit-learn; ordinal encoder",
+    "body": [
+      "enc = preprocessing.OrdinalEncoder()",
+      "enc.fit(X)",
+      "enc.transform(X)"
+    ]
+  },
+  "sklearn_onehot_encoder": {
+    "prefix": [
+      "sklearn_onehot_encoder",
+      "one_hot_encoder",
+      "sklearn_categorical"
+    ],
+    "description": "Scikit-learn; one-hot encoder",
+    "body": [
+      "enc = preprocessing.OneHotEncoder()",
+      "enc.fit(X)",
+      "enc.transform(X).toarray()"
+    ]
+  },
+  "sklearn_shuffle": {
+    "prefix": [
+      "sklearn_shuffle"
+    ],
+    "description": "scikit-learn; shuffle dataset",
+    "body": [
+      "from sklearn.utils import shuffle",
+      "df = shuffle(df)"
+    ]
+  },
+  "import_torch": {
+    "description": "Pytorch; import",
+    "prefix": [
+      "import_torch",
+      "import_pytorch",
+      "i_torch"
+    ],
+    "body": [
+      "import torch"
+    ]
+  },
+  "torch_from_dataframe": {
+    "prefix": [
+      "torch_from_dataframe",
+      "tensor_from_dataframe"
+    ],
+    "description": "Pytorch; tensor from dataframe",
+    "body": [
+      "torch_tensor = torch.tensor(df.values)"
+    ]
+  },
+  "torch_from_numpy": {
+    "description": "Pytorch; tensor from numpy",
+    "prefix": [
+      "torch_from_numpy",
+      "torch_numpy"
+    ],
+    "body": [
+      "torch.from_numpy(${1:np.array([1,2,3])})"
+    ]
+  },
+  "torch_tensor": {
+    "description": "Pytorch; tensor from numpy",
+    "prefix": [
+      "torch_tensor",
+      "tensor",
+      "torch_copy"
+    ],
+    "body": [
+      "torch.tensor(${1:np.array([1,2,3])})"
+    ]
+  },
+  "torch_empty": {
+    "description": "Pytorch; empty tensor",
+    "prefix": "torch_empty",
+    "body": [
+      "torch.empty(${1:4}, ${2:3})"
+    ]
+  },
+  "torch_rand": {
+    "description": "Pytorch; random tensor",
+    "prefix": "torch_rand",
+    "body": [
+      "torch.rand(${1:4}, ${2:3})"
+    ]
+  },
+  "torch_shape": {
+    "description": "Pytorch; get shape",
+    "prefix": [
+      "torch_shape",
+      "shape"
+    ],
+    "body": [
+      "${1:x}.shape"
+    ]
+  },
+  "torch_reshape": {
+    "description": "Pytorch; reshape",
+    "prefix": [
+      "torch_reshape",
+      "reshape",
+      "view"
+    ],
+    "body": [
+      "${1:x}.reshape(${2:rows}, ${3:cols})"
+    ]
+  },
+  "torch_get": {
+    "description": "Pytorch; get row and col",
+    "prefix": [
+      "torch_get"
+    ],
+    "body": [
+      "${1:x}[${2:row},${3:col}]"
+    ]
+  },
+  "torch_model": {
+    "prefix": [
+      "torch_model",
+      "torch_ann"
+    ],
+    "description": "Pytorch; basic ANN",
+    "body": [
+      "class Model(nn.Module):",
+      "\tdef __init__(self, in_sz=784, out_sz=10, layers=[120,84]):",
+      "\t\t\tsuper().__init__()",
+      "\t\t\tself.fc1 = nn.Linear(in_sz,layers[0])",
+      "\t\t\tself.fc2 = nn.Linear(layers[0],layers[1])",
+      "\t\t\tself.fc3 = nn.Linear(layers[1],out_sz)",
+      "\t",
+      "\tdef forward(self,X):",
+      "\t\t\tX = F.relu(self.fc1(X))",
+      "\t\t\tX = F.relu(self.fc2(X))",
+      "\t\t\tX = self.fc3(X)",
+      "\t\t\treturn F.log_softmax(X, dim=1)"
+    ]
+  },
+  "cdk_usage_comment": {
+    "description": "AWS CDK usage / help",
+    "prefix": [
+      "cdk_usage_comment",
+      "cdk",
+      "cdk_usage",
+      "cdk_help",
+      "aws_help"
+    ],
+    "body": [
+      "# CDK INSTALL: ",
+      "#   npm install -g aws-cdk ",
+      "#",
+      "# CDK CLI: ",
+      "#   cdk init ",
+      "#   cdk deploy ",
+      "#   cdk destroy ",
+      "#",
+      "# CDK requirements.txt: ",
+      "#   aws-cdk.aws-events",
+      "#   aws-cdk.aws-events-targets",
+      "#   aws-cdk.aws-lambda",
+      "#   aws-cdk.core"
+    ]
+  },
+  "cdk_import": {
+    "description": "AWS CDK Import",
+    "prefix": [
+      "cdk_import"
+    ],
+    "body": [
+      "from aws_cdk import (",
+      "  core,",
+      "  aws_lambda as _lambda,",
+      "  aws_apigateway as _apigw,",
+      "  aws_s3 as _s3",
+      ")"
+    ]
+  },
+  "cdk_app": {
+    "description": "AWS CDK App",
+    "prefix": [
+      "cdk_app"
+    ],
+    "body": [
+      "app = core.App()",
+      "ApiCorsLambdaStack(app, \"${1:MyStack}\")",
+      "app.synth()"
+    ]
+  },
+  "cdk_stack": {
+    "description": "AWS CDK Stack",
+    "prefix": [
+      "cdk_stack"
+    ],
+    "body": [
+      "class ${1:MyStack}(core.Stack): ",
+      "  def __init__(self, scope: core.Construct, id: str, **kwargs) -> None:",
+      "    super().__init__(scope, id, **kwargs)",
+      "    $0"
+    ]
+  },
+  "cdk_lambda": {
+    "description": "AWS CDK Lambda",
+    "prefix": [
+      "cdk_lambda"
+    ],
+    "body": [
+      "lambdaFn = lambda_.Function(",
+      "  self,",
+      "  'Singleton',",
+      "  code=lambda_.InlineCode(handler_code),",
+      "  handler='index.main',",
+      "  timeout=core.Duration.seconds(300),",
+      "  runtime=lambda_.Runtime.PYTHON_3_7,",
+      ")"
+    ]
+  },
+  "cdk_cron": {
+    "description": "AWS CDK Cron rule",
+    "prefix": [
+      "cdk_cron"
+    ],
+    "body": [
+      "rule = events.Rule(",
+      "  self,",
+      "  'Rule',",
+      "  schedule=events.Schedule.cron(",
+      "    year='*',",
+      "    month='*',",
+      "    week_day='MON-FRI',",
+      "    hour='18',",
+      "    minute='0'",
+      "  ),",
+      ")",
+      "rule.add_target(targets.LambdaFunction(lambdaFn))"
+    ]
+  },
+  "cdk_s3": {
+    "description": "AWS CDK S3 bucket",
+    "prefix": [
+      "cdk_s3",
+      "bucket",
+      "cdk_bucket"
+    ],
+    "body": [
+      "s3 = _s3.Bucket(self, 's3bucket')"
+    ]
+  },
+  "autopep8": {
+    "description": "Add comments to assist in installing pep8 and running pep8",
+    "prefix": [
+      "autopep8",
+      "pep8",
+      "autopep8_help",
+      "autopep8_comment",
+      "pep8_help",
+      "pep8_comment"
+    ],
+    "body": [
+      "# pip install --upgrade autopep8",
+      "# autopep8 --in-place --aggressive --aggressive <filename>"
+    ]
+  },
+  "args": {
+    "description": "Get STDIO / CLI args",
+    "prefix": [
+      "args",
+      "py_args",
+      "cli_args"
+    ],
+    "body": [
+      "import sys",
+      "print('This is the name of the script: ', sys.argv[0])",
+      "print('Number of arguments: ', len(sys.argv))",
+      "print('The arguments are: ' , str(sys.argv))"
+    ]
+  },
+  "dir_files": {
+    "description": "List all files in dir",
+    "prefix": [
+      "dir_files",
+      "listdir",
+      "list_dir",
+      "dirfiles"
+    ],
+    "body": [
+      "from os import listdir",
+      "from os.path import isfile, join",
+      "onlyfiles = [f for f in listdir(mypath) if isfile(join(mypath, f))]"
+    ]
+  },
+  "jupyter_cell": {
+    "description": "Jupyter inline cell (VSCode)",
+    "prefix": [
+      "jupyter_cell",
+      "cell"
+    ],
+    "body": [
+      "#%%"
+    ]
+  },
+  "jinja": {
+    "description": "Jinja html template file",
+    "prefix": [
+      "jinja",
+      "jinja_html",
+      "html",
+      "html_template"
+    ],
+    "body": [
+      "from jinja2 import Environment, FileSystemLoader",
+      "env = Environment(loader=FileSystemLoader('.'))",
+      "template = env.get_template('myreport.html')",
+      "html_out = template.render({\"my_df_table\": df.to_html()})"
+    ]
+  },
+  "import_yml": {
+    "prefix": [
+      "import_yml",
+      "import_yaml"
+    ],
+    "description": "Import pyyaml library",
+    "body": [
+      "import yaml"
+    ]
+  },
+  "yml": {
+    "prefix": [
+      "yml",
+      "yaml",
+      "load_yml",
+      "load_yaml"
+    ],
+    "description": "Load a yaml file",
+    "body": [
+      "with open('example.yaml', 'r') as f:",
+      "\tprint(yaml.safe_load(f))"
+    ]
+  },
+  "torch_dynamic_linear_model": {
+    "prefix": "torch_dynamic_linear_model",
+    "description": "Pytorch; dynamic linear model",
+    "body": [
+      "class Model(nn.Module):",
+      "    def __init__(self, layers=[]):",
+      "        super().__init__()",
+      "        self.layers = nn.ModuleList(",
+      "            [nn.Linear(item[0], item[1]) for item in layers])",
+      "",
+      "    def forward(self, X):",
+      "        idx = 0",
+      "        for layer in self.layers:",
+      "            X = layer(X) if len(self.layers) == (",
+      "                idx + 1) else nn.functional.relu(layer(X))",
+      "            idx += 1",
+      "        return X",
+      ""
+    ]
+  },
+  "torch_train_model": {
+    "prefix": "torch_train_model",
+    "description": "Pytorch; train model",
+    "body": [
+      "# %%",
+      "# Train model",
+      "epochs = 50",
+      "losses = []",
+      "",
+      "for i in range(epochs):",
+      "    i += 1",
+      "    y_pred = model.forward(X_train)",
+      "    loss = criterion(y_pred, y_train)",
+      "    losses.append(loss.item())",
+      "",
+      "    # a neat trick to save screen space:",
+      "    if i % 10 == 1:",
+      "        print(f'epoch: {i:2}  loss: {loss:10.8f}')",
+      "",
+      "    optimizer.zero_grad()",
+      "    loss.backward()",
+      "    optimizer.step()",
+      ""
+    ]
+  },
+  "torch_test": {
+    "prefix": [
+      "torch_test",
+      "torch_predict"
+    ],
+    "description": "Pytorch; test model / predictions",
+    "body": [
+      "predictions = []",
+      "with torch.no_grad():",
+      "    for i, data in enumerate(X_test):",
+      "        y_val = model.forward(data)",
+      "        print(f'{i+1:2}. {str(y_val.numpy()):38}  {y_test[i]}')",
+      "        predictions.append(y_val.numpy())",
+      ""
+    ]
+  },
+  "torch_criterion_optim": {
+    "prefix": "torch_criterion_optim",
+    "description": "Pytorch; create criterion / optimiser",
+    "body": [
+      "criterion = torch.nn.MSELoss()",
+      "optimizer = torch.optim.Adam(model.parameters(), lr=0.1)",
+      "#optimizer = torch.optim.SGD(model.parameters(), lr=0.01)"
+    ]
+  }
 }

@@ -1,0 +1,18 @@
+{
+	"tstype": {
+		"prefix": ["type", "interface", "ifc"],
+		"description": "Typescript interface",
+		"body": [
+			"interface ${1:MyType} {",
+			"  {$2:field}: ${3:string};",
+			"}"
+		]
+	},
+	"tsoption": {
+		"prefix": ["optional", "option"],
+		"description": "Typescript optional param in interface",
+		"body": [
+			"color?: number;"
+		]
+	},
+}
