@@ -54,30 +54,48 @@
 			"}"
 		]
 	},
+	"flex_1": {
+		"prefix": ["f1", "flex_1"],
+		"description": "Flexbox; grow 1",
+		"body": [
+			"flex: 1;"
+		]
+	},
 	"flex_row": {
-		"prefix": ["flex_row", "row"],
+		"prefix": ["fr", "flex_row", "row"],
+		"description": "Flexbox; row",
 		"body": [
 			"display: flex;",
 			"flex-direction: row;"
 		]
 	},
 	"flex_col": {
-		"prefix": ["flex_col", "col"],
+		"prefix": ["fc", "flex_col", "col"],
+		"description": "Flexbox; column",
 		"body": [
 			"display: flex;",
 			"flex-direction: column;"
 		]
 	},
-	"flex_center": {
-		"prefix": ["flex_center", "align_center", "center"],
+	"align_center": {
+		"prefix": ["aic", "align_center", "center"],
+		"description": "Align items; center",
 		"body": [
 			"align-items: center;"
 		]
 	},
-	"flex_stretch": {
-		"prefix": ["flex_stretch", "align_stretch", "stretch"],
+	"align_stretch": {
+		"prefix": ["ais", "align_stretch", "stretch"],
+		"description": "Align items; stretch",
 		"body": [
 			"align-items: stretch;"
+		]
+	},
+	"justify_center": {
+		"prefix": ["jcc", "justify_center"],
+		"description": "Justify content; center",
+		"body": [
+			"align-items: center;"
 		]
 	},
 	"m_0": {
