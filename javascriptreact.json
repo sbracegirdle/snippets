@@ -1009,10 +1009,10 @@
     "description": "Tailwind; styled HOC",
     "body": [
       "const styled = (classes, El = 'div', defaultProps) => props => {",
-      "  if (typeof classes === 'function') classes = classes(props);",
-      "  if (typeof classes === 'object' && classes.length) classes = classes.filter(v => !!v).join(' ');",
+      "  let classValues = typeof classes === 'function' ? classes(props) : classes;",
+      "  if (typeof classValues === 'object' && classValues.length) classValues = classValues.filter(v => !!v).join(' ');",
       "",
-      "  return <El {...defaultProps} {...props} className={`${classes || ''} ${props.className || ''}`} />;",
+      "  return <El {...defaultProps} {...props} className={`${classValues || ''} ${props.className || ''}`} />",
       "};"
     ]
   },
