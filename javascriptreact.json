@@ -1,4 +1,21 @@
 {
+  "promisify": {
+    "prefix": ["promisify"],
+    "description": "Node; promisify",
+    "body": [
+      "const fs = require('fs');",
+      "const {promisify} = require('util');",
+      "const readFileAsync = promisify(fs.readFile);"
+    ]
+  },
+  "read_file_sync": {
+    "prefix": ["read_file_sync"],
+    "description": "Node; read file synchronously",
+    "body": [
+      "const fs = require('fs');",
+      "const contents = fs.readFileSync('../bootstrap.sh');"
+    ]
+  },
   "el": {
     "prefix": "el",
     "body": [

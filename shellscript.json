@@ -1,8 +1,24 @@
 {
 	"bash_shebang": {
-		"prefix": "bash_shebang",
+		"prefix": ["shebang", "bash_shebang"],
+		"description": "Bash; shebang",
 		"body": [
 			"#!/usr/bin/env bash"
+		]
+	},
+	"log": {
+		"prefix": ["log"],
+		"description": "Bash; log to file",
+		"body": [
+			"echo \"### BOOTSTRAPPING\" >> /var/log/bootstrap.log"
+		]
+	},
+	"print_date": {
+		"prefix": ["date", "print_date"],
+		"description": "Bash; print",
+		"body": [
+			"currentDate=`date`",
+			"echo $currentDate"
 		]
 	},
 	"bash_if": {
