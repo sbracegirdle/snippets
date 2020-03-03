@@ -4,8 +4,15 @@
 		"description": "Typescript interface",
 		"body": [
 			"interface ${1:MyType} {",
-			"  {$2:field}: ${3:string};",
+			"  ${2:MyField}: ${3:string};",
 			"}"
+		]
+	},
+	"object_map": {
+		"prefix": ["object_map", "map", "key_value"],
+		"description": "Typescript object used as key/value pair",
+		"body": [
+			""
 		]
 	},
 	"tsoption": {
@@ -13,6 +20,15 @@
 		"description": "Typescript optional param in interface",
 		"body": [
 			"color?: number;"
+		]
+	},
+	"enum": {
+		"prefix": ["enum"],
+		"description": "Typescript enum",
+		"body": [
+			"enum ${1:MyType} {",
+			"  ${2:Thing} = ${3:\"SomeValue\"}",
+			"}"
 		]
 	},
 }

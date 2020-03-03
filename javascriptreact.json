@@ -14,7 +14,7 @@
     "body": [
       "const fs = require('fs');",
       "const contents = fs.readFileSync('../bootstrap.sh');"
-    ]
+    ],
   },
   "el": {
     "prefix": "el",
