@@ -1,34 +1,3 @@
 {
-	"tstype": {
-		"prefix": ["type", "interface", "ifc"],
-		"description": "Typescript interface",
-		"body": [
-			"interface ${1:MyType} {",
-			"  ${2:MyField}: ${3:string};",
-			"}"
-		]
-	},
-	"object_map": {
-		"prefix": ["object_map", "map", "key_value"],
-		"description": "Typescript object used as key/value pair",
-		"body": [
-			""
-		]
-	},
-	"tsoption": {
-		"prefix": ["optional", "option"],
-		"description": "Typescript optional param in interface",
-		"body": [
-			"color?: number;"
-		]
-	},
-	"enum": {
-		"prefix": ["enum"],
-		"description": "Typescript enum",
-		"body": [
-			"enum ${1:MyType} {",
-			"  ${2:Thing} = ${3:\"SomeValue\"}",
-			"}"
-		]
-	},
+	// NOTE; All Javascript/JSX/Typescript/TSC snippets are in the main snippet file so they can be shared between language contexts.
 }

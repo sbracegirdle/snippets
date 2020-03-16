@@ -1,128 +1,1234 @@
 {
-	// C:\Users\Simon\AppData\Roaming\Code\User\snippets\simon.code-snippets
-	// VSCODE META
-	"vscode_snippet": {
-		"prefix": "vscode_snippet",
+  // C:\Users\Simon\AppData\Roaming\Code\User\snippets\simon.code-snippets
+  // VSCODE META
+  "vscode_snippet": {
+    "prefix": "vscode_snippet",
+    "body": [
+      "\"$1\": {",
+      "\t\"prefix\": [\"$1\"],",
+      "\t\"description\": \"$2\",",
+      "\t\"body\": [",
+      "\t\t\"$3\"",
+      "\t]",
+      "},"
+    ]
+  },
+  "vscode_snippet_scope": {
+    "prefix": "vscode_snippet_scope",
+    "body": [
+      "\"$1\": {",
+      "\t\"prefix\": [\"$1\"],",
+      "\t\"description\": \"$2\",",
+      "\t\"scope\": \"javascript,javascriptreact,typescript,typescriptreact\",",
+      "\t\"body\": [",
+      "\t\t\"$3\"",
+      "\t]",
+      "},"
+    ]
+  },
+  "vscode_terminal_macro": {
+    "prefix": "vscode_terminal_macro",
+    "body": [
+      "{",
+      "\t\"key\": \"ctrl+u\",",
+      "\t\"command\": \"workbench.action.terminal.sendSequence\",",
+      "\t\"args\": { \"text\": \"$1\" }",
+      "},"
+    ]
+  },
+  "package_json_husky": {
+    "prefix": "package_json_husky",
+    "description": "",
+    "body": [
+      "\"husky\": {",
+      "    \"hooks\": {",
+      "      \"pre-commit\": \"npm run pre-commit\"",
+      "    }",
+      "  },"
+    ]
+  },
+  "prettierrc": {
+    "prefix": "prettierrc",
+    "description": "",
+    "body": [
+      "{",
+      "  \"arrowParens\": \"avoid\",",
+      "  \"bracketSpacing\": false,",
+      "  \"endOfLine\": \"lf\",",
+      "  \"jsxSingleQuote\": false,",
+      "  \"jsxBracketSameLine\": true,",
+      "  \"printWidth\": 120,",
+      "  \"semi\": true,",
+      "  \"singleQuote\": true,",
+      "  \"trailingComma\": \"none\",",
+      "  \"tabWidth\": 2,",
+      "  \"useTabs\": false",
+      "}",
+      ""
+    ]
+  },
+  "babelrc_react_node": {
+    "prefix": "babelrc_react_node",
+    "description": "",
+    "body": [
+      "{",
+      "  \"presets\": [",
+      "    [",
+      "      \"@babel/env\",",
+      "      {",
+      "        \"targets\": {",
+      "          \"node\": \"8\"",
+      "        },",
+      "        \"modules\": \"commonjs\"",
+      "      }",
+      "    ],",
+      "    \"@babel/react\"",
+      "  ]",
+      "}",
+      ""
+    ]
+  },
+  "eslintrc": {
+    "prefix": "eslintrc",
+    "description": "",
+    "body": [
+      "{",
+      "  \"extends\": [\"eslint:recommended\", \"plugin:react/recommended\"],",
+      "  \"parserOptions\": {",
+      "    \"ecmaVersion\": 2018",
+      "  },",
+      "  \"parser\": \"babel-eslint\",",
+      "  \"rules\": {",
+      "    \"linebreak-style\": [\"error\", \"unix\"],",
+      "    \"quotes\": [\"error\", \"single\", {\"allowTemplateLiterals\": true}],",
+      "    \"react/prop-types\": \"off\",",
+      "    \"react/display-name\": \"off\",",
+      "    \"react/jsx-key\": \"off\"",
+      "  },",
+      "  \"plugins\": [\"react\"],",
+      "  \"globals\": {",
+      "    \"module\": \"readonly\"",
+      "  },",
+      "  \"env\": {",
+      "    \"browser\": false,",
+      "    \"es6\": true,",
+      "    \"jest\": true,",
+      "    \"node\": true",
+      "  }",
+      "}"
+    ]
+  },
+  "jupyter_to_html": {
+    "prefix": "jupyter_to_html",
+    "body": [
+      "jupyter nbconvert --to html --no-input notebook.ipynb --output report.html"
+    ]
+  },
+  "babel_cli": {
+    "prefix": "babel_cli",
+    "body": [
+      "babel src/ --out-dir build/ --copy-files"
+    ]
+  },
+  "babel_install": {
+    "prefix": [
+      "babel_install"
+    ],
+    "body": [
+      "npm install --save-dev @babel/core @babel/cli @babel/preset-react @babel/preset-env"
+    ]
+  },
+  // TYPESCRIPT+JAVASCRIPT GLOBAL SNIPPETS
+  "promisify": {
+    "prefix": ["promisify"],
+    "description": "Node; promisify",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "const fs = require('fs');",
+      "const {promisify} = require('util');",
+      "const readFileAsync = promisify(fs.readFile);"
+    ]
+  },
+  "read_file_sync": {
+    "prefix": ["read_file_sync"],
+    "description": "Node; read file synchronously",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "const fs = require('fs');",
+      "const contents = fs.readFileSync('../bootstrap.sh');"
+    ],
+  },
+  "el": {
+    "prefix": "el",
+    "description": "JSX element",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "<${1:div}$2>$0</${1:div}>"
+    ]
+  },
+  "jest_test": {
+    "prefix": [
+      "jest_test",
+      "jest",
+      "test"
+    ],
+    "description": "Jest; test template",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "import ${1:mything} from '${2:mything}';",
+      "",
+      "describe('${3:something()}', () => {",
+      "  it('should ${4:do something}', () => {",
+      "    ${5:expect(something()).toBe([]);}",
+      "  });",
+      "});"
+    ]
+  },
+  "react_class": {
+    "prefix": [
+      "react_class"
+    ],
+    "description": "React; class component",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "import React, { Component } from 'react';",
+      "",
+      "class ${1:ComponentName} extends Component {",
+      "\trender() {",
+      "\t\treturn (",
+      "\t\t\t<div>",
+      "\t\t\t\t$0",
+      "\t\t\t</div>",
+      "\t\t);",
+      "\t}",
+      "}",
+      "",
+      "export default ${1:ComponentName};"
+    ]
+  },
+  "react_component": {
+    "prefix": [
+      "react_component",
+      "comp",
+      "component"
+    ],
+    "description": "React component (full)",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "import React from 'react';",
+      "",
+      "const ${1:componentName} = () => {",
+      "\treturn (",
+      "\t\t<div>",
+      "\t\t\t$0",
+      "\t\t</div>",
+      "\t);",
+      "};",
+      "",
+      "export default ${1:componentName};"
+    ]
+  },
+  "react_component_inline": {
+    "prefix": [
+      "react_component_inline",
+      "comp_inline",
+      "comp_private",
+      "comp_func",
+      "component_inline",
+      "component_functional"
+    ],
+    "description": "React inline functional component",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "const ${1:componentName} = () => {",
+      "\treturn (",
+      "\t\t<div>",
+      "\t\t\t$0",
+      "\t\t</div>",
+      "\t);",
+      "};"
+    ]
+  },
+  "react_use_effect": {
+    "prefix": [
+      "react_use_effect",
+      "use_effect"
+    ],
+    "description": "React; useEffect",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "useEffect(() => {",
+      "  someAsyncCall(); ",
+      "}, [myDep])"
+    ]
+  },
+  "react_use_state": {
+    "prefix": [
+      "react_use_state",
+      "use_state"
+    ],
+    "description": "React; useState",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "const [${1:name}, set${1:name}] = useState(${2:defaultValue});"
+    ]
+  },
+  "react_use_memo": {
+    "prefix": [
+      "react_use_memo",
+      "use_memo"
+    ],
+    "description": "React; useMemo",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "const ${1:name} = useMemo(() => ${3:computation}, [${2:dependency}])"
+    ]
+  },
+  "react_use_ref": {
+    "prefix": [
+      "react_use_ref",
+      "use_ref"
+    ],
+    "description": "React; useRef",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "const ${1:myVar} = useRef(${2:null});"
+    ]
+  },
+  "react_use_callback": {
+    "prefix": [
+      "react_use_callback",
+      "use_callback"
+    ],
+    "description": "React; useCallback",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "const ${1:memoizedCallback} = useCallback(",
+      "\t() => ${2:doSomething()},",
+      "\t[${3:myDep}],",
+      ");"
+    ]
+  },
+  "cname": {
+    "prefix": [
+      "cls",
+      "cname",
+      "class",
+      "class_name"
+    ],
+    "description": "React; className",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "className={${1:thingClass}}"
+    ]
+  },
+  "cname_cond": {
+    "prefix": [
+      "cname_cond",
+      "ccond",
+      "class_cond",
+      "class_condition"
+    ],
+    "description": "React; className condition",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "className={`${${1:condition} ? ${2:thingClass} : ''`}"
+    ]
+  },
+  "shallow_renderer": {
+    "prefix": [
+      "import_shallow_renderer",
+      "import_shallow",
+      "i_shallow",
+      "shallow"
+    ],
+    "description": "React test renderer; shallow",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "import ShallowRenderer from 'react-test-renderer/shallow';"
+    ]
+  },
+  "jest_snapshot": {
+    "prefix": [
+      "snapshot",
+      "jest_snapshot",
+      "shallow_snapshot"
+    ],
+    "description": "Jest; snapshot test",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "const renderer = new ShallowRenderer();",
+      "const result = renderer.render(<${1:MyComp} />);",
+      "expect(result).toMatchSnapshot();"
+    ]
+  },
+  "class_as": {
+    "prefix": "class_as",
+    "description": "class as otherclass",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "${1:MyClass} as ${1:MyClass}Class"
+    ]
+  },
+  "import_css": {
+    "prefix": [
+      "import_css",
+      "import_module_css",
+      "i_css"
+    ],
+    "description": "Import css module",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "import ${1:{mything as mythingClass}} from './${2:mything}.module.css';"
+    ]
+  },
+  "import_react": {
+    "prefix": [
+      "import_react",
+      "react",
+      "ir"
+    ],
+    "description": "React; import",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "import React from 'react';"
+    ]
+  },
+  "import_react_dom": {
+    "prefix": "import_react_dom",
+    "description": "ReactDOM; import",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "import ReactDOM from 'react-dom';"
+    ]
+  },
+  "router_link": {
+    "prefix": [
+      "router_link",
+      "import_link",
+      "link",
+      "il",
+      "router"
+    ],
+    "description": "React-router; import link",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "import {Link} from 'react-router-dom';"
+    ]
+  },
+  "router_switch": {
+    "prefix": [
+      "router_switch",
+      "router_routes"
+    ],
+    "description": "React-router; routes switch",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "<Switch>",
+      "  <Route exact path=\"/\">",
+      "    <Home />",
+      "  </Route>",
+      "",
+      "  <Route path=\"/users\">",
+      "    <Users />",
+      "  </Route>",
+      "  <Redirect from=\"/accounts\" to=\"/users\" />",
+      "",
+      "  <Route>",
+      "    <NoMatch />",
+      "  </Route>",
+      "</Switch>"
+    ]
+  },
+  "router_setup": {
+    "prefix": [
+      "react_router",
+      "router_history",
+      "history",
+      "router_setup"
+    ],
+    "description": "React-router; setup router",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "import { Router } from \"react-router\";",
+      "import { createBrowserHistory } from \"history\";",
+      "const history = createBrowserHistory();",
+      "",
+      "<Router history={history}></Router>"
+    ]
+  },
+  "import_react_intl": {
+    "prefix": [
+      "import_react_intl",
+      "import_format_message",
+      "i_intl"
+    ],
+    "description": "React Intl; Import FormattedMessage",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "import {FormattedMessage} from 'react-intl';"
+    ]
+  },
+  "import_formatted_date": {
+    "prefix": [
+      "import_react_intl_date",
+      "import_format_date"
+    ],
+    "description": "React Intl; Import FormattedDate",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "import {FormattedDate} from 'react-intl';"
+    ]
+  },
+  "import_react_intl_provider": {
+    "prefix": [
+      "import_react_intl_provider",
+      "i_intl_provider"
+    ],
+    "description": "React intl; import IntlProvider",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "import {IntlProvider} from 'react-intl'"
+    ]
+  },
+  "import_from": {
+    "prefix": [
+      "import_from",
+      "import",
+      "i"
+    ],
+    "description": "Import from",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "import {${1:thing}} from '${2:library}';"
+    ]
+  },
+  "intl_provider": {
+    "prefix": "intl_provider",
+    "description": "React Intl; IntlProvider",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "<IntlProvider>$0</IntlProvider>"
+    ]
+  },
+  "msg": {
+    "prefix": [
+      "msg",
+      "formatted_msg",
+      "format_msg",
+      "intl_msg"
+    ],
+    "description": "React Intl; FormattedMessage",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "<FormattedMessage id=\"${1:app.greeting}\" defaultMessage=\"${2:My message}\" />"
+    ]
+  },
+  "intl_formatted_date": {
+    "prefix": [
+      "intl_formatted_date",
+      "intl_date",
+      "formatted_date",
+      "format_date"
+    ],
+    "description": "React Intl; FormattedDate",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "<FormattedDate value={new Date(text)} />"
+    ]
+  },
+  "intl_inject": {
+    "prefix": "intl_inject",
+    "description": "React intl; injectIntl",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "injectIntl(${1:MyComp})"
+    ]
+  },
+  "intl_use_intl": {
+    "prefix": [
+      "intl_use_intl",
+      "intl_use",
+      "use_format_message"
+    ],
+    "description": "React Intl; Use intl /w formatMessage",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "const {formatMessage} = useIntl();"
+    ]
+  },
+  "intl_get_msg": {
+    "prefix": [
+      "intl_get_msg",
+      "intl_get_format_msg"
+    ],
+    "description": "React intl; get formatMessage prop",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "intl: {formatMessage}"
+    ]
+  },
+  "format_msg_func": {
+    "prefix": [
+      "format_msg_func"
+    ],
+    "description": "React Intl; formatMessage function",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "formatMessage({id: '${1:app.greeting}', defaultMessage: '${2:My message}'})"
+    ]
+  },
+  "redux_connect": {
+    "prefix": "connect",
+    "description": "Redux; connect",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": "import {connect} from 'react-redux';\n\nconst Connected${1} = connect(state => ({\n\n}), dispatch => ({\n\n}))(${1});\n\nexport default Connected${1};"
+  },
+  "mocha_describe": {
+    "prefix": "mocha_describe",
+    "description": "Mocha; describe",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": "describe('${1}', () => {\n\t\n});"
+  },
+  "mocha_it": {
+    "prefix": "mocha_it",
+    "description": "Mocha; it",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": "it('should ${1:do something}', () => {\n\t\n});"
+  },
+  "jest_expect": {
+    "prefix": [
+      "jest_expect",
+      "expect"
+    ],
+    "description": "Jest; expect toBe",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": "expect(${1:myThing()}).toBe(${2:someOutput})"
+  },
+  "jest_expect_deep": {
+    "prefix": [
+      "jest_expect_deep",
+      "jest_expect_equal"
+    ],
+    "description": "Jest; expect deep equal",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "expect(${1:myThing()}).toEqual(${2:someOutput})"
+    ]
+  },
+  "jest_expect_object": {
+    "prefix": [
+      "jest_expect_object",
+      "expect_object"
+    ],
+    "description": "Jest; expect object props (not deep)",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": "expect(${1:myThing()}).toMatchObject(${2:{myObj}});"
+  },
+  "jest_describe": {
+    "prefix": [
+      "jest_describe",
+      "describe"
+    ],
+    "description": "Jest; describe()",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": "describe('${1:myThing()}', () => {$0});"
+  },
+  "jest_it": {
+    "prefix": [
+      "jest_it",
+      "it"
+    ],
+    "description": "Jest; it()",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "it('should ${1:do something}', () => {",
+      "  $0",
+      "});"
+    ]
+  },
+  "jest_throws": {
+    "prefix": [
+      "jest_throws",
+      "jest_expect_throws"
+    ],
+    "description": "Jest; expect throws",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "expect(() => ${1:myFunc}()).toThrow();"
+    ]
+  },
+  "mocha_test": {
+    "prefix": "mocha_test",
+    "description": "Mocha; test",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": "import testSetup from '../testutil/testSetup';\nimport React from 'react';\n\n// import thing from './place';\n\nconst {expect, shallow, mount, createStore, fetchMock, waitForAction} = testSetup;\n\ndescribe('ProfileEditDetails tests', () => {\n\tdescribe('businessNameNotInPersonalName', () => {\n\t\tit('empty personal name should be ok', () => {\n\t\t\texpect(businessNameNotInPersonalName('', '', 'Alpha Building')).to.be.ok;\n\t\t});\n\t});\n});\n"
+  },
+  "dynamo_get": {
+    "prefix": "dynamo_get",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "description": "AWS; DynamoDB get / retrieve",
+    "body": [
+      "const result = await docClient",
+      ".get({",
+      "  TableName: TEMPLATES_TABLE,",
+      "  Key: {",
+      "    id,",
+      "    tenantId",
+      "  }",
+      "})",
+      ".promise();",
+      "",
+      "if (result && result.Item) doSomething();"
+    ]
+  },
+  "dynamo_create_table": {
+    "prefix": "dynamo_create_table",
+    "description": "AWS; DynamoDB create table",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "await dynamodb",
+      "    .createTable({",
+      "      TableName: TEMPLATES_TABLE,",
+      "      KeySchema: [{AttributeName: 'tenantId', KeyType: 'HASH'}, {AttributeName: 'id', KeyType: 'RANGE'}],",
+      "      AttributeDefinitions: [",
+      "        {AttributeName: 'tenantId', AttributeType: 'S'},",
+      "        {AttributeName: 'id', AttributeType: 'S'}",
+      "      ],",
+      "      ProvisionedThroughput: {",
+      "        ReadCapacityUnits: 5,",
+      "        WriteCapacityUnits: 5",
+      "      }",
+      "    })",
+      "    .promise();"
+    ]
+  },
+  "dynamo_delete_table": {
+    "prefix": "dynamo_delete_table",
+    "description": "AWS; DynamoDB delete table",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "await dynamodb.deleteTable({TableName: TEMPLATES_TABLE}).promise();"
+    ]
+  },
+  "dynamo_list_tables": {
+    "prefix": "dynamo_list_tables",
+    "description": "AWS; DynamoDB list tables",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "await dynamodb.listTables({}).promise();"
+    ]
+  },
+  "dynamo_connect": {
+    "prefix": "dynamo_connect",
+    "description": "AWS; DynamoDB connect",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "const AWS = require('aws-sdk');",
+      "",
+      "AWS.config.update({",
+      "  region: 'us-west-2',",
+      "  endpoint: 'http://localhost:8000',",
+      "  accessKeyId: 'fakeMyKeyId',",
+      "  secretAccessKey: 'fakeSecretAccessKey'",
+      "});",
+      "",
+      "const TEMPLATES_TABLE = 'DesignerTemplates';",
+      "const dynamodb = new AWS.DynamoDB();",
+      "const docClient = new AWS.DynamoDB.DocumentClient();"
+    ]
+  },
+  "joi_schema": {
+    "prefix": "joi_schema",
+    "description": "JOI; Schema",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "const nodeSchema = Joi.object().keys({",
+      "  name: Joi.string().required(),",
+      "  props: Joi.object()",
+      "    .pattern(Joi.string(), Joi.string())",
+      "    .optional(),",
+      "  children: Joi.array()",
+      "    .items(Joi.object())",
+      "    .optional(),",
+      "  text: Joi.string().optional()",
+      "});"
+    ]
+  },
+  "joi_require": {
+    "prefix": "joi_require",
+    "description": "JOI; require",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "const Joi = require('@hapi/joi');"
+    ]
+  },
+  "joi_validate": {
+    "prefix": "joi_validate",
+    "description": "JOI; validate",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "const result = Joi.validate(node, nodeSchema);",
+      "",
+      "  if (result.error) throw new InvalidTemplate(result.error);"
+    ]
+  },
+  "express_app": {
+    "prefix": "express_app",
+    "description": "Express; app",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "const express = require('express')",
+      "",
+      "const app = express();",
+      "const port = process.env.PORT || 3000;",
+      "",
+      "app.use(express.json());",
+      "app.use(express.urlencoded());",
+      "app.use(morgan('tiny'));",
+      "",
+      "app.listen(port, () => console.log(`report-designer-api listening on port ${port}!`));"
+    ]
+  },
+  "express_route": {
+    "prefix": "express_route",
+    "description": "Express; route",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "app.get('/foo/:id', (req, res) => res.send({foo: 'bar'}));"
+    ]
+  },
+  "cdk_app": {
+    "prefix": [
+      "cdk",
+      "cdk_app",
+      "cdk_help",
+      "cdk_use",
+      "cdk_init"
+    ],
+    "description": "CDK; App",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "const cdk = require('@aws-cdk/core');",
+      "",
+      "// ## CDK Quick ref: ",
+      "// npm install -g aws-cdk ",
+      "// cdk --version ",
+      "// cdk init --language LANGUAGE [TEMPLATE] ",
+      "// cdk init --language javascript ",
+      "// cdk init --language python sample-app ",
+      "// cdk ls ",
+      "// cdk diff ",
+      "// cdk synth // Create CFN template (good for testing) ",
+      "// cdk deploy",
+      "// cdk deploy MyStack",
+      "// cdk destroy ",
+      "",
+      "const app = new cdk.App();",
+      "new MyStack(app, 'MyStack');",
+      "app.synth();"
+    ]
+  },
+  "cdk_stack": {
+    "prefix": "cdk_stack",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "description": "CDK; Stack",
+    "body": [
+      "const cdk = require('@aws-cdk/core');",
+      "",
+      "class LambdaCronStack extends cdk.Stack {",
+      "  constructor(app, id, props) {",
+      "    super(app, id, props);",
+      "",
+      "    // Do things",
+      "  }",
+      "}"
+    ]
+  },
+  "cdk_construct": {
+    "prefix": [
+      "cdk_construct",
+      "cdk_custom_construct"
+    ],
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "description": "CDK; Construct",
+    "body": [
+      "class ${1:MyConstruct} extends cdk.Construct {",
+      "  constructor(scope, id, props = {}) {",
+      "    super(scope, id, props);",
+      "",
+      "    // Create things here e.g. this.myThing = new Something();",
+      "  }",
+      "}"
+    ]
+  },
+  "cdk_lambda": {
+    "prefix": "cdk_lambda",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "description": "CDK; Lambda",
+    "body": [
+      "const lambda = require('@aws-cdk/aws-lambda');",
+      "",
+      "const lambdaFn = new lambda.Function(this, 'Singleton', { ",
+      "  code: new lambda.InlineCode(fs.readFileSync('lambda-handler.py', { encoding: 'utf-8' })),",
+      "  handler: 'index.main',",
+      "  timeout: cdk.Duration.seconds(300),",
+      "  runtime: lambda.Runtime.PYTHON_2_7",
+      "});"
+    ]
+  },
+  "cdk_events_lambda": {
+    "prefix": "cdk_events_lambda",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "description": "CDK; Lambda schedule event",
+    "body": [
+      "const events = require('@aws-cdk/aws-events');",
+      "const targets = require('@aws-cdk/aws-events-targets');",
+      "",
+      "const rule = new events.Rule(this, 'Rule', {",
+      "  schedule: events.Schedule.expression('cron(0 18 ? * MON-FRI *)')",
+      "});",
+      "",
+      "rule.addTarget(new targets.LambdaFunction(lambdaFn));"
+    ]
+  },
+  "cdk_bucket": {
+    "prefix": "cdk_bucket",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "description": "CDK; S3 Bucket",
+    "body": [
+      "const s3 = require('@aws-cdk/aws-s3');",
+      "//...",
+      "const siteBucket = new s3.Bucket(this, 'SiteBucket', {",
+      "  bucketName: siteDomain,",
+      "  websiteIndexDocument: 'index.html',",
+      "  websiteErrorDocument: 'error.html',",
+      "  publicReadAccess: true,",
+      "  removalPolicy: cdk.RemovalPolicy.DESTROY,",
+      "});"
+    ]
+  },
+  "cdk_bucket_deploy": {
+    "prefix": "cdk_bucket_deploy",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "description": "CDK; S3 bucket deployment",
+    "body": [
+      "const s3deploy = require('@aws-cdk/aws-s3-deployment');",
+      "//...",
+      "new s3deploy.BucketDeployment(this, 'DeployWithInvalidation', {",
+      "  source: s3deploy.Source.asset('./site-contents'),",
+      "  destinationBucket: siteBucket,",
+      "  distribution,",
+      "  distributionPaths: ['/*'],",
+      "});"
+    ]
+  },
+  "cdk_acm": {
+    "prefix": "cdk_acm",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "description": "CDK; Certificate manager (ACM)",
+    "body": [
+      "const acm = require('@aws-cdk/aws-certificatemanager');",
+      "//...",
+      "const certificateArn = new acm.DnsValidatedCertificate(this, 'SiteCertificate', {",
+      "  domainName: siteDomain,",
+      "  hostedZone: zone",
+      "}).certificateArn;"
+    ]
+  },
+  "cdk_cloudfront": {
+    "prefix": "cdk_cloudfront",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "description": "CDK; Cloudfront",
+    "body": [
+      "const cloudfront = require('@aws-cdk/aws-cloudfront');",
+      "",
+      "const distribution = new cloudfront.CloudFrontWebDistribution(this, 'SiteDistribution', {",
+      "  aliasConfiguration: {",
+      "    acmCertRef: certificateArn,",
+      "    names: [ siteDomain ],",
+      "    sslMethod: cloudfront.SSLMethod.SNI,",
+      "    securityPolicy: cloudfront.SecurityPolicyProtocol.TLS_V1_1_2016,",
+      "  },",
+      "  originConfigs: [",
+      "    {",
+      "      s3OriginSource: {",
+      "        s3BucketSource: siteBucket",
+      "      },",
+      "      behaviors : [ {isDefaultBehavior: true}],",
+      "    }",
+      "  ]",
+      "});"
+    ]
+  },
+  "cdk_ecs": {
+    "prefix": [
+      "cdk_ecs"
+    ],
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "description": "CDK; ECS Fargate",
+    "body": [
+      "const ec2 = require('@aws-cdk/aws-ec2');",
+      "const ecs = require('@aws-cdk/aws-ecs');",
+      "",
+      "const vpc = new ec2.Vpc(this, 'MyVpc', { maxAzs: 2 });",
+      "const cluster = new ecs.Cluster(this, 'Ec2Cluster', { vpc });",
+      "",
+      "// create a task definition with CloudWatch Logs",
+      "const logging = new ecs.AwsLogDriver({",
+      "  streamPrefix: 'myapp',",
+      "})",
+      "",
+      "const taskDef = new ecs.FargateTaskDefinition(this, 'MyTaskDefinition', {",
+      "  memoryLimitMiB: 512,",
+      "  cpu: 256, // 1 vCPU = 1024 ",
+      "})",
+      "",
+      "taskDef.addContainer('AppContainer', {",
+      "  image: ecs.ContainerImage.fromRegistry('amazon/amazon-ecs-sample'),",
+      "  logging,",
+      "})",
+      "",
+      "// Instantiate ECS Service with just cluster and image",
+      "new ecs.FargateService(this, 'FargateService', {",
+      "  cluster,",
+      "  taskDefinition: taskDef",
+      "});"
+    ]
+  },
+  "cdk_ecs_fargate_scheduled": {
+    "prefix": [
+      "cdk_ecs_fargate_scheduled",
+      "cdk_ecs_fargate"
+    ],
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "description": "CDK; ECS Fargate scheduled",
+    "body": [
+      "const vpc = new ec2.Vpc(this, \"ScraperVPC\", { maxAzs: 1 });",
+      "const cluster = new ecs.Cluster(this, \"ScraperCluster\", { vpc });",
+      "",
+      "const logDriver = new ecs.AwsLogDriver({",
+      "  streamPrefix: \"bankstack-scraper\"",
+      "});",
+      "",
+      "const ecsScheduledTask = new ecsPatterns.ScheduledFargateTask(",
+      "  this,",
+      "  \"ScraperScheduledTask\",",
+      "  {",
+      "    cluster,",
+      "    vpc,",
+      "    desiredTaskCount: 1,",
+      "    schedule: autoscaling.Schedule.expression(\"rate(1 day)\"),",
+      "    scheduledFargateTaskImageOptions: {",
+      "      image: ecs.ContainerImage.fromRegistry(",
+      "        \"438831467415.dkr.ecr.ap-southeast-2.amazonaws.com/bankstack-scraper\"",
+      "      ),",
+      "      // environment: { name: \"TRIGGER\", value: \"CloudWatch Events\" }, ENV VARS",
+      "      // TODO secret",
+      "      memoryLimitMiB: 1024,",
+      "      cpu: 512, // 1 vCPU = 1024",
+      "      logDriver",
+      "    }",
+      "  }",
+      ");"
+    ]
+  },
+  "cdk_secret": {
+    "prefix": [
+      "cdk_secret",
+      "cdk_secret_value"
+    ],
+    "description": "CDK; SM Secret value",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "const sm = require(\"@aws-cdk/aws-secretsmanager\");",
+      "",
+      "sm.Secret.fromSecretArn(this, \"BankUNSecretImported\", \"arn\");"
+    ]
+  },
+  "react_popper": {
+    "prefix": "react_popper",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "description": "React Popper",
+    "body": [
+      "<Manager>",
+      "  <Reference innerRef={innerRef => (buttonRef.current = innerRef)}>",
+      "    {({ref}) => (",
+      "      <div ref={ref}></div>",
+      "    )}",
+      "  </Reference>",
+      "  {ReactDOM.createPortal(",
+      "    <Popper placement=\"bottom-start\">",
+      "      {({ref, style, placement}) => (",
+      "        <div ref={ref} style={style} data-placement={placement}></div>",
+      "      )}",
+      "    </Popper>,",
+      "    document.body",
+      "  )}",
+      "</Manager>"
+    ]
+  },
+  "import_react_popper": {
+    "prefix": "import_react_popper",
+    "description": "React Popper; import",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "import {Manager, Reference, Popper} from 'react-popper';"
+    ]
+  },
+  "story": {
+    "prefix": [
+      "story",
+      "storybook"
+    ],
+    "description": "Storybook; story",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "import React from 'react';",
+      "import {storiesOf} from '@storybook/react';",
+      "import {${1:MyComponent}} from '../index';",
+      "",
+      "storiesOf('${1:MyComponent}', module)",
+      "  .add('test', () => (",
+      "    <${1:MyComponent} />",
+      "  ));"
+    ]
+  },
+  "import_use_shared_state": {
+    "prefix": [
+      "import_use_shared_state",
+      "import_hook_shared_state",
+      "import_shared_state"
+    ],
+    "description": "hook-shared-state; import",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "import {useSharedState} from 'hook-shared-state';"
+    ]
+  },
+  "use_shared_state": {
+    "prefix": [
+      "use_shared_state",
+      "hook_shared_state",
+      "shared_state"
+    ],
+    "description": "hook-shared-state; useSharedState",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "const [${1:email}, set${1:email}] = useSharedState('${1:email}');"
+    ]
+  },
+  "install_use_shared_state": {
+    "prefix": [
+      "install_use_shared_state",
+      "install_shared_state",
+      "install_hook_shared_state"
+    ],
+    "description": "hook-shared-state; install",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "npm i --save hook-shared-state"
+    ]
+  },
+  "eslint_disable_line": {
+    "prefix": [
+      "eslint_disable_line"
+    ],
+    "description": "ESLint; disable line",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "// eslint-disable-line no-use-before-define"
+    ]
+  },
+  "eslint_disable_next_line": {
+    "prefix": [
+      "eslint_disable_next_line"
+    ],
+    "description": "ESLint; disable next line",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "// eslint-disable-mext-line no-use-before-define"
+    ]
+  },
+  "styled_hoc": {
+    "prefix": ["styled_hoc", "tailwind_styled"],
+    "description": "Tailwind; styled HOC",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "const styled = (classes, El = 'div', defaultProps) => props => {",
+      "  let classValues = typeof classes === 'function' ? classes(props) : classes;",
+      "  if (typeof classValues === 'object' && classValues.length) classValues = classValues.filter(v => !!v).join(' ');",
+      "",
+      "  return <El {...defaultProps} {...props} className={`${classValues || ''} ${props.className || ''}`} />",
+      "};"
+    ]
+  },
+  "styled": {
+    "prefix": ["styled", "tailwind_styled"],
+    "description": "Tailwind; styled",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "styled('MyComponent p-2 bg-gray-300 rounded')"
+    ]
+  },
+  "object_to_map": {
+    "prefix": ["object_to_map", "to_map"],
+    "description": "Convert plain object to Map",
+    "body": [
+      "new Map(Object.entries({foo: 'bar'}))"
+    ]
+  },
+  "array_to_set": {
+    "prefix": ["array_to_set", "list_to_set", "to_set"],
+    "description": "Convert plain array to set",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "new Set([1, 2, 3, 4])"
+    ]
+  },
+  // TYPESCRIPT focused snippets
+  "ts_type": {
+		"prefix": ["type", "interface", "ifc"],
+		"description": "Typescript; interface",
+		"scope": "typescript,typescriptreact",
 		"body": [
-			"\"$1\": {",
-			"\t\"prefix\": [\"$1\"],",
-			"\t\"description\": \"$2\",",
-			"\t\"body\": [",
-			"\t\t\"$3\"",
-			"\t]",
-			"},"
-		]
-	},
-	"vscode_terminal_macro": {
-		"prefix": "vscode_terminal_macro",
-		"body": [
-			"{",
-			"\t\"key\": \"ctrl+u\",",
-			"\t\"command\": \"workbench.action.terminal.sendSequence\",",
-			"\t\"args\": { \"text\": \"$1\" }",
-			"},"
-		]
-	},
-	"package_json_husky": {
-		"prefix": "package_json_husky",
-		"description": "",
-		"body": [
-			"\"husky\": {",
-			"    \"hooks\": {",
-			"      \"pre-commit\": \"npm run pre-commit\"",
-			"    }",
-			"  },"
-		]
-	},
-	"prettierrc": {
-		"prefix": "prettierrc",
-		"description": "",
-		"body": [
-			"{",
-			"  \"arrowParens\": \"avoid\",",
-			"  \"bracketSpacing\": false,",
-			"  \"endOfLine\": \"lf\",",
-			"  \"jsxSingleQuote\": false,",
-			"  \"jsxBracketSameLine\": true,",
-			"  \"printWidth\": 120,",
-			"  \"semi\": true,",
-			"  \"singleQuote\": true,",
-			"  \"trailingComma\": \"none\",",
-			"  \"tabWidth\": 2,",
-			"  \"useTabs\": false",
-			"}",
-			""
-		]
-	},
-	"babelrc_react_node": {
-		"prefix": "babelrc_react_node",
-		"description": "",
-		"body": [
-			"{",
-			"  \"presets\": [",
-			"    [",
-			"      \"@babel/env\",",
-			"      {",
-			"        \"targets\": {",
-			"          \"node\": \"8\"",
-			"        },",
-			"        \"modules\": \"commonjs\"",
-			"      }",
-			"    ],",
-			"    \"@babel/react\"",
-			"  ]",
-			"}",
-			""
-		]
-	},
-	"eslintrc": {
-		"prefix": "eslintrc",
-		"description": "",
-		"body": [
-			"{",
-			"  \"extends\": [\"eslint:recommended\", \"plugin:react/recommended\"],",
-			"  \"parserOptions\": {",
-			"    \"ecmaVersion\": 2018",
-			"  },",
-			"  \"parser\": \"babel-eslint\",",
-			"  \"rules\": {",
-			"    \"linebreak-style\": [\"error\", \"unix\"],",
-			"    \"quotes\": [\"error\", \"single\", {\"allowTemplateLiterals\": true}],",
-			"    \"react/prop-types\": \"off\",",
-			"    \"react/display-name\": \"off\",",
-			"    \"react/jsx-key\": \"off\"",
-			"  },",
-			"  \"plugins\": [\"react\"],",
-			"  \"globals\": {",
-			"    \"module\": \"readonly\"",
-			"  },",
-			"  \"env\": {",
-			"    \"browser\": false,",
-			"    \"es6\": true,",
-			"    \"jest\": true,",
-			"    \"node\": true",
-			"  }",
+			"interface ${1:MyType} {",
+			"  ${2:MyField}: ${3:string};",
 			"}"
 		]
 	},
-	"jupyter_to_html": {
-		"prefix": "jupyter_to_html",
+	"ts_object_map": {
+		"prefix": ["object_map", "map", "key_value"],
+		"description": "Typescript; object used as key/value pair",
+		"scope": "typescript,typescriptreact",
 		"body": [
-			"jupyter nbconvert --to html --no-input notebook.ipynb --output report.html"
+			""
 		]
 	},
-	"babel_cli": {
-		"prefix": "babel_cli",
+	"tsoption": {
+		"prefix": ["optional", "option"],
+		"description": "Typescript; optional param in interface",
+		"scope": "typescript,typescriptreact",
 		"body": [
-			"babel src/ --out-dir build/ --copy-files"
+			"color?: number;"
 		]
 	},
-	"babel_install": {
-		"prefix": [
-			"babel_install"
-		],
+	"ts_enum": {
+		"prefix": ["ts_enum", "enum"],
+		"description": "Typescript; enum",
+		"scope": "typescript,typescriptreact",
 		"body": [
-			"npm install --save-dev @babel/core @babel/cli @babel/preset-react @babel/preset-env"
+			"enum ${1:MyType} {",
+			"  ${2:Thing} = ${3:\"SomeValue\"}",
+			"}"
 		]
-	},
+  },
+  "ts_type_alias": {
+    "prefix": ["ts_type_alias", "type", "type_alias"],
+    "description": "Typescript; Type alias",
+    "body": [
+      "type ${1:NameResolver} = () => string;"
+    ]
+  },
+
 }
