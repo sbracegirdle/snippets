@@ -138,9 +138,46 @@
       "npm install --save-dev @babel/core @babel/cli @babel/preset-react @babel/preset-env"
     ]
   },
+  // 
   // TYPESCRIPT+JAVASCRIPT GLOBAL SNIPPETS
+  // 
+  "aws_mock_import": {
+    "prefix": [
+      "aws_mock_import",
+      "aws_mock_setup"
+    ],
+    "description": "AWS; Mock for unit testing (import and setup)",
+    "body": [
+      "import * as AWS from 'aws-sdk';",
+      "import * as AWSMock from 'aws-sdk-mock';",
+      "",
+      "AWSMock.setSDKInstance(AWS);",
+      "",
+      "afterEach(() => AWSMock.restore());"
+    ]
+  },
+  "aws_mock_method": {
+    "prefix": [
+      "aws_mock_method",
+      "aws_mock"
+    ],
+    "description": "AWS; Mock a AWS method",
+    "body": [
+      "const mockMyAWSThing = () => {",
+      "  const mock = jest.fn();",
+      "  AWSMock.mock(",
+      "    'AWSObject',",
+      "    'method',",
+      "    mock.mockResolvedValueOnce(someValue)",
+      "  );",
+      "  return mock;",
+      "}"
+    ]
+  },
   "promisify": {
-    "prefix": ["promisify"],
+    "prefix": [
+      "promisify"
+    ],
     "description": "Node; promisify",
     "scope": "javascript,javascriptreact,typescript,typescriptreact",
     "body": [
@@ -150,7 +187,9 @@
     ]
   },
   "read_file_sync": {
-    "prefix": ["read_file_sync"],
+    "prefix": [
+      "read_file_sync"
+    ],
     "description": "Node; read file synchronously",
     "scope": "javascript,javascriptreact,typescript,typescriptreact",
     "body": [
@@ -1151,7 +1190,10 @@
     ]
   },
   "styled_hoc": {
-    "prefix": ["styled_hoc", "tailwind_styled"],
+    "prefix": [
+      "styled_hoc",
+      "tailwind_styled"
+    ],
     "description": "Tailwind; styled HOC",
     "scope": "javascript,javascriptreact,typescript,typescriptreact",
     "body": [
@@ -1164,7 +1206,10 @@
     ]
   },
   "styled": {
-    "prefix": ["styled", "tailwind_styled"],
+    "prefix": [
+      "styled",
+      "tailwind_styled"
+    ],
     "description": "Tailwind; styled",
     "scope": "javascript,javascriptreact,typescript,typescriptreact",
     "body": [
@@ -1172,14 +1217,21 @@
     ]
   },
   "object_to_map": {
-    "prefix": ["object_to_map", "to_map"],
+    "prefix": [
+      "object_to_map",
+      "to_map"
+    ],
     "description": "Convert plain object to Map",
     "body": [
       "new Map(Object.entries({foo: 'bar'}))"
     ]
   },
   "array_to_set": {
-    "prefix": ["array_to_set", "list_to_set", "to_set"],
+    "prefix": [
+      "array_to_set",
+      "list_to_set",
+      "to_set"
+    ],
     "description": "Convert plain array to set",
     "scope": "javascript,javascriptreact,typescript,typescriptreact",
     "body": [
@@ -1188,47 +1240,85 @@
   },
   // TYPESCRIPT focused snippets
   "ts_type": {
-		"prefix": ["type", "interface", "ifc"],
-		"description": "Typescript; interface",
-		"scope": "typescript,typescriptreact",
-		"body": [
-			"interface ${1:MyType} {",
-			"  ${2:MyField}: ${3:string};",
-			"}"
-		]
-	},
-	"ts_object_map": {
-		"prefix": ["object_map", "map", "key_value"],
-		"description": "Typescript; object used as key/value pair",
-		"scope": "typescript,typescriptreact",
-		"body": [
-			""
-		]
-	},
-	"tsoption": {
-		"prefix": ["optional", "option"],
-		"description": "Typescript; optional param in interface",
-		"scope": "typescript,typescriptreact",
-		"body": [
-			"color?: number;"
-		]
-	},
-	"ts_enum": {
-		"prefix": ["ts_enum", "enum"],
-		"description": "Typescript; enum",
-		"scope": "typescript,typescriptreact",
-		"body": [
-			"enum ${1:MyType} {",
-			"  ${2:Thing} = ${3:\"SomeValue\"}",
-			"}"
-		]
+    "prefix": [
+      "type",
+      "interface",
+      "ifc"
+    ],
+    "description": "Typescript; interface",
+    "scope": "typescript,typescriptreact",
+    "body": [
+      "interface ${1:MyType} {",
+      "  ${2:MyField}: ${3:string};",
+      "}"
+    ]
+  },
+  "ts_object_map": {
+    "prefix": [
+      "object_map",
+      "map",
+      "key_value"
+    ],
+    "description": "Typescript; object used as key/value pair",
+    "scope": "typescript,typescriptreact",
+    "body": [
+      ""
+    ]
+  },
+  "tsoption": {
+    "prefix": [
+      "optional",
+      "option"
+    ],
+    "description": "Typescript; optional param in interface",
+    "scope": "typescript,typescriptreact",
+    "body": [
+      "color?: number;"
+    ]
+  },
+  "ts_enum": {
+    "prefix": [
+      "ts_enum",
+      "enum"
+    ],
+    "description": "Typescript; enum",
+    "scope": "typescript,typescriptreact",
+    "body": [
+      "enum ${1:MyType} {",
+      "  ${2:Thing} = ${3:\"SomeValue\"}",
+      "}"
+    ]
   },
   "ts_type_alias": {
-    "prefix": ["ts_type_alias", "type", "type_alias"],
+    "prefix": [
+      "ts_type_alias",
+      "type",
+      "type_alias"
+    ],
     "description": "Typescript; Type alias",
     "body": [
       "type ${1:NameResolver} = () => string;"
     ]
   },
-
+  "ts_assert_string": {
+    "prefix": [
+      "ts_assert_string"
+    ],
+    "description": "",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "function assertString(val: any): asserts val is string {\r\n  if (typeof val !== 'string') {\r\n    throw new Error('Not a string!')\r\n  }\r\n}"
+    ]
+  },
+  "ts_assert": {
+    "prefix": [
+      "ts_assert",
+      "ts_assert_defined"
+    ],
+    "description": "",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "function assertIsDefined<T>(val: T): asserts val is NonNullable<T> {\n    if (val === undefined || val === null) {\n        throw new Error(\n            `Expected 'val' to be defined, but received ${val}`\n        );\n    }\n}"
+    ]
+  },
 }
