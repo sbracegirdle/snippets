@@ -138,6 +138,7 @@
       "npm install --save-dev @babel/core @babel/cli @babel/preset-react @babel/preset-env"
     ]
   },
+  // 
   // TYPESCRIPT+JAVASCRIPT GLOBAL SNIPPETS
   "tsconfig": {
     "prefix": [
@@ -148,6 +149,39 @@
     "scope": "json,jsonc,typescript",
     "body": [
       "{\n        \"compileOnSave\": false,\n        \"compilerOptions\": {\n          \"target\": \"esnext\",\n          \"module\": \"esnext\",\n          \"jsx\": \"preserve\",\n          \"allowJs\": false,\n          \"moduleResolution\": \"node\",\n          \"noImplicitAny\": true,\n          \"noUnusedLocals\": true,\n          \"noUnusedParameters\": true,\n          \"removeComments\": false,\n          \"preserveConstEnums\": true,\n          \"sourceMap\": true,\n          \"skipLibCheck\": true,\n          \"noEmit\": true,\n          \"baseUrl\": \".\",\n          \"lib\": [\"dom\", \"es2015\", \"es2016\"]\n        },\n        \"exclude\": [\"artifacts\/**\/*\", \"dist\/**\/*\", \"public\/**\/*\", \"node_modules\"]\n      }"
+    ]
+  },
+  "aws_mock_import": {
+    "prefix": [
+      "aws_mock_import",
+      "aws_mock_setup"
+    ],
+    "description": "AWS; Mock for unit testing (import and setup)",
+    "body": [
+      "import * as AWS from 'aws-sdk';",
+      "import * as AWSMock from 'aws-sdk-mock';",
+      "",
+      "AWSMock.setSDKInstance(AWS);",
+      "",
+      "afterEach(() => AWSMock.restore());"
+    ]
+  },
+  "aws_mock_method": {
+    "prefix": [
+      "aws_mock_method",
+      "aws_mock"
+    ],
+    "description": "AWS; Mock a AWS method",
+    "body": [
+      "const mockMyAWSThing = () => {",
+      "  const mock = jest.fn();",
+      "  AWSMock.mock(",
+      "    'AWSObject',",
+      "    'method',",
+      "    mock.mockResolvedValueOnce(someValue)",
+      "  );",
+      "  return mock;",
+      "}"
     ]
   },
   "promisify": {
@@ -1274,6 +1308,27 @@
     "description": "Typescript; Type alias",
     "body": [
       "type ${1:NameResolver} = () => string;"
+    ]
+  },
+  "ts_assert_string": {
+    "prefix": [
+      "ts_assert_string"
+    ],
+    "description": "",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "function assertString(val: any): asserts val is string {\r\n  if (typeof val !== 'string') {\r\n    throw new Error('Not a string!')\r\n  }\r\n}"
+    ]
+  },
+  "ts_assert": {
+    "prefix": [
+      "ts_assert",
+      "ts_assert_defined"
+    ],
+    "description": "",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "function assertIsDefined<T>(val: T): asserts val is NonNullable<T> {\n    if (val === undefined || val === null) {\n        throw new Error(\n            `Expected 'val' to be defined, but received ${val}`\n        );\n    }\n}"
     ]
   },
 }
