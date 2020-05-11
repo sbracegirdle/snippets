@@ -140,7 +140,17 @@
   },
   // 
   // TYPESCRIPT+JAVASCRIPT GLOBAL SNIPPETS
-  // 
+  "tsconfig": {
+    "prefix": [
+      "tsconfig",
+      "typescript_config"
+    ],
+    "description": "Typescript config",
+    "scope": "json,jsonc,typescript",
+    "body": [
+      "{\n        \"compileOnSave\": false,\n        \"compilerOptions\": {\n          \"target\": \"esnext\",\n          \"module\": \"esnext\",\n          \"jsx\": \"preserve\",\n          \"allowJs\": false,\n          \"moduleResolution\": \"node\",\n          \"noImplicitAny\": true,\n          \"noUnusedLocals\": true,\n          \"noUnusedParameters\": true,\n          \"removeComments\": false,\n          \"preserveConstEnums\": true,\n          \"sourceMap\": true,\n          \"skipLibCheck\": true,\n          \"noEmit\": true,\n          \"baseUrl\": \".\",\n          \"lib\": [\"dom\", \"es2015\", \"es2016\"]\n        },\n        \"exclude\": [\"artifacts\/**\/*\", \"dist\/**\/*\", \"public\/**\/*\", \"node_modules\"]\n      }"
+    ]
+  },
   "aws_mock_import": {
     "prefix": [
       "aws_mock_import",
