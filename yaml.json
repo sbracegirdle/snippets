@@ -1,0 +1,31 @@
+{
+	"cfn_inline_lambda": {
+		"prefix": [
+			"cfn_inline_lambda",
+			"cfn_lambda"
+		],
+		"description": "CFN; Inline Lambda Function",
+		"body": [
+			"HelloWorldLambdaFunction:\n    Type: AWS::Lambda::Function\n    Properties:\n      Runtime: python3.7\n      Handler: index.lambda_handler\n      Code:\n        ZipFile: |\n          import json\n          def lambda_handler(event, context):\n              return {\n                  'statusCode': 200,\n                  'body': json.dumps('Hello World!')\n              }"
+		]
+	},
+	"cfn_lambda_custom_resource": {
+		"prefix": [
+			"cfn_lambda_custom_resource"
+		],
+		"description": "CFN: Lambda Custom Resource",
+		"body": [
+			"DescribeOrganizationFunction:\n  Type: AWS::Lambda::Function\n  Properties:\n    Runtime: python3.7\n    Handler: index.lambda_handler\n    Code:\n      ZipFile: |\n        import json\n        import boto3\n        import cfnresponse\n        client = boto3.client('organizations')\n\n        def lambda_handler(event, context):\n          response = client.describe_organization()\n          cfnresponse.send(event, context, cfnresponse.SUCCESS, response['Organization'] if response and response['Organization'] else {})"
+		]
+	},
+	"cfn_execution_role": {
+		"prefix": [
+			"cfn_execution_role",
+			"cfn_role"
+		],
+		"description": "CFN: IAM role for lambda execution",
+		"body": [
+			"DescribeOrganizationExecutionRole:\n    Type: AWS::IAM::Role\n    Properties:\n      AssumeRolePolicyDocument:\n        Version: '2012-10-17'\n        Statement:\n        - Effect: Allow\n          Principal:\n            Service:\n            - lambda.amazonaws.com\n          Action:\n          - sts:AssumeRole\n      Path: "/"\n      Policies:\n      - PolicyName: root\n        PolicyDocument:\n          Version: '2012-10-17'\n          Statement:\n          - Effect: Allow\n            Action:\n              - logs:CreateLogGroup\n              - logs:CreateLogStream\n              - logs:PutLogEvents\n            Resource: arn:aws:logs:*:*:*\n          - Effect: Allow\n            Action:\n              - organizations:DescribeOrganization \n            Resource: "*""
+		]
+	},
+}

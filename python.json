@@ -814,7 +814,9 @@
     ]
   },
   "sklearn_metrics": {
-    "prefix": ["sklearn_metrics"],
+    "prefix": [
+      "sklearn_metrics"
+    ],
     "description": "Scikit-learn; metrics",
     "body": [
       "from sklearn import metrics",
@@ -1260,5 +1262,34 @@
       "optimizer = torch.optim.Adam(model.parameters(), lr=0.1)",
       "#optimizer = torch.optim.SGD(model.parameters(), lr=0.01)"
     ]
-  }
+  },
+  "boto3_organisations": {
+    "prefix": [
+      "boto3_organisations",
+      "organisations",
+      "aws_organisations"
+    ],
+    "description": "AWS Organisations (Boto3)",
+    "body": [
+      "import boto3\nclient = boto3.client('organizations')"
+    ]
+  },
+  "boto3_profile": {
+    "prefix": [
+      "boto3_profile"
+    ],
+    "description": "AWS profile client (Boto3)",
+    "body": [
+      "import boto3\nsession = boto3.Session(profile_name='mechrockadmin')\nclient = session.client('organizations')"
+    ]
+  },
+  "lambda_handler": {
+    "prefix": [
+      "lambda_handler"
+    ],
+    "description": "AWS lambda handler",
+    "body": [
+      "def lambda_handler(event, context):\n    response = client.describe_organization()\n\n    return {\n        'statusCode': 200,\n        'body': json.dumps(response['Organization']) if response and response['Organization'] else '{}'\n    }"
+    ]
+  },
 }

@@ -1321,4 +1321,14 @@
       "function assertIsDefined<T>(val: T): asserts val is NonNullable<T> {\n    if (val === undefined || val === null) {\n        throw new Error(\n            `Expected 'val' to be defined, but received ${val}`\n        );\n    }\n}"
     ]
   },
+  "exec": {
+    "prefix": [
+      "exec",
+      "child_process"
+    ],
+    "description": "Exec child process in NodeJS (promisified)",
+    "body": [
+      "import { exec } from 'child_process'\nimport * as util from 'util'\nconst execAsync = util.promisify(exec)"
+    ]
+  },
 }
