@@ -138,6 +138,17 @@
       "npm install --save-dev @babel/core @babel/cli @babel/preset-react @babel/preset-env"
     ]
   },
+  "webpack_typescript": {
+    "prefix": [
+      "webpack_typescript",
+      "typescript_bundle"
+    ],
+    "scope": "json,jsonc,javascript,javascriptreact,typescript,typescriptreact",
+    "description": "Webpack; Typescript get started",
+    "body": [
+      "const path = require('path')\n\n// npm install --save-dev webpack webpack-cli typescript ts-loader\n\nmodule.exports = {\n  entry: './index.ts',\n  module: {\n    rules: [\n      {\n        test: /\\.tsx?$/,\n        use: 'ts-loader',\n        exclude: /node_modules/,\n      },\n    ],\n  },\n  resolve: {\n    extensions: ['.tsx', '.ts', '.js'],\n  },\n  output: {\n    filename: 'bundle.js',\n    path: path.resolve(__dirname, 'dist'),\n  },\n}\n"
+    ]
+  },
   // 
   // TYPESCRIPT+JAVASCRIPT GLOBAL SNIPPETS
   "tsconfig": {
@@ -1339,6 +1350,18 @@
     "description": "Exec child process in NodeJS (promisified)",
     "body": [
       "import { exec } from 'child_process'\nimport * as util from 'util'\nconst execAsync = util.promisify(exec)"
+    ]
+  },
+  "ts_aws_lambda_types": {
+    "prefix": [
+      "ts_aws_lambda_types",
+      "aws_lambda_types"
+    ],
+    "description": "",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "// npm install --save @types/aws-lambda",
+      "import {ScheduledHandler} from 'aws-lambda'"
     ]
   },
 }
