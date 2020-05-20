@@ -1,4 +1,14 @@
 {
+	"cfn_validate": {
+		"prefix": [
+			"cfn_validate",
+			"cfn_validate_template"
+		],
+		"description": "CFN; Validate Template",
+		"body": [
+			"# aws cloudformation validate-template --profile mechrockadmin --template-body file://./GuardDutyFindings.yml"
+		]
+	},
 	"cfn_inline_lambda": {
 		"prefix": [
 			"cfn_inline_lambda",
@@ -26,6 +36,24 @@
 		"description": "CFN: IAM role for lambda execution",
 		"body": [
 			"DescribeOrganizationExecutionRole:\n    Type: AWS::IAM::Role\n    Properties:\n      AssumeRolePolicyDocument:\n        Version: '2012-10-17'\n        Statement:\n        - Effect: Allow\n          Principal:\n            Service:\n            - lambda.amazonaws.com\n          Action:\n          - sts:AssumeRole\n      Path: "/"\n      Policies:\n      - PolicyName: root\n        PolicyDocument:\n          Version: '2012-10-17'\n          Statement:\n          - Effect: Allow\n            Action:\n              - logs:CreateLogGroup\n              - logs:CreateLogStream\n              - logs:PutLogEvents\n            Resource: arn:aws:logs:*:*:*\n          - Effect: Allow\n            Action:\n              - organizations:DescribeOrganization \n            Resource: "*""
+		]
+	},
+	"cfn_template": {
+		"prefix": [
+			"cfn_template"
+		],
+		"description": "CFN: Empty template",
+		"body": [
+			"AWSTemplateFormatVersion: \"2010-09-09\"\nDescription: A sample template\n\nParameters:\n\nResources:\n"
+		]
+	},
+	"cfn_parameter": {
+		"prefix": [
+			"cfn_parameter"
+		],
+		"description": "CFN: Parameter",
+		"body": [
+			"  TestParameter: \n    Type: String\n    Default: t2.micro\n    AllowedValues: \n      - t2.micro\n      - m1.small\n      - m1.large\n    Description: Enter t2.micro, m1.small, or m1.large. Default is t2.micro."
 		]
 	},
 }
