@@ -56,4 +56,13 @@
 			"  TestParameter: \n    Type: String\n    Default: t2.micro\n    AllowedValues: \n      - t2.micro\n      - m1.small\n      - m1.large\n    Description: Enter t2.micro, m1.small, or m1.large. Default is t2.micro."
 		]
 	},
+	"cfn_tags": {
+		"prefix": [
+			"cfn_tags"
+		],
+		"description": "CFN: Standard tags",
+		"body": [
+			"Tags:\n        - Key: RepositoryUrl\n          Value: \"my-repository\"\n        - Key: Version\n          Value: \"1.0\"\n        - Key: Creator\n          Value: \"creator-here\"\n        - Key: Owner\n          Value: \"owner-here\"\n        - Key: Stack\n          Value: \"Environment here e.g. Prod etc\"\n        - Key: Project\n          Value: \"my-project-name\""
+		]
+	},
 }
