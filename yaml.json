@@ -6,7 +6,7 @@
 		],
 		"description": "CFN; Validate Template",
 		"body": [
-			"# aws cloudformation validate-template --profile mechrockadmin --template-body file://./GuardDutyFindings.yml"
+			"# aws cloudformation validate-template --profile myprofile --template-body file://./template.yml"
 		]
 	},
 	"cfn_inline_lambda": {
@@ -160,5 +160,90 @@
 		"body": [
 			"!GetAtt GuardDutyOrganizationMembersFunctionRole.Arn"
 		]
+	},
+	"cfn_policy_logs": {
+		"prefix": [
+			"cfn_policy_logs",
+			"cfn_create_logs"
+		],
+		"description": "CFN: IAM Policy to create logs",
+		"body": [
+			"- Effect: \"Allow\"\n                Action:\n                  - \"logs:CreateLogGroup\"\n                  - \"logs:CreateLogStream\"\n                  - \"logs:PutLogEvents\"\n                Resource: \"*\""
+		]
+	},
+	"cfn_codepipeline_cfn_action": {
+		"prefix": [
+			"cfn_codepipeline_cloudformation_action",
+			"cfn_codepipeline_cfn_action"
+		],
+		"description": "CFN: CodePipeline CFN Deploy action",
+		"body": [
+			"Name: ExecuteChangeSet",
+			"ActionTypeId:",
+			"  Category: Deploy",
+			"  Owner: AWS",
+			"  Provider: CloudFormation",
+			"  Version: '1'",
+			"RunOrder: 2",
+			"Configuration:",
+			"  ActionMode: CHANGE_SET_EXECUTE",
+			"  Capabilities: CAPABILITY_NAMED_IAM,CAPABILITY_AUTO_EXPAND",
+			"  ChangeSetName: pipeline-changeset",
+			"  ParameterOverrides: '{\"ProjectId\": \"my-project\",\"CodeDeployRole\": \"CodeDeploy_Role_ARN\"}'",
+			"  RoleArn: CloudFormation_Role_ARN",
+			"  StackName: my-project--lambda",
+			"  TemplateConfiguration: 'my-project--BuildArtifact::template-configuration.json'",
+			"  TemplatePath: 'my-project--BuildArtifact::template-export.yml'",
+			"OutputArtifacts: []",
+			"InputArtifacts:",
+			"  - Name: my-project-BuildArtifact",
+		]
+	},
+	"cfn_codepipeline_codebuild_action": {
+		"prefix": [
+			"cfn_codepipeline_codebuild_action"
+		],
+		"description": "CFN: CodePipeline CodeBuild Action",
+		"body": [
+			"- Name: PackageExport",
+			"  ActionTypeId:",
+			"    Category: Build",
+			"    Owner: AWS",
+			"    Provider: CodeBuild",
+			"    Version: '1'",
+			"  RunOrder: 1",
+			"  Configuration:",
+			"    ProjectName: my-build-project",
+			"    PrimarySource: MyApplicationSource1",
+			"    EnvironmentVariables: '[{\"name\":\"TEST_VARIABLE\",\"value\":\"TEST_VALUE\",\"type\":\"PLAINTEXT\"}]'",
+			"  OutputArtifacts:",
+			"    - Name: MyPipeline-BuildArtifact",
+			"  InputArtifacts:",
+			"    - Name: MyApplicationSource1",
+			"    - Name: MyApplicationSource2",
+		]
+	},
+	"cfn_codepipeline_codecommit_action": {
+		"prefix": [
+			"cfn_codepipeline_codecommit_action"
+		],
+		"description": "",
+		"body": [
+			"- Name: Source",
+			"  OutputArtifacts:",
+			"    - Name: Artifact_MyWebsiteStack",
+			"  InputArtifacts: []",
+			"  Name: source",
+			"  Configuration:",
+			"    RepositoryName: MyWebsite",
+			"    BranchName: mainline",
+			"    PollForSourceChanges: 'false'",
+			"  RunOrder: 1",
+			"  ActionTypeId:",
+			"    Version: '1'",
+			"    Provider: CodeCommit",
+			"    Category: Source",
+			"    Owner: AWS",
+		],
 	},
 }
