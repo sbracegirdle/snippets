@@ -126,47 +126,43 @@
   },
   "babel_cli": {
     "prefix": "babel_cli",
-    "body": [
-      "babel src/ --out-dir build/ --copy-files"
-    ]
+    "body": ["babel src/ --out-dir build/ --copy-files"]
   },
   "babel_install": {
-    "prefix": [
-      "babel_install"
-    ],
+    "prefix": ["babel_install"],
     "body": [
       "npm install --save-dev @babel/core @babel/cli @babel/preset-react @babel/preset-env"
     ]
   },
   "webpack_typescript": {
-    "prefix": [
-      "webpack_typescript",
-      "typescript_bundle"
-    ],
+    "prefix": ["webpack_typescript", "typescript_bundle"],
     "scope": "json,jsonc,javascript,javascriptreact,typescript,typescriptreact",
     "description": "Webpack; Typescript get started",
     "body": [
       "const path = require('path')\n\n// npm install --save-dev webpack webpack-cli typescript ts-loader\n\nmodule.exports = {\n  entry: './index.ts',\n  module: {\n    rules: [\n      {\n        test: /\\.tsx?$/,\n        use: 'ts-loader',\n        exclude: /node_modules/,\n      },\n    ],\n  },\n  resolve: {\n    extensions: ['.tsx', '.ts', '.js'],\n  },\n  output: {\n    filename: 'bundle.js',\n    path: path.resolve(__dirname, 'dist'),\n  },\n}\n"
     ]
   },
-  // 
+  //
+  // CLI STUFF
+  "cli_aws_cloudformation_create": {
+    "prefix": ["cli_aws_cloudformation_create", "cli_aws_create_stack"],
+    "description": "CLI AWS; CloudFormation create-stack",
+    "body": [
+      "aws cloudformation create-stack --stack-name google-trends-to-s3 --template-body file://template.yaml --capabilities CAPABILITY_NAMED_IAM"
+    ]
+  },
+  //
   // TYPESCRIPT+JAVASCRIPT GLOBAL SNIPPETS
   "tsconfig": {
-    "prefix": [
-      "tsconfig",
-      "typescript_config"
-    ],
+    "prefix": ["tsconfig", "typescript_config"],
     "description": "Typescript config",
     "scope": "json,jsonc,typescript",
     "body": [
-      "{\n        \"compileOnSave\": false,\n        \"compilerOptions\": {\n          \"target\": \"esnext\",\n          \"module\": \"esnext\",\n          \"jsx\": \"preserve\",\n          \"allowJs\": false,\n          \"moduleResolution\": \"node\",\n          \"noImplicitAny\": true,\n          \"noUnusedLocals\": true,\n          \"noUnusedParameters\": true,\n          \"removeComments\": false,\n          \"preserveConstEnums\": true,\n          \"sourceMap\": true,\n          \"skipLibCheck\": true,\n          \"noEmit\": true,\n          \"baseUrl\": \".\",\n          \"lib\": [\"dom\", \"es2015\", \"es2016\"]\n        },\n        \"exclude\": [\"artifacts\/**\/*\", \"dist\/**\/*\", \"public\/**\/*\", \"node_modules\"]\n      }"
+      "{\n        \"compileOnSave\": false,\n        \"compilerOptions\": {\n          \"target\": \"esnext\",\n          \"module\": \"esnext\",\n          \"jsx\": \"preserve\",\n          \"allowJs\": false,\n          \"moduleResolution\": \"node\",\n          \"noImplicitAny\": true,\n          \"noUnusedLocals\": true,\n          \"noUnusedParameters\": true,\n          \"removeComments\": false,\n          \"preserveConstEnums\": true,\n          \"sourceMap\": true,\n          \"skipLibCheck\": true,\n          \"noEmit\": true,\n          \"baseUrl\": \".\",\n          \"lib\": [\"dom\", \"es2015\", \"es2016\"]\n        },\n        \"exclude\": [\"artifacts/**/*\", \"dist/**/*\", \"public/**/*\", \"node_modules\"]\n      }"
     ]
   },
   "aws_mock_import": {
-    "prefix": [
-      "aws_mock_import",
-      "aws_mock_setup"
-    ],
+    "prefix": ["aws_mock_import", "aws_mock_setup"],
     "description": "AWS; Mock for unit testing (import and setup)",
     "body": [
       "import * as AWS from 'aws-sdk';",
@@ -178,10 +174,7 @@
     ]
   },
   "aws_mock_method": {
-    "prefix": [
-      "aws_mock_method",
-      "aws_mock"
-    ],
+    "prefix": ["aws_mock_method", "aws_mock"],
     "description": "AWS; Mock a AWS method",
     "body": [
       "const mockMyAWSThing = () => {",
@@ -196,9 +189,7 @@
     ]
   },
   "promisify": {
-    "prefix": [
-      "promisify"
-    ],
+    "prefix": ["promisify"],
     "description": "Node; promisify",
     "scope": "javascript,javascriptreact,typescript,typescriptreact",
     "body": [
@@ -208,30 +199,22 @@
     ]
   },
   "read_file_sync": {
-    "prefix": [
-      "read_file_sync"
-    ],
+    "prefix": ["read_file_sync"],
     "description": "Node; read file synchronously",
     "scope": "javascript,javascriptreact,typescript,typescriptreact",
     "body": [
       "const fs = require('fs');",
       "const contents = fs.readFileSync('../bootstrap.sh');"
-    ],
+    ]
   },
   "el": {
     "prefix": "el",
     "description": "JSX element",
     "scope": "javascript,javascriptreact,typescript,typescriptreact",
-    "body": [
-      "<${1:div}$2>$0</${1:div}>"
-    ]
+    "body": ["<${1:div}$2>$0</${1:div}>"]
   },
   "jest_test": {
-    "prefix": [
-      "jest_test",
-      "jest",
-      "test"
-    ],
+    "prefix": ["jest_test", "jest", "test"],
     "description": "Jest; test template",
     "scope": "javascript,javascriptreact,typescript,typescriptreact",
     "body": [
@@ -245,9 +228,7 @@
     ]
   },
   "react_class": {
-    "prefix": [
-      "react_class"
-    ],
+    "prefix": ["react_class"],
     "description": "React; class component",
     "scope": "javascript,javascriptreact,typescript,typescriptreact",
     "body": [
@@ -267,11 +248,7 @@
     ]
   },
   "react_component": {
-    "prefix": [
-      "react_component",
-      "comp",
-      "component"
-    ],
+    "prefix": ["react_component", "comp", "component"],
     "description": "React component (full)",
     "scope": "javascript,javascriptreact,typescript,typescriptreact",
     "body": [
@@ -310,34 +287,19 @@
     ]
   },
   "react_use_effect": {
-    "prefix": [
-      "react_use_effect",
-      "use_effect"
-    ],
+    "prefix": ["react_use_effect", "use_effect"],
     "description": "React; useEffect",
     "scope": "javascript,javascriptreact,typescript,typescriptreact",
-    "body": [
-      "useEffect(() => {",
-      "  someAsyncCall(); ",
-      "}, [myDep])"
-    ]
+    "body": ["useEffect(() => {", "  someAsyncCall(); ", "}, [myDep])"]
   },
   "react_use_state": {
-    "prefix": [
-      "react_use_state",
-      "use_state"
-    ],
+    "prefix": ["react_use_state", "use_state"],
     "description": "React; useState",
     "scope": "javascript,javascriptreact,typescript,typescriptreact",
-    "body": [
-      "const [${1:name}, set${1:name}] = useState(${2:defaultValue});"
-    ]
+    "body": ["const [${1:name}, set${1:name}] = useState(${2:defaultValue});"]
   },
   "react_use_memo": {
-    "prefix": [
-      "react_use_memo",
-      "use_memo"
-    ],
+    "prefix": ["react_use_memo", "use_memo"],
     "description": "React; useMemo",
     "scope": "javascript,javascriptreact,typescript,typescriptreact",
     "body": [
@@ -345,21 +307,13 @@
     ]
   },
   "react_use_ref": {
-    "prefix": [
-      "react_use_ref",
-      "use_ref"
-    ],
+    "prefix": ["react_use_ref", "use_ref"],
     "description": "React; useRef",
     "scope": "javascript,javascriptreact,typescript,typescriptreact",
-    "body": [
-      "const ${1:myVar} = useRef(${2:null});"
-    ]
+    "body": ["const ${1:myVar} = useRef(${2:null});"]
   },
   "react_use_callback": {
-    "prefix": [
-      "react_use_callback",
-      "use_callback"
-    ],
+    "prefix": ["react_use_callback", "use_callback"],
     "description": "React; useCallback",
     "scope": "javascript,javascriptreact,typescript,typescriptreact",
     "body": [
@@ -370,30 +324,16 @@
     ]
   },
   "cname": {
-    "prefix": [
-      "cls",
-      "cname",
-      "class",
-      "class_name"
-    ],
+    "prefix": ["cls", "cname", "class", "class_name"],
     "description": "React; className",
     "scope": "javascript,javascriptreact,typescript,typescriptreact",
-    "body": [
-      "className={${1:thingClass}}"
-    ]
+    "body": ["className={${1:thingClass}}"]
   },
   "cname_cond": {
-    "prefix": [
-      "cname_cond",
-      "ccond",
-      "class_cond",
-      "class_condition"
-    ],
+    "prefix": ["cname_cond", "ccond", "class_cond", "class_condition"],
     "description": "React; className condition",
     "scope": "javascript,javascriptreact,typescript,typescriptreact",
-    "body": [
-      "className={`${${1:condition} ? ${2:thingClass} : ''`}"
-    ]
+    "body": ["className={`${${1:condition} ? ${2:thingClass} : ''`}"]
   },
   "shallow_renderer": {
     "prefix": [
@@ -404,16 +344,10 @@
     ],
     "description": "React test renderer; shallow",
     "scope": "javascript,javascriptreact,typescript,typescriptreact",
-    "body": [
-      "import ShallowRenderer from 'react-test-renderer/shallow';"
-    ]
+    "body": ["import ShallowRenderer from 'react-test-renderer/shallow';"]
   },
   "jest_snapshot": {
-    "prefix": [
-      "snapshot",
-      "jest_snapshot",
-      "shallow_snapshot"
-    ],
+    "prefix": ["snapshot", "jest_snapshot", "shallow_snapshot"],
     "description": "Jest; snapshot test",
     "scope": "javascript,javascriptreact,typescript,typescriptreact",
     "body": [
@@ -426,16 +360,10 @@
     "prefix": "class_as",
     "description": "class as otherclass",
     "scope": "javascript,javascriptreact,typescript,typescriptreact",
-    "body": [
-      "${1:MyClass} as ${1:MyClass}Class"
-    ]
+    "body": ["${1:MyClass} as ${1:MyClass}Class"]
   },
   "import_css": {
-    "prefix": [
-      "import_css",
-      "import_module_css",
-      "i_css"
-    ],
+    "prefix": ["import_css", "import_module_css", "i_css"],
     "description": "Import css module",
     "scope": "javascript,javascriptreact,typescript,typescriptreact",
     "body": [
@@ -443,44 +371,25 @@
     ]
   },
   "import_react": {
-    "prefix": [
-      "import_react",
-      "react",
-      "ir"
-    ],
+    "prefix": ["import_react", "react", "ir"],
     "description": "React; import",
     "scope": "javascript,javascriptreact,typescript,typescriptreact",
-    "body": [
-      "import React from 'react';"
-    ]
+    "body": ["import React from 'react';"]
   },
   "import_react_dom": {
     "prefix": "import_react_dom",
     "description": "ReactDOM; import",
     "scope": "javascript,javascriptreact,typescript,typescriptreact",
-    "body": [
-      "import ReactDOM from 'react-dom';"
-    ]
+    "body": ["import ReactDOM from 'react-dom';"]
   },
   "router_link": {
-    "prefix": [
-      "router_link",
-      "import_link",
-      "link",
-      "il",
-      "router"
-    ],
+    "prefix": ["router_link", "import_link", "link", "il", "router"],
     "description": "React-router; import link",
     "scope": "javascript,javascriptreact,typescript,typescriptreact",
-    "body": [
-      "import {Link} from 'react-router-dom';"
-    ]
+    "body": ["import {Link} from 'react-router-dom';"]
   },
   "router_switch": {
-    "prefix": [
-      "router_switch",
-      "router_routes"
-    ],
+    "prefix": ["router_switch", "router_routes"],
     "description": "React-router; routes switch",
     "scope": "javascript,javascriptreact,typescript,typescriptreact",
     "body": [
@@ -501,12 +410,7 @@
     ]
   },
   "router_setup": {
-    "prefix": [
-      "react_router",
-      "router_history",
-      "history",
-      "router_setup"
-    ],
+    "prefix": ["react_router", "router_history", "history", "router_setup"],
     "description": "React-router; setup router",
     "scope": "javascript,javascriptreact,typescript,typescriptreact",
     "body": [
@@ -518,66 +422,37 @@
     ]
   },
   "import_react_intl": {
-    "prefix": [
-      "import_react_intl",
-      "import_format_message",
-      "i_intl"
-    ],
+    "prefix": ["import_react_intl", "import_format_message", "i_intl"],
     "description": "React Intl; Import FormattedMessage",
     "scope": "javascript,javascriptreact,typescript,typescriptreact",
-    "body": [
-      "import {FormattedMessage} from 'react-intl';"
-    ]
+    "body": ["import {FormattedMessage} from 'react-intl';"]
   },
   "import_formatted_date": {
-    "prefix": [
-      "import_react_intl_date",
-      "import_format_date"
-    ],
+    "prefix": ["import_react_intl_date", "import_format_date"],
     "description": "React Intl; Import FormattedDate",
     "scope": "javascript,javascriptreact,typescript,typescriptreact",
-    "body": [
-      "import {FormattedDate} from 'react-intl';"
-    ]
+    "body": ["import {FormattedDate} from 'react-intl';"]
   },
   "import_react_intl_provider": {
-    "prefix": [
-      "import_react_intl_provider",
-      "i_intl_provider"
-    ],
+    "prefix": ["import_react_intl_provider", "i_intl_provider"],
     "description": "React intl; import IntlProvider",
     "scope": "javascript,javascriptreact,typescript,typescriptreact",
-    "body": [
-      "import {IntlProvider} from 'react-intl'"
-    ]
+    "body": ["import {IntlProvider} from 'react-intl'"]
   },
   "import_from": {
-    "prefix": [
-      "import_from",
-      "import",
-      "i"
-    ],
+    "prefix": ["import_from", "import", "i"],
     "description": "Import from",
     "scope": "javascript,javascriptreact,typescript,typescriptreact",
-    "body": [
-      "import {${1:thing}} from '${2:library}';"
-    ]
+    "body": ["import {${1:thing}} from '${2:library}';"]
   },
   "intl_provider": {
     "prefix": "intl_provider",
     "description": "React Intl; IntlProvider",
     "scope": "javascript,javascriptreact,typescript,typescriptreact",
-    "body": [
-      "<IntlProvider>$0</IntlProvider>"
-    ]
+    "body": ["<IntlProvider>$0</IntlProvider>"]
   },
   "msg": {
-    "prefix": [
-      "msg",
-      "formatted_msg",
-      "format_msg",
-      "intl_msg"
-    ],
+    "prefix": ["msg", "formatted_msg", "format_msg", "intl_msg"],
     "description": "React Intl; FormattedMessage",
     "scope": "javascript,javascriptreact,typescript,typescriptreact",
     "body": [
@@ -593,45 +468,28 @@
     ],
     "description": "React Intl; FormattedDate",
     "scope": "javascript,javascriptreact,typescript,typescriptreact",
-    "body": [
-      "<FormattedDate value={new Date(text)} />"
-    ]
+    "body": ["<FormattedDate value={new Date(text)} />"]
   },
   "intl_inject": {
     "prefix": "intl_inject",
     "description": "React intl; injectIntl",
     "scope": "javascript,javascriptreact,typescript,typescriptreact",
-    "body": [
-      "injectIntl(${1:MyComp})"
-    ]
+    "body": ["injectIntl(${1:MyComp})"]
   },
   "intl_use_intl": {
-    "prefix": [
-      "intl_use_intl",
-      "intl_use",
-      "use_format_message"
-    ],
+    "prefix": ["intl_use_intl", "intl_use", "use_format_message"],
     "description": "React Intl; Use intl /w formatMessage",
     "scope": "javascript,javascriptreact,typescript,typescriptreact",
-    "body": [
-      "const {formatMessage} = useIntl();"
-    ]
+    "body": ["const {formatMessage} = useIntl();"]
   },
   "intl_get_msg": {
-    "prefix": [
-      "intl_get_msg",
-      "intl_get_format_msg"
-    ],
+    "prefix": ["intl_get_msg", "intl_get_format_msg"],
     "description": "React intl; get formatMessage prop",
     "scope": "javascript,javascriptreact,typescript,typescriptreact",
-    "body": [
-      "intl: {formatMessage}"
-    ]
+    "body": ["intl: {formatMessage}"]
   },
   "format_msg_func": {
-    "prefix": [
-      "format_msg_func"
-    ],
+    "prefix": ["format_msg_func"],
     "description": "React Intl; formatMessage function",
     "scope": "javascript,javascriptreact,typescript,typescriptreact",
     "body": [
@@ -657,66 +515,40 @@
     "body": "it('should ${1:do something}', () => {\n\t\n});"
   },
   "jest_expect": {
-    "prefix": [
-      "jest_expect",
-      "expect"
-    ],
+    "prefix": ["jest_expect", "expect"],
     "description": "Jest; expect toBe",
     "scope": "javascript,javascriptreact,typescript,typescriptreact",
     "body": "expect(${1:myThing()}).toBe(${2:someOutput})"
   },
   "jest_expect_deep": {
-    "prefix": [
-      "jest_expect_deep",
-      "jest_expect_equal"
-    ],
+    "prefix": ["jest_expect_deep", "jest_expect_equal"],
     "description": "Jest; expect deep equal",
     "scope": "javascript,javascriptreact,typescript,typescriptreact",
-    "body": [
-      "expect(${1:myThing()}).toEqual(${2:someOutput})"
-    ]
+    "body": ["expect(${1:myThing()}).toEqual(${2:someOutput})"]
   },
   "jest_expect_object": {
-    "prefix": [
-      "jest_expect_object",
-      "expect_object"
-    ],
+    "prefix": ["jest_expect_object", "expect_object"],
     "description": "Jest; expect object props (not deep)",
     "scope": "javascript,javascriptreact,typescript,typescriptreact",
     "body": "expect(${1:myThing()}).toMatchObject(${2:{myObj}});"
   },
   "jest_describe": {
-    "prefix": [
-      "jest_describe",
-      "describe"
-    ],
+    "prefix": ["jest_describe", "describe"],
     "description": "Jest; describe()",
     "scope": "javascript,javascriptreact,typescript,typescriptreact",
     "body": "describe('${1:myThing()}', () => {$0});"
   },
   "jest_it": {
-    "prefix": [
-      "jest_it",
-      "it"
-    ],
+    "prefix": ["jest_it", "it"],
     "description": "Jest; it()",
     "scope": "javascript,javascriptreact,typescript,typescriptreact",
-    "body": [
-      "it('should ${1:do something}', () => {",
-      "  $0",
-      "});"
-    ]
+    "body": ["it('should ${1:do something}', () => {", "  $0", "});"]
   },
   "jest_throws": {
-    "prefix": [
-      "jest_throws",
-      "jest_expect_throws"
-    ],
+    "prefix": ["jest_throws", "jest_expect_throws"],
     "description": "Jest; expect throws",
     "scope": "javascript,javascriptreact,typescript,typescriptreact",
-    "body": [
-      "expect(() => ${1:myFunc}()).toThrow();"
-    ]
+    "body": ["expect(() => ${1:myFunc}()).toThrow();"]
   },
   "mocha_test": {
     "prefix": "mocha_test",
@@ -775,9 +607,7 @@
     "prefix": "dynamo_list_tables",
     "description": "AWS; DynamoDB list tables",
     "scope": "javascript,javascriptreact,typescript,typescriptreact",
-    "body": [
-      "await dynamodb.listTables({}).promise();"
-    ]
+    "body": ["await dynamodb.listTables({}).promise();"]
   },
   "dynamo_connect": {
     "prefix": "dynamo_connect",
@@ -819,9 +649,7 @@
     "prefix": "joi_require",
     "description": "JOI; require",
     "scope": "javascript,javascriptreact,typescript,typescriptreact",
-    "body": [
-      "const Joi = require('@hapi/joi');"
-    ]
+    "body": ["const Joi = require('@hapi/joi');"]
   },
   "joi_validate": {
     "prefix": "joi_validate",
@@ -854,18 +682,10 @@
     "prefix": "express_route",
     "description": "Express; route",
     "scope": "javascript,javascriptreact,typescript,typescriptreact",
-    "body": [
-      "app.get('/foo/:id', (req, res) => res.send({foo: 'bar'}));"
-    ]
+    "body": ["app.get('/foo/:id', (req, res) => res.send({foo: 'bar'}));"]
   },
   "cdk_app": {
-    "prefix": [
-      "cdk",
-      "cdk_app",
-      "cdk_help",
-      "cdk_use",
-      "cdk_init"
-    ],
+    "prefix": ["cdk", "cdk_app", "cdk_help", "cdk_use", "cdk_init"],
     "description": "CDK; App",
     "scope": "javascript,javascriptreact,typescript,typescriptreact",
     "body": [
@@ -906,10 +726,7 @@
     ]
   },
   "cdk_construct": {
-    "prefix": [
-      "cdk_construct",
-      "cdk_custom_construct"
-    ],
+    "prefix": ["cdk_construct", "cdk_custom_construct"],
     "scope": "javascript,javascriptreact,typescript,typescriptreact",
     "description": "CDK; Construct",
     "body": [
@@ -1022,9 +839,7 @@
     ]
   },
   "cdk_ecs": {
-    "prefix": [
-      "cdk_ecs"
-    ],
+    "prefix": ["cdk_ecs"],
     "scope": "javascript,javascriptreact,typescript,typescriptreact",
     "description": "CDK; ECS Fargate",
     "body": [
@@ -1057,10 +872,7 @@
     ]
   },
   "cdk_ecs_fargate_scheduled": {
-    "prefix": [
-      "cdk_ecs_fargate_scheduled",
-      "cdk_ecs_fargate"
-    ],
+    "prefix": ["cdk_ecs_fargate_scheduled", "cdk_ecs_fargate"],
     "scope": "javascript,javascriptreact,typescript,typescriptreact",
     "description": "CDK; ECS Fargate scheduled",
     "body": [
@@ -1094,10 +906,7 @@
     ]
   },
   "cdk_secret": {
-    "prefix": [
-      "cdk_secret",
-      "cdk_secret_value"
-    ],
+    "prefix": ["cdk_secret", "cdk_secret_value"],
     "description": "CDK; SM Secret value",
     "scope": "javascript,javascriptreact,typescript,typescriptreact",
     "body": [
@@ -1132,15 +941,10 @@
     "prefix": "import_react_popper",
     "description": "React Popper; import",
     "scope": "javascript,javascriptreact,typescript,typescriptreact",
-    "body": [
-      "import {Manager, Reference, Popper} from 'react-popper';"
-    ]
+    "body": ["import {Manager, Reference, Popper} from 'react-popper';"]
   },
   "story": {
-    "prefix": [
-      "story",
-      "storybook"
-    ],
+    "prefix": ["story", "storybook"],
     "description": "Storybook; story",
     "scope": "javascript,javascriptreact,typescript,typescriptreact",
     "body": [
@@ -1162,16 +966,10 @@
     ],
     "description": "hook-shared-state; import",
     "scope": "javascript,javascriptreact,typescript,typescriptreact",
-    "body": [
-      "import {useSharedState} from 'hook-shared-state';"
-    ]
+    "body": ["import {useSharedState} from 'hook-shared-state';"]
   },
   "use_shared_state": {
-    "prefix": [
-      "use_shared_state",
-      "hook_shared_state",
-      "shared_state"
-    ],
+    "prefix": ["use_shared_state", "hook_shared_state", "shared_state"],
     "description": "hook-shared-state; useSharedState",
     "scope": "javascript,javascriptreact,typescript,typescriptreact",
     "body": [
@@ -1186,35 +984,22 @@
     ],
     "description": "hook-shared-state; install",
     "scope": "javascript,javascriptreact,typescript,typescriptreact",
-    "body": [
-      "npm i --save hook-shared-state"
-    ]
+    "body": ["npm i --save hook-shared-state"]
   },
   "eslint_disable_line": {
-    "prefix": [
-      "eslint_disable_line"
-    ],
+    "prefix": ["eslint_disable_line"],
     "description": "ESLint; disable line",
     "scope": "javascript,javascriptreact,typescript,typescriptreact",
-    "body": [
-      "// eslint-disable-line no-use-before-define"
-    ]
+    "body": ["// eslint-disable-line no-use-before-define"]
   },
   "eslint_disable_next_line": {
-    "prefix": [
-      "eslint_disable_next_line"
-    ],
+    "prefix": ["eslint_disable_next_line"],
     "description": "ESLint; disable next line",
     "scope": "javascript,javascriptreact,typescript,typescriptreact",
-    "body": [
-      "// eslint-disable-mext-line no-use-before-define"
-    ]
+    "body": ["// eslint-disable-mext-line no-use-before-define"]
   },
   "styled_hoc": {
-    "prefix": [
-      "styled_hoc",
-      "tailwind_styled"
-    ],
+    "prefix": ["styled_hoc", "tailwind_styled"],
     "description": "Tailwind; styled HOC",
     "scope": "javascript,javascriptreact,typescript,typescriptreact",
     "body": [
@@ -1227,104 +1012,54 @@
     ]
   },
   "styled": {
-    "prefix": [
-      "styled",
-      "tailwind_styled"
-    ],
+    "prefix": ["styled", "tailwind_styled"],
     "description": "Tailwind; styled",
     "scope": "javascript,javascriptreact,typescript,typescriptreact",
-    "body": [
-      "styled('MyComponent p-2 bg-gray-300 rounded')"
-    ]
+    "body": ["styled('MyComponent p-2 bg-gray-300 rounded')"]
   },
   "object_to_map": {
-    "prefix": [
-      "object_to_map",
-      "to_map"
-    ],
+    "prefix": ["object_to_map", "to_map"],
     "description": "Convert plain object to Map",
-    "body": [
-      "new Map(Object.entries({foo: 'bar'}))"
-    ]
+    "body": ["new Map(Object.entries({foo: 'bar'}))"]
   },
   "array_to_set": {
-    "prefix": [
-      "array_to_set",
-      "list_to_set",
-      "to_set"
-    ],
+    "prefix": ["array_to_set", "list_to_set", "to_set"],
     "description": "Convert plain array to set",
     "scope": "javascript,javascriptreact,typescript,typescriptreact",
-    "body": [
-      "new Set([1, 2, 3, 4])"
-    ]
+    "body": ["new Set([1, 2, 3, 4])"]
   },
   // TYPESCRIPT focused snippets
   "ts_type": {
-    "prefix": [
-      "type",
-      "interface",
-      "ifc"
-    ],
+    "prefix": ["type", "interface", "ifc"],
     "description": "Typescript; interface",
     "scope": "typescript,typescriptreact",
-    "body": [
-      "interface ${1:MyType} {",
-      "  ${2:MyField}: ${3:string};",
-      "}"
-    ]
+    "body": ["interface ${1:MyType} {", "  ${2:MyField}: ${3:string};", "}"]
   },
   "ts_object_map": {
-    "prefix": [
-      "object_map",
-      "map",
-      "key_value"
-    ],
+    "prefix": ["object_map", "map", "key_value"],
     "description": "Typescript; object used as key/value pair",
     "scope": "typescript,typescriptreact",
-    "body": [
-      ""
-    ]
+    "body": [""]
   },
   "tsoption": {
-    "prefix": [
-      "optional",
-      "option"
-    ],
+    "prefix": ["optional", "option"],
     "description": "Typescript; optional param in interface",
     "scope": "typescript,typescriptreact",
-    "body": [
-      "color?: number;"
-    ]
+    "body": ["color?: number;"]
   },
   "ts_enum": {
-    "prefix": [
-      "ts_enum",
-      "enum"
-    ],
+    "prefix": ["ts_enum", "enum"],
     "description": "Typescript; enum",
     "scope": "typescript,typescriptreact",
-    "body": [
-      "enum ${1:MyType} {",
-      "  ${2:Thing} = ${3:\"SomeValue\"}",
-      "}"
-    ]
+    "body": ["enum ${1:MyType} {", "  ${2:Thing} = ${3:\"SomeValue\"}", "}"]
   },
   "ts_type_alias": {
-    "prefix": [
-      "ts_type_alias",
-      "type",
-      "type_alias"
-    ],
+    "prefix": ["ts_type_alias", "type", "type_alias"],
     "description": "Typescript; Type alias",
-    "body": [
-      "type ${1:NameResolver} = () => string;"
-    ]
+    "body": ["type ${1:NameResolver} = () => string;"]
   },
   "ts_assert_string": {
-    "prefix": [
-      "ts_assert_string"
-    ],
+    "prefix": ["ts_assert_string"],
     "description": "",
     "scope": "javascript,javascriptreact,typescript,typescriptreact",
     "body": [
@@ -1332,10 +1067,7 @@
     ]
   },
   "ts_assert": {
-    "prefix": [
-      "ts_assert",
-      "ts_assert_defined"
-    ],
+    "prefix": ["ts_assert", "ts_assert_defined"],
     "description": "",
     "scope": "javascript,javascriptreact,typescript,typescriptreact",
     "body": [
@@ -1343,25 +1075,19 @@
     ]
   },
   "exec": {
-    "prefix": [
-      "exec",
-      "child_process"
-    ],
+    "prefix": ["exec", "child_process"],
     "description": "Exec child process in NodeJS (promisified)",
     "body": [
       "import { exec } from 'child_process'\nimport * as util from 'util'\nconst execAsync = util.promisify(exec)"
     ]
   },
   "ts_aws_lambda_types": {
-    "prefix": [
-      "ts_aws_lambda_types",
-      "aws_lambda_types"
-    ],
+    "prefix": ["ts_aws_lambda_types", "aws_lambda_types"],
     "description": "",
     "scope": "javascript,javascriptreact,typescript,typescriptreact",
     "body": [
       "// npm install --save @types/aws-lambda",
       "import {ScheduledHandler} from 'aws-lambda'"
     ]
-  },
+  }
 }

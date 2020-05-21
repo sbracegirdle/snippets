@@ -44,7 +44,25 @@
 		],
 		"description": "CFN: Empty template",
 		"body": [
-			"AWSTemplateFormatVersion: \"2010-09-09\"\nDescription: A sample template\n\nParameters:\n\nResources:\n"
+			"# INCEPTION:",
+			"# aws cloudformation create-stack \\",
+			"#       --stack-name myteststack \\",
+			"#       --template-body file://template.yaml \\",
+			"#       --parameters ParameterKey=KeyPairName,ParameterValue=TestKey",
+			"#",
+			"# update-stack has same syntax",
+			"# ",
+			"# For assets:",
+			"# aws s3 mb s3://my-assets-bucket --region ap-southeast-2",
+			"# aws s3 ls",
+			"# aws s3 sync . s3://my-assets-bucket",
+			"AWSTemplateFormatVersion: \"2010-09-09\"",
+			"Description: A sample template",
+			"",
+			"Parameters:",
+			"",
+			"Resources:",
+			""
 		]
 	},
 	"cfn_parameter": {
@@ -227,7 +245,7 @@
 		"prefix": [
 			"cfn_codepipeline_codecommit_action"
 		],
-		"description": "",
+		"description": "CFN: CodePipeline CodeCommit Action",
 		"body": [
 			"- Name: Source",
 			"  OutputArtifacts:",
@@ -245,5 +263,43 @@
 			"    Category: Source",
 			"    Owner: AWS",
 		],
+	},
+	"cfn_kinesis_firehose_s3": {
+		"prefix": ["cfn_kinesis_firehose_s3"],
+		"description": "CFN: Kinesis Firehose delivery stream to s3",
+		"body": [
+			"GoogleTrendsS3DeliveryStream:",
+			"  Type: AWS::KinesisFirehose::DeliveryStream",
+			"  Properties:",
+			"    DeliveryStreamName: GoogleTrendsS3DeliveryStream",
+			"    DeliveryStreamType: KinesisStreamAsSource",
+			"    KinesisStreamSourceConfiguration:",
+			"      KinesisStreamARN: !Ref kinesisStreamARN",
+			"      RoleARN: !Ref kinesisStreamRoleArn",
+			"    ExtendedS3DestinationConfiguration:",
+			"      BucketARN: !GetAtt GoogleTrendsBucket.Arn",
+			"      BufferingHints:",
+			"        IntervalInSeconds: 60",
+			"        SizeInMBs: 50",
+			"      CompressionFormat: UNCOMPRESSED",
+			"      Prefix: firehose/",
+			"      RoleARN: !Ref deliveryRoleArn",
+		]
+	},
+	"cfn_event_rule_schedule": {
+		"prefix": ["cfn_event_rule_schedule", "cfn_schedule_lambda"],
+		"description": "CFN: Schedule Lambda via Event Rule",
+		"body": [
+			"GoogleTrendsProducerSchedule:",
+			"Type: 'AWS::Events::Rule'",
+			"Properties:",
+			"  Description: Invoke google trends lambda",
+			"  RoleArn: !GetAtt GoogleTrendsProducerScheduleExecutionRole.Arn",
+			"  ScheduleExpression: 'rate(5 minutes)'",
+			"  State: ENABLED",
+			"  Targets:",
+			"    - Id: GoogleTrendsProducerScheduleFunctionTarget",
+			"      Arn: !GetAtt GoogleTrendsProducerFunction.Arn",
+		]
 	},
 }
