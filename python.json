@@ -1292,4 +1292,44 @@
       "def lambda_handler(event, context):\n    response = client.describe_organization()\n\n    return {\n        'statusCode': 200,\n        'body': json.dumps(response['Organization']) if response and response['Organization'] else '{}'\n    }"
     ]
   },
+  "cfn_response": {
+    "prefix": [
+      "cfn_response",
+      "aws_cfn_custom",
+      "cfn_custom_resource"
+    ],
+    "description": "AWS CloudFormation Custom Resource Response",
+    "body": [
+      "def lambda_handler(event, context):",
+      "  response = client.describe_organization()",
+      "  cfnresponse.send(event, context, cfnresponse.SUCCESS, response['Organization'] if response and response['Organization'] else {})"
+    ]
+  },
+  "boto_guardduty": {
+    "prefix": [
+      "boto_guardduty",
+      "aws_guardduty",
+      "boto_guard_duty"
+    ],
+    "description": "",
+    "body": [
+      "import boto3",
+      "client = boto3.client('guardduty')"
+    ]
+  },
+  "raise_error": {
+    "prefix": [
+      "raise_error",
+      "throw",
+      "raise",
+      "error"
+    ],
+    "description": "",
+    "body": [
+      "class B(Exception):",
+      "    pass",
+      "",
+      "raise B()",
+    ]
+  },
 }
