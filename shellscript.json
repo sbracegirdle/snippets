@@ -1,20 +1,28 @@
 {
 	"bash_shebang": {
-		"prefix": ["shebang", "bash_shebang"],
+		"prefix": [
+			"shebang",
+			"bash_shebang"
+		],
 		"description": "Bash; shebang",
 		"body": [
 			"#!/usr/bin/env bash"
 		]
 	},
 	"log": {
-		"prefix": ["log"],
+		"prefix": [
+			"log"
+		],
 		"description": "Bash; log to file",
 		"body": [
 			"echo \"### BOOTSTRAPPING\" >> /var/log/bootstrap.log"
 		]
 	},
 	"print_date": {
-		"prefix": ["date", "print_date"],
+		"prefix": [
+			"date",
+			"print_date"
+		],
 		"description": "Bash; print",
 		"body": [
 			"currentDate=`date`",
@@ -151,8 +159,31 @@
 		"prefix": "bash_array_iter",
 		"body": [
 			"for i in \"${arrayName[@]}\"; do",
-			"\techo $i", 
+			"\techo $i",
 			"done"
+		]
+	},
+	"distribute_python_lambda": {
+		"prefix": [
+			"zip_python_lambda",
+			"dist_python_lambda",
+			"distribute_python_lambda"
+		],
+		"description": "Zip python function and dependencies for deployment",
+		"body": [
+			"#!/usr/bin/env bash",
+			"",
+			"# Clean",
+			"rm -rf build/",
+			"rm -rf dist/",
+			"mkdir -p build/",
+			"mkdir -p dist/",
+			"",
+			"",
+			"pip install --target ./build boto3==1.13.14",
+			"cp create_members.py build/",
+			"cd build/",
+			"zip -r ../dist/guard-duty.zip ./*",
 		]
 	},
 }
