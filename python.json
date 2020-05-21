@@ -1274,6 +1274,23 @@
       "import boto3\nclient = boto3.client('organizations')"
     ]
   },
+  "boto3_organisations_list": {
+    "prefix": [
+      "boto3_organisations_list_accounts",
+      "boto3_list_accounts",
+      "aws_list_accounts"
+    ],
+    "description": "AWS List all Organizations (boto3)",
+    "body": [
+      "sub_accounts = []",
+      "account_response = orgs.list_accounts(MaxResults=20)",
+      "sub_accounts = sub_accounts + account_response['Accounts']",
+      "while 'NextToken' in account_response:",
+      "    account_response = orgs.list_accounts(",
+      "        MaxResults=20, NextToken=account_response['NextToken'])",
+      "    sub_accounts = sub_accounts + account_response['Accounts']",
+    ]
+  },
   "boto3_profile": {
     "prefix": [
       "boto3_profile"
@@ -1290,6 +1307,87 @@
     "description": "AWS lambda handler",
     "body": [
       "def lambda_handler(event, context):\n    response = client.describe_organization()\n\n    return {\n        'statusCode': 200,\n        'body': json.dumps(response['Organization']) if response and response['Organization'] else '{}'\n    }"
+    ]
+  },
+  "cfn_response": {
+    "prefix": [
+      "cfn_response",
+      "aws_cfn_custom",
+      "cfn_custom_resource"
+    ],
+    "description": "AWS CloudFormation Custom Resource Response",
+    "body": [
+      "def lambda_handler(event, context):",
+      "  response = client.describe_organization()",
+      "  cfnresponse.send(event, context, cfnresponse.SUCCESS, response['Organization'] if response and response['Organization'] else {})"
+    ]
+  },
+  "boto_guardduty": {
+    "prefix": [
+      "boto_guardduty",
+      "aws_guardduty",
+      "boto_guard_duty"
+    ],
+    "description": "",
+    "body": [
+      "import boto3",
+      "client = boto3.client('guardduty')"
+    ]
+  },
+  "custom_error": {
+    "prefix": [
+      "custom_error",
+      "throw_custom",
+      "raise_custom"
+    ],
+    "description": "Raise custom error",
+    "body": [
+      "class B(Exception):",
+      "    pass",
+      "",
+      "raise B()",
+    ]
+  },
+  "raise_error": {
+    "prefix": ["raise_error", "throw_error"],
+    "description": "",
+    "body": [
+      "raise Exception('Something happened')"
+    ]
+  },
+  "try_catch": {
+    "prefix": [
+      "try_catch"
+    ],
+    "description": "Simple try catch",
+    "body": [
+      "try:",
+      "  pass",
+      "except Exception as e:",
+      "  pass"
+    ]
+  },
+  "unit_test": {
+    "prefix": [
+      "unit_test",
+      "unittest",
+      "test"
+    ],
+    "description": "Python unit test",
+    "body": [
+      "import unittest",
+      "",
+      "class TestSomething(unittest.TestCase):",
+      "",
+      "    def test_upper(self):",
+      "        self.assertEqual('foo'.upper(), 'FOO')",
+      "",
+      "    def test_isupper(self):",
+      "        self.assertTrue('FOO'.isupper())",
+      "        self.assertFalse('Foo'.isupper())",
+      "",
+      "if __name__ == '__main__':",
+      "    unittest.main()",
     ]
   },
 }
