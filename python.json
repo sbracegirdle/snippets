@@ -1390,4 +1390,22 @@
       "    unittest.main()",
     ]
   },
+  "date_today": {
+    "prefix": ["date_today", "date"],
+    "description": "Today's date",
+    "body": [
+      "from datetime import date",
+      "today = date.today()"
+    ]
+  },
+  "requests_get": {
+    "prefix": ["requests_get", "requests", "get_request"],
+    "description": "",
+    "body": [
+      "import requests",
+      "r = requests.get('https://api.github.com/search/repositories?q=tetris&sort=stars&order=desc')",
+      "r.status_code",
+      "print(r.json())"
+    ]
+  },
 }
