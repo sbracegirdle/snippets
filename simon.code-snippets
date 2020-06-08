@@ -58,9 +58,9 @@
       "  \"jsxSingleQuote\": false,",
       "  \"jsxBracketSameLine\": true,",
       "  \"printWidth\": 120,",
-      "  \"semi\": true,",
+      "  \"semi\": false,",
       "  \"singleQuote\": true,",
-      "  \"trailingComma\": \"none\",",
+      "  \"trailingComma\": \"all\",",
       "  \"tabWidth\": 2,",
       "  \"useTabs\": false",
       "}",
@@ -1089,5 +1089,80 @@
       "// npm install --save @types/aws-lambda",
       "import {ScheduledHandler} from 'aws-lambda'"
     ]
+  },
+  "mui_init": {
+    "prefix": ["mui_init", "mui_bootstrap", "mui_wrap"],
+    "description": "MUI; Bootstrap",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "import CssBaseline from '@material-ui/core/CssBaseline'",
+      "import {ThemeProvider} from '@material-ui/core/styles'",
+      "import theme from './theme'",
+      "//...",
+      "<ThemeProvider theme={theme}>",
+      "  <CssBaseline />",
+      "  <App />",
+      "</ThemeProvider>"
+    ]
+  },
+  "mui_grid": {
+    "prefix": ["mui_grid"],
+    "description": "MUI; Grid",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "<Grid container spacing={5}>",
+      "  <Grid item xs={12} md={8}>$0",
+      "  </Grid>",
+      "</Grid>"
+    ]
+  },
+  "mui_container": {
+    "prefix": ["mui_container"],
+    "description": "MUI; Container",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": ["<Container maxWidth=\"lg\">$0</Container>"]
+  },
+  "mui_button": {
+    "prefix": ["mui_button"],
+    "description": "MUI; Button",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "<Button variant=\"contained\" color=\"primary\">Hello World</Button>"
+    ]
+  },
+  "mui_theme": {
+    "prefix": ["mui_theme"],
+    "description": "",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "import {red} from '@material-ui/core/colors'",
+      "import {createMuiTheme} from '@material-ui/core/styles'",
+      "",
+      "// https://material-ui.com/customization/default-theme/",
+      "const theme = createMuiTheme({",
+      "  typography: {",
+      "    fontSize: 15,",
+      "  },",
+      "  palette: {",
+      "    type: 'dark',",
+      "    primary: {",
+      "      light: '#b085f5',",
+      "      main: '#7c43bd',",
+      "      dark: '#4a148c',",
+      "    },",
+      "    error: {",
+      "      main: red.A400,",
+      "    },",
+      "  },",
+      "})",
+      "",
+      "export default theme"
+    ]
+  },
+  "mui_typography": {
+    "prefix": ["mui_typography"],
+    "description": "MUI; Typography",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": ["<Typography variant=\"h2\" gutterBottom>$0</Typography>"]
   }
 }
