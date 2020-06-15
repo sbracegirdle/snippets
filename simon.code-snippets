@@ -139,7 +139,31 @@
     "scope": "json,jsonc,javascript,javascriptreact,typescript,typescriptreact",
     "description": "Webpack; Typescript get started",
     "body": [
-      "const path = require('path')\n\n// npm install --save-dev webpack webpack-cli typescript ts-loader\n\nmodule.exports = {\n  entry: './index.ts',\n  module: {\n    rules: [\n      {\n        test: /\\.tsx?$/,\n        use: 'ts-loader',\n        exclude: /node_modules/,\n      },\n    ],\n  },\n  resolve: {\n    extensions: ['.tsx', '.ts', '.js'],\n  },\n  output: {\n    filename: 'bundle.js',\n    path: path.resolve(__dirname, 'dist'),\n  },\n}\n"
+      "const path = require('path')",
+      "",
+      "// npm install --save-dev webpack webpack-cli typescript ts-loader",
+      "",
+      "module.exports = {",
+      "  entry: './index.ts',",
+      "  mode: 'production',",
+      "  module: {",
+      "    rules: [",
+      "      {",
+      "        test: /\\.tsx?$/,",
+      "        use: 'ts-loader',",
+      "        exclude: /node_modules/,",
+      "      },",
+      "    ],",
+      "  },",
+      "  resolve: {",
+      "    extensions: ['.tsx', '.ts', '.js'],",
+      "  },",
+      "  output: {",
+      "    libraryTarget: 'commonjs',",
+      "    filename: 'bundle.js',",
+      "    path: path.resolve(__dirname, 'dist'),",
+      "  },",
+      "}"
     ]
   },
   //
@@ -784,6 +808,12 @@
       "  removalPolicy: cdk.RemovalPolicy.DESTROY,",
       "});"
     ]
+  },
+  "cdk_lambda_asset": {
+    "prefix": ["cdk_lambda_asset"],
+    "description": "CDK; Lambda code asset",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": ["lambda.Code.fromAsset(path.join(__dirname, 'handler'))"]
   },
   "cdk_bucket_deploy": {
     "prefix": "cdk_bucket_deploy",
