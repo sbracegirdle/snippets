@@ -1303,5 +1303,32 @@
     "description": "MUI; Typography",
     "scope": "javascript,javascriptreact,typescript,typescriptreact",
     "body": ["<Typography variant=\"h2\" gutterBottom>$0</Typography>"]
+  },
+  "github_actions_ci": {
+    "prefix": ["github_actions_ci", "github_ci_node", "github_actions_node"],
+    "description": "Github; NodeJS actions build",
+    "body": [
+      "name: Branch CI",
+      "on:",
+      "  push:",
+      "    branches:",
+      "      - '*'",
+      "jobs:",
+      "  build:",
+      "    runs-on: ubuntu-latest",
+      "    steps:",
+      "      - uses: actions/checkout@v2",
+      "      - name: Use Node.js 12",
+      "        uses: actions/setup-node@v1",
+      "        with:",
+      "          node-version: 12.x",
+      "      - name: Run CI tasks",
+      "        run: |",
+      "          npm install",
+      "          npm run lint",
+      "          npm run test",
+      "          npm run build",
+      "          npm run synth"
+    ]
   }
 }
