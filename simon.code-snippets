@@ -815,6 +815,12 @@
     "scope": "javascript,javascriptreact,typescript,typescriptreact",
     "body": ["lambda.Code.fromAsset(path.join(__dirname, 'handler'))"]
   },
+  "cdk_schedule_rate": {
+    "prefix": ["cdk_schedule_rate"],
+    "description": "CDK; Schedule event at fixed rate",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": ["events.Schedule.rate(cdk.Duration.minutes(5))"]
+  },
   "cdk_bucket_deploy": {
     "prefix": "cdk_bucket_deploy",
     "scope": "javascript,javascriptreact,typescript,typescriptreact",
