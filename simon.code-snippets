@@ -1031,6 +1031,29 @@
       "})"
     ]
   },
+  "cdk_codecommit_github_user": {
+    "prefix": ["cdk_codecommit_github_user", "cdk_github_service_user"],
+    "description": "CDK: Github <-> CodeCommit sync service user",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "const serviceUserBoundaryPolicy = new iam.ManagedPolicy(this, 'GithubServiceUserManagedPolicy', {",
+      "  statements: [",
+      "    new iam.PolicyStatement({",
+      "      resources: ['*'],",
+      "      actions: ['codecommit:*'],",
+      "      effect: iam.Effect.ALLOW,",
+      "    }),",
+      "  ],",
+      "})",
+      "",
+      "const githubServiceUser = new iam.User(this, 'GithubServiceUser', {",
+      "  // INTENTIONALLY NO PASSWORD. NO CONSOLE ACCESS ALLOWED",
+      "  userName: 'my-gh-service-user',",
+      "  permissionsBoundary: serviceUserBoundaryPolicy,",
+      "})",
+      "repo.grantPullPush(githubServiceUser)"
+    ]
+  },
   "react_popper": {
     "prefix": "react_popper",
     "scope": "javascript,javascriptreact,typescript,typescriptreact",
