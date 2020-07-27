@@ -1,0 +1,527 @@
+{
+  "cdk_import": {
+    "prefix": ["cdk_import"],
+    "description": "CDK; Generic import",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "import * as ${1:s3} from '@aws-cdk/aws-${1:s3}'"
+    ]
+  },
+  "cdk_import_core": {
+    "prefix": ["cdk_import_core"],
+    "description": "CDK; Generic core",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "import * as cdk from '@aws-cdk/aws-core'"
+    ]
+  },
+  "cdk_app": {
+    "prefix": ["cdk_app"],
+    "description": "CDK; App",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "const app = new cdk.App();",
+      "new MyStack(app, 'MyStack');",
+      "app.synth();"
+    ]
+  },
+  "cdk_json": {
+    "prefix": ["cdk_json"],
+    "description": "CDK; JSON Config",
+    "scope": "json,jsonc",
+    "body": [
+      "{",
+      "  \"app\": \"npx ts-node src/apps/SecurityBot.ts\",",
+      "  \"context\": {",
+      "    \"@aws-cdk/core:enableStackNameDuplicates\": \"true\",",
+      "    \"aws-cdk:enableDiffNoFail\": \"true\"",
+      "  }",
+      "}",
+    ]
+  },
+  "cdk_stack": {
+    "prefix": "cdk_stack",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "description": "CDK; Stack",
+    "body": [
+      "export class ${1:MyStack} extends cdk.Stack {",
+      "  constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {",
+      "    super(scope, id, props)",
+      "",
+      "    ${0:// Do things}",
+      "  }",
+      "}"
+    ]
+  },
+  "cdk_construct": {
+    "prefix": ["cdk_construct", "cdk_custom_construct"],
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "description": "CDK; Construct",
+    "body": [
+      "class ${1:MyConstruct} extends cdk.Construct {",
+      "  constructor(scope: cdk.Construct, id: string) {",
+      "    super(scope, id);",
+      "",
+      "    ${0:// Create things here}",
+      "  }",
+      "}"
+    ]
+  },
+  "cdk_cfn_parameter": {
+    "prefix": ["cdk_cfn_parameter"],
+    "description": "",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "$0new CfnParameter(this, '${1:MyCFNParameter}', {",
+      "  type: '${2:String}',",
+      "  description: '${3:Description of the parameter}',",
+      "  default: '${4:Description of the parameter}',",
+      "})",
+    ]
+  },
+  "cdk_code_asset_from_bucket": {
+    "prefix": ["cdk_code_asset_from_bucket", "cdk_asset_from_bucket", "cdk_code_from_bucket"],
+    "description": "CDK; Code asset from external bucket",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "const codeBucket = s3.Bucket.fromBucketName(this, 'CodeBucket', ${1:props.codeBucketName})",
+      "const code = Code.fromBucket(codeBucket, ${2:props.codeBucketKey})"
+    ]
+  },
+  "cdk_lambda": {
+    "prefix": ["cdk_lambda", "cdk_function"],
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "description": "CDK; Lambda",
+    "body": [
+      "new lambda.Function(this, 'Singleton', { ",
+      "  code: new lambda.InlineCode(fs.readFileSync('lambda-handler.py', { encoding: 'utf-8' })),",
+      "  handler: 'index.main',",
+      "  timeout: cdk.Duration.seconds(300),",
+      "  runtime: lambda.Runtime.PYTHON_2_7",
+      "})"
+    ]
+  },
+  "cdk_events_lambda": {
+    "prefix": "cdk_events_lambda",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "description": "CDK; Lambda schedule event",
+    "body": [
+      "const rule = new events.Rule(this, 'Rule', {",
+      "  schedule: events.Schedule.expression('cron(0 18 ? * MON-FRI *)')",
+      "});",
+      "",
+      "rule.addTarget(new targets.LambdaFunction(lambdaFn));"
+    ]
+  },
+  "cdk_bucket": {
+    "prefix": "cdk_bucket",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "description": "CDK; S3 Public",
+    "body": [
+      "const siteBucket = new s3.Bucket(this, 'SiteBucket');"
+    ]
+  },
+  "cdk_public_bucket": {
+    "prefix": "cdk_public_bucket",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "description": "CDK; S3 Bucket Public",
+    "body": [
+      "const siteBucket = new s3.Bucket(this, 'SiteBucket', {",
+      "  bucketName: siteDomain,",
+      "  websiteIndexDocument: 'index.html',",
+      "  websiteErrorDocument: 'error.html',",
+      "  publicReadAccess: true,",
+      "});"
+    ]
+  },
+  "cdk_lambda_asset": {
+    "prefix": ["cdk_lambda_asset"],
+    "description": "CDK; Lambda code asset",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": ["lambda.Code.fromAsset(path.join(__dirname, 'handler'))"]
+  },
+  "cdk_schedule_rate": {
+    "prefix": ["cdk_schedule_rate"],
+    "description": "CDK; Schedule event at fixed rate",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": ["events.Schedule.rate(cdk.Duration.minutes(5))"]
+  },
+  "cdk_bucket_deploy": {
+    "prefix": ["cdk_bucket_deploy", "cdk_s3_deploy"],
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "description": "CDK; S3 bucket deployment",
+    "body": [
+      "new s3deploy.BucketDeployment(this, 'DeployWithInvalidation', {",
+      "  source: s3deploy.Source.asset('./site-contents'),",
+      "  destinationBucket: siteBucket,",
+      "  distribution,",
+      "  distributionPaths: ['/*'],",
+      "})"
+    ]
+  },
+  "cdk_acm": {
+    "prefix": ["cdk_acm", "cdk_cert", "cdk_dns_cert"],
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "description": "CDK; Certificate manager DNS validated cert (ACM)",
+    "body": [
+      "new acm.DnsValidatedCertificate(this, 'SiteCertificate', {",
+      "  domainName: siteDomain,",
+      "  hostedZone: zone",
+      "}).certificateArn"
+    ]
+  },
+  "cdk_cloudfront": {
+    "prefix": "cdk_cloudfront",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "description": "CDK; Cloudfront distribution with S3 origin",
+    "body": [
+      "new cloudfront.CloudFrontWebDistribution(this, '${1:MyDistribution}', {",
+      "  aliasConfiguration: {",
+      "    acmCertRef: certificateArn,",
+      "    names: [ siteDomain ],",
+      "    sslMethod: cloudfront.SSLMethod.SNI,",
+      "    securityPolicy: cloudfront.SecurityPolicyProtocol.TLS_V1_1_2016,",
+      "  },",
+      "  originConfigs: [",
+      "    {",
+      "      s3OriginSource: {",
+      "        s3BucketSource: ${2:siteBucket}",
+      "      },",
+      "      behaviors : [ {isDefaultBehavior: true}],",
+      "    }",
+      "  ]",
+      "})"
+    ]
+  },
+  "cdk_ecs": {
+    "prefix": ["cdk_ecs"],
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "description": "CDK; ECS Fargate",
+    "body": [
+      "const ec2 = require('@aws-cdk/aws-ec2');",
+      "const ecs = require('@aws-cdk/aws-ecs');",
+      "",
+      "const vpc = new ec2.Vpc(this, 'MyVpc', { maxAzs: 2 });",
+      "const cluster = new ecs.Cluster(this, 'Ec2Cluster', { vpc });",
+      "",
+      "// create a task definition with CloudWatch Logs",
+      "const logging = new ecs.AwsLogDriver({",
+      "  streamPrefix: 'myapp',",
+      "})",
+      "",
+      "const taskDef = new ecs.FargateTaskDefinition(this, 'MyTaskDefinition', {",
+      "  memoryLimitMiB: 512,",
+      "  cpu: 256, // 1 vCPU = 1024 ",
+      "})",
+      "",
+      "taskDef.addContainer('AppContainer', {",
+      "  image: ecs.ContainerImage.fromRegistry('amazon/amazon-ecs-sample'),",
+      "  logging,",
+      "})",
+      "",
+      "// Instantiate ECS Service with just cluster and image",
+      "new ecs.FargateService(this, 'FargateService', {",
+      "  cluster,",
+      "  taskDefinition: taskDef",
+      "});"
+    ]
+  },
+  "cdk_ecs_fargate_scheduled": {
+    "prefix": ["cdk_ecs_fargate_scheduled", "cdk_ecs_fargate"],
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "description": "CDK; ECS Fargate scheduled",
+    "body": [
+      "const vpc = new ec2.Vpc(this, \"ScraperVPC\", { maxAzs: 1 });",
+      "const cluster = new ecs.Cluster(this, \"ScraperCluster\", { vpc });",
+      "",
+      "const logDriver = new ecs.AwsLogDriver({",
+      "  streamPrefix: \"bankstack-scraper\"",
+      "});",
+      "",
+      "const ecsScheduledTask = new ecsPatterns.ScheduledFargateTask(",
+      "  this,",
+      "  \"ScraperScheduledTask\",",
+      "  {",
+      "    cluster,",
+      "    vpc,",
+      "    desiredTaskCount: 1,",
+      "    schedule: autoscaling.Schedule.expression(\"rate(1 day)\"),",
+      "    scheduledFargateTaskImageOptions: {",
+      "      image: ecs.ContainerImage.fromRegistry(",
+      "        \"438831467415.dkr.ecr.ap-southeast-2.amazonaws.com/bankstack-scraper\"",
+      "      ),",
+      "      // environment: { name: \"TRIGGER\", value: \"CloudWatch Events\" }, ENV VARS",
+      "      // TODO secret",
+      "      memoryLimitMiB: 1024,",
+      "      cpu: 512, // 1 vCPU = 1024",
+      "      logDriver",
+      "    }",
+      "  }",
+      ");"
+    ]
+  },
+  "cdk_secret": {
+    "prefix": ["cdk_secret", "cdk_secret_value"],
+    "description": "CDK; SM Secret value",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "sm.Secret.fromSecretArn(this, '${1:MySecretName}', '${2:secretarn}');"
+    ]
+  },
+  "cdk_codecommit": {
+    "prefix": ["cdk_codecommit", "cdk_repo"],
+    "description": "CDK; Codecommit repo",
+    "body": [
+      "new codecommit.Repository(this, '${1:Repository}' ,{",
+      "  repositoryName: '${2:MyRepositoryName}',",
+      "  description: '${3:Some description.}', // optional property",
+      "});"
+    ]
+  },
+  "cdk_pipeline_artifact": {
+    "prefix": ["cdk_pipeline_artifact"],
+    "description": "",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "new codepipeline.Artifact()"
+    ]
+  },
+  "cdk_pipeline": {
+    "prefix": ["cdk_pipeline", "cdk_codepipeline"],
+    "description": "CDK; Codepipeline",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "new codepipeline.Pipeline(this, '${1:MyProjectCodePipeline}', {",
+      "  stages: [$0] // Add inline stages here",
+      "})"
+    ]
+  },
+  "cdk_pipeline_add_stage": {
+    "prefix": ["cdk_pipeline_add_stage"],
+    "description": "CDK; Codepipeline add a stage",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "pipeline.addStage({",
+      "  stageName: '${1:StageName}',",
+      "  actions: [${0:/*Put some actions here*/}]",
+      "})"
+    ]
+  },
+  "cdk_pipeline_inline_stage_source": {
+    "prefix": ["cdk_pipeline_inline_stage_source", "cdk_pipeline_inline_source_stage"],
+    "description": "CDK: Codepipeline codecommit source action stage",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "{",
+      "  stageName: '${1:Source}',",
+      "  actions: [",
+      "    new codepipeline_actions.CodeCommitSourceAction({",
+      "       actionName: '${2:CodeCommitSource}',",
+      "       repository: ${3:repo},",
+      "       output: ${4:sourceArtifact},",
+      "     })",
+      "  ],",
+      "}",
+    ]
+  },
+  "cdk_pipeline_inline_build_stage": {
+    "prefix": ["cdk_pipeline_inline_build_stage", "cdk_pipeline_inline_codebuild_stage"],
+    "description": "CDK; Codepipeline codebuild action stage",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "{",
+      "  stageName: '${1:Build}',",
+      "  actions: [",
+      "    new codepipeline_actions.CodeBuildAction({",
+      "      actionName: '${2:BuildMyThings}',",
+      "      project: ${3:codeBuildProject},",
+      "      input: ${4:sourceArtifact},",
+      "      outputs: [${5:buildArtifact}], // Optional",
+      "    }),",
+      "  ],",
+      "})"
+    ]
+  },
+  "cdk_codecommit_github_user": {
+    "prefix": ["cdk_codecommit_github_user", "cdk_github_service_user"],
+    "description": "CDK: Github <-> CodeCommit sync service user",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "const serviceUserBoundaryPolicy = new iam.ManagedPolicy(this, 'GithubServiceUserManagedPolicy', {",
+      "  statements: [",
+      "    new iam.PolicyStatement({",
+      "      resources: ['*'],",
+      "      actions: ['codecommit:*'],",
+      "      effect: iam.Effect.ALLOW,",
+      "    }),",
+      "  ],",
+      "})",
+      "",
+      "const githubServiceUser = new iam.User(this, 'GithubServiceUser', {",
+      "  // INTENTIONALLY NO PASSWORD. NO CONSOLE ACCESS ALLOWED",
+      "  userName: 'my-gh-service-user',",
+      "  permissionsBoundary: serviceUserBoundaryPolicy,",
+      "})",
+      "repo.grantPullPush(githubServiceUser)"
+    ]
+  },
+  "cdk_tag_helpers": {
+    "prefix": ["cdk_tag_helpers"],
+    "description": "CDK; Standard tag helpers",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "export const STANDARD_TAGS: { [key: string]: string } = {",
+      "  RepositoryUrl: REPOSITORY_URL,",
+      "  Creator: CREATORS.join(','),",
+      "  Owner: OWNER,",
+      "  Stack: process.env.STACK_ENV || 'nonProd',",
+      "  Project: PROJECT_NAME,",
+      "}",
+      "",
+      "export const UNTAGGABLE_RESOURCE_TYPES = ['AWS::KMS::Key']",
+      "",
+      "export const applyTags = (construct: cdk.Construct, tags: { [key: string]: string }, tagProps: cdk.TagProps) => {",
+      "  Object.entries(tags).forEach((entry: [string, string]) => {",
+      "    Tag.add(construct, entry[0], entry[1], tagProps)",
+      "  })",
+      "}"
+    ]
+  },
+  "cdk_apply_tags": {
+    "prefix": ["cdk_apply_tags"],
+    "description": "CDK; Apply tags using helpers",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "applyTags(roleStack, STANDARD_TAGS, {",
+      "  excludeResourceTypes: UNTAGGABLE_RESOURCE_TYPES,",
+      "})"
+    ]
+  },
+  "cdk_codebuild_project": {
+    "prefix": ["cdk_pipeline_build_project", "cdk_codebuild_pipeline_project"],
+    "description": "CDK: CodeBuild CodePipeline project",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "new codebuild.PipelineProject(this, '${1:MyProjectCodeBuild}', {",
+      "  buildSpec: ${2:buildSpec}",
+      "})"
+    ]
+  },
+  "cdk_codebuild_spec": {
+    "prefix": ["cdk_codebuild_spec", "cdk_buildspec"],
+    "description": "CDK: Simple CodeBuild spec",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "cb.BuildSpec.fromObject({",
+      "  version: '0.2',",
+      "  env: {",
+      "    ${1:MY_VAR}: ${2:value},",
+      "  },",
+      "  phases: {",
+      "    install: {",
+      "      commands: [${3:'npm ci'}],",
+      "    },",
+      "    build: {",
+      "      commands: [${4:'npm run build'}]",
+      "    },",
+      "  },",
+      "})"
+    ]
+  },
+  "cdk_codebuild_typings": {
+    "prefix": ["cdk_codebuild_typings", "cdk_buildspec_typings"],
+    "description": "CDK; Unofficial (incomplete) codebuild buildspec typings",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "interface BuildPhase {",
+      "  'run-as'?: string",
+      "  commands: string[]",
+      "  finally?: string[]",
+      "}",
+      "",
+      "interface InstallBuildPhase extends BuildPhase {",
+      "  'runtime-versions'?: Record<string, string>",
+      "}",
+      "",
+      "interface BuildPhases {",
+      "  install?: InstallBuildPhase",
+      "  pre_build?: BuildPhase",
+      "  build?: BuildPhase",
+      "  post_build?: BuildPhase",
+      "}",
+      "",
+      "interface BuildEnv {",
+      "  shell?: string",
+      "  variables?: Record<string, string>",
+      "  'parameter-store'?: Record<string, string>",
+      "  'exported-variables'?: string[]",
+      "  'secrets-manager'?: Record<string, string>",
+      "  'git-credential-helper'?: boolean",
+      "}",
+      "",
+      "interface BuildArtifactFragment {",
+      "  files?: string[]",
+      "  name?: string",
+      "  'discard-paths'?: boolean",
+      "  'base-directory'?: string",
+      "}",
+      "",
+      "interface BuildArtifacts extends BuildArtifactFragment {",
+      "  'secondary-artifacts'?: Record<string, BuildArtifactFragment>",
+      "}",
+      "",
+      "interface BuildCache {",
+      "  paths: string[]",
+      "}",
+      "",
+      "interface BuildSpec {",
+      "  version: '0.1' | '0.2'",
+      "  'run-as'?: string",
+      "  env?: BuildEnv",
+      "  phases: BuildPhases",
+      "  artifacts?: BuildArtifacts",
+      "  cache?: BuildCache",
+      "}",
+      "",
+      "export const buildSpec = (spec: BuildSpec): cb.BuildSpec => cb.BuildSpec.fromObject(spec)",
+    ]
+  },
+  "cdk_rest_api_lambda": {
+    "prefix": ["cdk_rest_api_lambda", "cdk_api_lambda"],
+    "description": "CDK; Api Gateway Lambda integration (apigateway v1)",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "$0new api.RestApi(this, '${1:MyAPI}').root",
+      "  .addResource('${2:message}')",
+      "  .addMethod('${3:POST}', new api.LambdaIntegration(${4:manageResponse}))",
+    ]
+  },
+  "cdk_lambda_subscription": {
+    "prefix": ["cdk_lambda_subscription", "cdk_sns_lambda"],
+    "description": "CDK; Lambda SNS subscription",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "${1:topic}.addSubscription(new subscriptions.LambdaSubscription(${2:consumer}))"
+    ]
+  },
+  "cdk_sns_topic_arn": {
+    "prefix": ["cdk_sns_topic_arn"],
+    "description": "CDK; Ref SNS topic by ARN",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "sns.Topic.fromTopicArn(this, '${1:MyTopic}', ${2:myTopicArn})"
+    ]
+  },
+  "cdk_iam_policy_statement": {
+    "prefix": ["cdk_iam_policy_statement"],
+    "description": "CDK; IAM Policy statement",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "new iam.PolicyStatement({",
+      "  resources: [${1:myResourceARN}],",
+      "  actions: [${2:'codecommit:*'}],",
+      "  effect: iam.Effect.ALLOW,",
+      "})"
+    ]
+  },
+}
