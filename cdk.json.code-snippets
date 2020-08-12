@@ -3,17 +3,13 @@
     "prefix": ["cdk_import"],
     "description": "CDK; Generic import",
     "scope": "javascript,javascriptreact,typescript,typescriptreact",
-    "body": [
-      "import * as ${1:s3} from '@aws-cdk/aws-${1:s3}'"
-    ]
+    "body": ["import * as ${1:s3} from '@aws-cdk/aws-${1:s3}'"]
   },
   "cdk_import_core": {
     "prefix": ["cdk_import_core"],
     "description": "CDK; Generic core",
     "scope": "javascript,javascriptreact,typescript,typescriptreact",
-    "body": [
-      "import * as cdk from '@aws-cdk/aws-core'"
-    ]
+    "body": ["import * as cdk from '@aws-cdk/aws-core'"]
   },
   "cdk_app": {
     "prefix": ["cdk_app"],
@@ -36,7 +32,7 @@
       "    \"@aws-cdk/core:enableStackNameDuplicates\": \"true\",",
       "    \"aws-cdk:enableDiffNoFail\": \"true\"",
       "  }",
-      "}",
+      "}"
     ]
   },
   "cdk_stack": {
@@ -76,11 +72,15 @@
       "  type: '${2:String}',",
       "  description: '${3:Description of the parameter}',",
       "  default: '${4:Description of the parameter}',",
-      "})",
+      "})"
     ]
   },
   "cdk_code_asset_from_bucket": {
-    "prefix": ["cdk_code_asset_from_bucket", "cdk_asset_from_bucket", "cdk_code_from_bucket"],
+    "prefix": [
+      "cdk_code_asset_from_bucket",
+      "cdk_asset_from_bucket",
+      "cdk_code_from_bucket"
+    ],
     "description": "CDK; Code asset from external bucket",
     "scope": "javascript,javascriptreact,typescript,typescriptreact",
     "body": [
@@ -118,7 +118,11 @@
     "scope": "javascript,javascriptreact,typescript,typescriptreact",
     "description": "CDK; S3 Public",
     "body": [
-      "const siteBucket = new s3.Bucket(this, 'SiteBucket');"
+      "$0new s3.Bucket(this, '${1:MyBucket}', {",
+      "  bucketName: '${2:my-bucket}',",
+      "  encryption: s3.BucketEncryption.S3_MANAGED,",
+      "  publicReadAccess: false",
+      "})"
     ]
   },
   "cdk_public_bucket": {
@@ -126,7 +130,7 @@
     "scope": "javascript,javascriptreact,typescript,typescriptreact",
     "description": "CDK; S3 Bucket Public",
     "body": [
-      "const siteBucket = new s3.Bucket(this, 'SiteBucket', {",
+      "new s3.Bucket(this, '${1:MyBucket}', {",
       "  bucketName: siteDomain,",
       "  websiteIndexDocument: 'index.html',",
       "  websiteErrorDocument: 'error.html',",
@@ -282,9 +286,7 @@
     "prefix": ["cdk_pipeline_artifact"],
     "description": "",
     "scope": "javascript,javascriptreact,typescript,typescriptreact",
-    "body": [
-      "new codepipeline.Artifact()"
-    ]
+    "body": ["new codepipeline.Artifact()"]
   },
   "cdk_pipeline": {
     "prefix": ["cdk_pipeline", "cdk_codepipeline"],
@@ -308,7 +310,10 @@
     ]
   },
   "cdk_pipeline_inline_stage_source": {
-    "prefix": ["cdk_pipeline_inline_stage_source", "cdk_pipeline_inline_source_stage"],
+    "prefix": [
+      "cdk_pipeline_inline_stage_source",
+      "cdk_pipeline_inline_source_stage"
+    ],
     "description": "CDK: Codepipeline codecommit source action stage",
     "scope": "javascript,javascriptreact,typescript,typescriptreact",
     "body": [
@@ -321,11 +326,14 @@
       "       output: ${4:sourceArtifact},",
       "     })",
       "  ],",
-      "}",
+      "}"
     ]
   },
   "cdk_pipeline_inline_build_stage": {
-    "prefix": ["cdk_pipeline_inline_build_stage", "cdk_pipeline_inline_codebuild_stage"],
+    "prefix": [
+      "cdk_pipeline_inline_build_stage",
+      "cdk_pipeline_inline_codebuild_stage"
+    ],
     "description": "CDK; Codepipeline codebuild action stage",
     "scope": "javascript,javascriptreact,typescript,typescriptreact",
     "body": [
@@ -483,7 +491,7 @@
       "  cache?: BuildCache",
       "}",
       "",
-      "export const buildSpec = (spec: BuildSpec): cb.BuildSpec => cb.BuildSpec.fromObject(spec)",
+      "export const buildSpec = (spec: BuildSpec): cb.BuildSpec => cb.BuildSpec.fromObject(spec)"
     ]
   },
   "cdk_rest_api_lambda": {
@@ -493,7 +501,7 @@
     "body": [
       "$0new api.RestApi(this, '${1:MyAPI}').root",
       "  .addResource('${2:message}')",
-      "  .addMethod('${3:POST}', new api.LambdaIntegration(${4:manageResponse}))",
+      "  .addMethod('${3:POST}', new api.LambdaIntegration(${4:manageResponse}))"
     ]
   },
   "cdk_lambda_subscription": {
@@ -508,8 +516,22 @@
     "prefix": ["cdk_sns_topic_arn"],
     "description": "CDK; Ref SNS topic by ARN",
     "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": ["sns.Topic.fromTopicArn(this, '${1:MyTopic}', ${2:myTopicArn})"]
+  },
+  "cdk_iam_policy": {
+    "prefix": ["cdk_iam_policy"],
+    "description": "CDK; IAM policy",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": ["new iam.Policy(this, '${1:MyPolicy}');"]
+  },
+  "cdk_iam_role": {
+    "prefix": ["cdk_iam_role", "cdk_iam_service_role"],
+    "description": "CDK; IAM service assumed role",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
     "body": [
-      "sns.Topic.fromTopicArn(this, '${1:MyTopic}', ${2:myTopicArn})"
+      "$0new iam.Role(this, '${1:MyRole}', {",
+      "  assumedBy: new iam.ServicePrincipal('${2:glue.amazonaws.com}'),",
+      "})"
     ]
   },
   "cdk_iam_policy_statement": {
@@ -524,4 +546,62 @@
       "})"
     ]
   },
+  "cdk_iam_user": {
+    "prefix": ["cdk_iam_user"],
+    "description": "CDK; IAM User",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "new iam.User(this, '${1:MyUser}', { password: cdk.SecretValue.plainText('${2:1234}') })"
+    ]
+  },
+  "cdk_dynamo_table": {
+    "prefix": ["cdk_dynamo_table", "cdk_dynamodb_table"],
+    "description": "CDK; DynamoDB table",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "new dynamodb.Table(this, '${1:TableDoingThings}', {",
+      "  tableName: '${2:MyTable}',",
+      "  partitionKey: { name: 'PK', type: dynamodb.AttributeType.STRING },",
+      "  sortKey: { name: 'SK', type: dynamodb.AttributeType.STRING },",
+      "  billingMode: dynamodb.BillingMode.PAY_PER_REQUEST",
+      "})"
+    ]
+  },
+  "cdk_cloudwatch_metric": {
+    "prefix": ["cdk_cloudwatch_metric", "cdk_metric"],
+    "description": "CDK; CloudWatch metric",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "new cloudwatch.Metric({",
+      "  namespace: 'AWS/Lambda',",
+      "  metricName: 'Errors',",
+      "  statistic: 'sum',",
+      "  period: Duration.minutes(30),",
+      "})"
+    ]
+  },
+  "cdk_cloudwatch_add_alarm": {
+    "prefix": ["cdk_cloudwatch_add_alarm", "cdk_cloudwatch_metric_alarm"],
+    "description": "CDK; Add Alarm to Metric",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "myMetric.createAlarm(this, 'ErrorsAlarm', {",
+      "  evaluationPeriods: 1,",
+      "  threshold: 1,",
+      "  treatMissingData: cloudwatch.TreatMissingData.IGNORE,",
+      "})"
+    ]
+  },
+  "cdk_sns_topic": {
+    "prefix": ["cdk_sns_topic", "cdk_topic"],
+    "description": "CDK; SNS topic",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": ["new sns.Topic(this, '${1:MyTopic}')"]
+  },
+  "cdk_cloudwatch_alarm_action": {
+    "prefix": ["cdk_cloudwatch_alarm_action"],
+    "description": "CDK; CloudWatch Alarm action",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": ["new cw_actions.SnsAction(topic)"]
+  }
 }
