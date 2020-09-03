@@ -1,4 +1,16 @@
 {
+  "npm_script_cdk_deploy": {
+    "prefix": ["npm_script_cdk_deploy", "cdk_deploy"],
+    "description": "CDK NPM Script; Deploy without approval",
+    "scope": "json,jsonc",
+    "body": ["npm run cdk -- deploy --require-approval=never"]
+  },
+  "npm_script_cdk_synth": {
+    "prefix": ["npm_script_cdk_synth", "cdk_synth"],
+    "description": "CDK NPM Script; Synth",
+    "scope": "json,jsonc",
+    "body": ["npm run cdk -- synth"]
+  },
   "cdk_import": {
     "prefix": ["cdk_import"],
     "description": "CDK; Generic import",
@@ -9,7 +21,7 @@
     "prefix": ["cdk_import_core"],
     "description": "CDK; Generic core",
     "scope": "javascript,javascriptreact,typescript,typescriptreact",
-    "body": ["import * as cdk from '@aws-cdk/aws-core'"]
+    "body": ["import * as cdk from '@aws-cdk/core'"]
   },
   "cdk_app": {
     "prefix": ["cdk_app"],

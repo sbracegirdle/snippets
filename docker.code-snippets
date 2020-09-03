@@ -1,0 +1,28 @@
+{
+  "docker_run": {
+    "prefix": ["docker_run", "docker_start"],
+    "description": "Docker; run interactive",
+    "body": [
+      "docker run --rm -it ${1:ubuntu}"
+    ]
+  },
+  "docker_postgres": {
+    "prefix": ["docker_postgres"],
+    "description": "Docker; start postgres instance",
+    "body": [
+      "docker run --name ${1:my-postgres} -p 5432:5432 -e POSTGRES_PASSWORD=mysecretpassword -d postgres"
+    ]
+  },
+  "docker_exec": {
+    "prefix": ["docker_exec", "docker_attach"],
+    "description": "Docker; attach to container interactively",
+    "body": ["docker exec -it ${1:my-container} /bin/sh"]
+  },
+  "docker_sqitch": {
+    "prefix": ["docker_sqitch"],
+    "description": "Docker; run sqitch",
+    "body": [
+      "docker run --rm -it sqitch/sqitch ${1:\"help\"}"
+    ]
+  },
+}
