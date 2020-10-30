@@ -730,7 +730,7 @@
     "scope": "javascript,javascriptreact,typescript,typescriptreact",
     "body": ["app.get('/foo/:id', (req, res) => res.send({foo: 'bar'}));"]
   },
-  
+
   "react_popper": {
     "prefix": "react_popper",
     "scope": "javascript,javascriptreact,typescript,typescriptreact",
@@ -844,7 +844,7 @@
     "scope": "javascript,javascriptreact,typescript,typescriptreact",
     "body": ["new Set([1, 2, 3, 4])"]
   },
-  
+
   "exec": {
     "prefix": ["exec", "child_process"],
     "description": "Exec child process in NodeJS (promisified)",
@@ -852,7 +852,7 @@
       "import { exec } from 'child_process'\nimport * as util from 'util'\nconst execAsync = util.promisify(exec)"
     ]
   },
-  
+
   "mui_init": {
     "prefix": ["mui_init", "mui_bootstrap", "mui_wrap"],
     "description": "MUI; Bootstrap",
@@ -984,4 +984,25 @@
       "          git push --force --mirror mirror"
     ]
   },
+  "pause": {
+    "prefix": ["pause", "wait", "timeout"],
+    "description": "Promisified timeout",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "const wait = (ms: number) => new Promise(resolve => setTimeout(resolve, ms))"
+    ]
+  },
+  "clean_usecase": {
+    "prefix": ["clean_usecase", "usecase"],
+    "description": "Clean architecture; Use case template",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "export interface Ports {",
+      "}",
+      "",
+      "export const myUseCase = ({}: Ports) => async (): Promise<void> => {",
+      "  // await something",
+      "}"
+    ]
+  }
 }

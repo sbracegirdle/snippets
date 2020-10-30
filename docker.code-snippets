@@ -2,9 +2,7 @@
   "docker_run": {
     "prefix": ["docker_run", "docker_start"],
     "description": "Docker; run interactive",
-    "body": [
-      "docker run --rm -it ${1:ubuntu}"
-    ]
+    "body": ["docker run --rm -it ${1:ubuntu}"]
   },
   "docker_postgres": {
     "prefix": ["docker_postgres"],
@@ -21,8 +19,42 @@
   "docker_sqitch": {
     "prefix": ["docker_sqitch"],
     "description": "Docker; run sqitch",
+    "body": ["docker run --rm -it sqitch/sqitch ${1:\"help\"}"]
+  },
+  "docker_compose": {
+    "prefix": ["docker_compose", "compose"],
+    "description": "Docker Compose; Template",
+    "scope": "yml,yaml",
     "body": [
-      "docker run --rm -it sqitch/sqitch ${1:\"help\"}"
+      "# docker-compose up -d",
+      "# docker-compose down",
+      "version: \"3.8\"",
+      "services:",
+      "  redis:",
+      "    image: redis",
+      "  web:",
+      "    build: .",
+      "    ports:",
+      "      - \"5000:5000\"",
+      "    volumes:",
+      "      - .:/code",
+      "      - logvolume01:/var/log",
+      "    links:",
+      "      - redis",
+      "volumes:",
+      "  logvolume01: {}"
     ]
   },
+  "docker_compose_mount": {
+    "prefix": ["docker_compose_mount", "docker_compose_volume"],
+    "description": "Docker Compose; Mount volume",
+    "scope": "yml,yaml",
+    "body": ["volumes:", "  - .:/code"]
+  },
+  "docker_compose_env": {
+    "prefix": ["docker_compose_env"],
+    "description": "Docker Compose; Env variables",
+    "scope": "yml,yaml",
+    "body": ["environment:", "  BLAH: something"]
+  }
 }

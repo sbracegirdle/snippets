@@ -11,6 +11,12 @@
     "scope": "json,jsonc",
     "body": ["npm run cdk -- synth"]
   },
+  "npm_install_cdk": {
+    "prefix": ["npm_install_cdk"],
+    "description": "CDK NPM Script; Synth",
+    "scope": "json,jsonc",
+    "body": ["\"@aws-cdk/aws-${1:s3}\": \"${2:1.61.0}\","]
+  },
   "cdk_import": {
     "prefix": ["cdk_import"],
     "description": "CDK; Generic import",
@@ -615,5 +621,26 @@
     "description": "CDK; CloudWatch Alarm action",
     "scope": "javascript,javascriptreact,typescript,typescriptreact",
     "body": ["new cw_actions.SnsAction(topic)"]
+  },
+  "cdk_lakeformation_grant": {
+    "prefix": ["cdk_lakeformation_grant"],
+    "description": "CDK; LakeFormation cross-account grant",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "new lakeformation.CfnPermissions(this, '${1:GrantSelect}', {",
+      "  dataLakePrincipal: {",
+      "    dataLakePrincipalIdentifier: '123456789012',",
+      "  },",
+      "  resource: {",
+      "    tableResource: {",
+      "      // BUG -- wildcardTable property missing",
+      "      databaseName: ${2:db.databaseName},",
+      "      name: '${3:simon_lf_2020_09_03_source}', // Not ideal specifying it directly here",
+      "    },",
+      "  },",
+      "  permissionsWithGrantOption: ['SELECT'],",
+      "  permissions: ['SELECT'],",
+      "})"
+    ]
   }
 }

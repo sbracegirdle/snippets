@@ -1,0 +1,487 @@
+{
+  "cfn_s3_bucket": {
+    "prefix": [
+      "cfn_bucket",
+      "cfn_s3",
+      "cfn_s3_bucket"
+    ],
+    "description": "CFN; S3 Bucket",
+    "scope": "yaml",
+    "body": [
+      "MySourceDataStore:",
+      "  Type: AWS::S3::Bucket",
+      "  DeletionPolicy: Delete",
+      "  Properties:",
+      "    AccessControl: Private",
+      "    BucketName: !Sub 'my-source-data-store-${AWS::Region}-${AWS::AccountId}'",
+      "    BucketEncryption:",
+      "      ServerSideEncryptionConfiguration:",
+      "        - ServerSideEncryptionByDefault:",
+      "          SSEAlgorithm: AES256"
+    ]
+  },
+  "cfn_glue_db": {
+    "prefix": [
+      "cfn_glue_db"
+    ],
+    "description": "CFN: Glue database",
+    "scope": "yaml",
+    "body": [
+      "MySourceGlueDatabase:",
+      "  Type: AWS::Glue::Database",
+      "  Properties: ",
+      "    CatalogId: !Ref AWS::AccountId",
+      "    DatabaseInput:",
+      "      Name: my-source-glue-database",
+      "      Description: String"
+    ]
+  },
+  "cfn_ref_acct": {
+    "prefix": [
+      "cfn_ref_acct"
+    ],
+    "description": "CFN: Ref account ID",
+    "scope": "yaml",
+    "body": [
+      "!Ref AWS::AccountId"
+    ]
+  },
+  "cfn_glue_crawler": {
+    "prefix": [
+      "cfn_glue_crawler"
+    ],
+    "description": "CFN; Glue crawler",
+    "scope": "yaml",
+    "body": [
+      "MySourceCrawler:",
+      "  Type: AWS::Glue::Crawler",
+      "  Properties:",
+      "    Name: my-source-data-crawler",
+      "    Role: !GetAtt MyRole.Arn",
+      "    DatabaseName: !Ref MySourceGlueDatabase",
+      "    Targets:",
+      "      S3Targets:",
+      "        - Path: !Ref MySourceDataStore",
+      "    SchemaChangePolicy:",
+      "      UpdateBehavior: \"UPDATE_IN_DATABASE\"",
+      "      DeleteBehavior: \"LOG\"",
+      "    Schedule:",
+      "      ScheduleExpression: \"cron(0/10 * ? * MON-FRI *)\""
+    ]
+  },
+  "cfn_role": {
+    "prefix": [
+      "cfn_role"
+    ],
+    "description": "CFN; IAM Role",
+    "scope": "yaml",
+    "body": [
+      "MySourceCrawlerRole:",
+      "  Type: AWS::IAM::Role",
+      "  Properties:",
+      "    AssumeRolePolicyDocument:",
+      "      Version: \"2012-10-17\"",
+      "      Statement:",
+      "        -",
+      "          Effect: \"Allow\"",
+      "          Principal:",
+      "            Service:",
+      "              - \"glue.amazonaws.com\"",
+      "          Action:",
+      "            - \"sts:AssumeRole\"",
+      "    Path: \"/\"",
+      "    Policies:",
+      "      -",
+      "        PolicyName: \"root\"",
+      "        PolicyDocument:",
+      "          Version: \"2012-10-17\"",
+      "          Statement:",
+      "            -",
+      "              Effect: \"Allow\"",
+      "              Action: \"*\"",
+      "              Resource: \"*\""
+    ]
+  },
+  "cfn_getatt": {
+    "prefix": [
+      "cfn_getatt",
+      "cfn_get_attribute"
+    ],
+    "description": "CFN; GetAtt",
+    "scope": "yaml",
+    "body": [
+      "!GetAtt ${1:MySourceCrawlerRole}.${2:Arn}"
+    ]
+  },
+  "cfn_get_role_arn": {
+    "prefix": [
+      "cfn_get_role_arn",
+      "cfn_iam_role_arn"
+    ],
+    "description": "CFN; Get IAM role ARN",
+    "scope": "yaml",
+    "body": [
+      "!GetAtt ${1:MySourceCrawlerRole}.Arn"
+    ]
+  },
+  "cfn_sub": {
+    "prefix": [
+      "cfn_sub"
+    ],
+    "description": "CFN; Subtstitute",
+    "scope": "yaml",
+    "body": [
+      "!Sub 'my-source-data-store-${AWS::Region}-${AWS::AccountId}'"
+    ]
+  },
+  "cfn_lf_grant": {
+    "prefix": [
+      "cfn_lf_grant",
+      "cfn_lf_permissions",
+      "cfn_lake_formation_grants"
+    ],
+    "description": "CFN; Lake Formation permissions / grants",
+    "scope": "yaml",
+    "body": [
+      "SourceCrawlerLakeGrants:",
+      "  Type: AWS::LakeFormation::Permissions",
+      "  Properties:",
+      "    DataLakePrincipal:",
+      "      DataLakePrincipalIdentifier: !GetAtt MySourceCrawlerRole.Arn",
+      "    Permissions:",
+      "      - ALTER",
+      "      - DROP",
+      "      - CREATE_TABLE",
+      "    Resource:",
+      "      DatabaseResource:",
+      "        Name: !Ref MySourceGlueDatabase"
+    ]
+  },
+  "cfn_validate": {
+    "prefix": [
+      "cfn_validate",
+      "cfn_validate_template"
+    ],
+    "description": "CFN; Validate Template",
+    "scope": "yaml",
+    "body": [
+      "# aws cloudformation validate-template --profile myprofile --template-body file://./template.yml"
+    ]
+  },
+  "cfn_inline_lambda": {
+    "prefix": [
+      "cfn_inline_lambda",
+      "cfn_lambda"
+    ],
+    "description": "CFN; Inline Lambda Function",
+    "scope": "yaml",
+    "body": [
+      "HelloWorldLambdaFunction:\n    Type: AWS::Lambda::Function\n    Properties:\n      Runtime: python3.7\n      Handler: index.lambda_handler\n      Code:\n        ZipFile: |\n          import json\n          def lambda_handler(event, context):\n              return {\n                  'statusCode': 200,\n                  'body': json.dumps('Hello World!')\n              }"
+    ]
+  },
+  "cfn_lambda_custom_resource": {
+    "prefix": [
+      "cfn_lambda_custom_resource"
+    ],
+    "description": "CFN: Lambda Custom Resource",
+    "scope": "yaml",
+    "body": [
+      "DescribeOrganizationFunction:\n  Type: AWS::Lambda::Function\n  Properties:\n    Runtime: python3.7\n    Handler: index.lambda_handler\n    Code:\n      ZipFile: |\n        import json\n        import boto3\n        import cfnresponse\n        client = boto3.client('organizations')\n\n        def lambda_handler(event, context):\n          response = client.describe_organization()\n          cfnresponse.send(event, context, cfnresponse.SUCCESS, response['Organization'] if response and response['Organization'] else {})"
+    ]
+  },
+  "cfn_execution_role": {
+    "prefix": [
+      "cfn_execution_role",
+      "cfn_role"
+    ],
+    "description": "CFN: IAM role for lambda execution",
+    "scope": "yaml",
+    "body": [
+      ("DescribeOrganizationExecutionRole:\n    Type: AWS::IAM::Role\n    Properties:\n      AssumeRolePolicyDocument:\n        Version: '2012-10-17'\n        Statement:\n        - Effect: Allow\n          Principal:\n            Service:\n            - lambda.amazonaws.com\n          Action:\n          - sts:AssumeRole\n      Path: " /
+        "\n      Policies:\n      - PolicyName: root\n        PolicyDocument:\n          Version: '2012-10-17'\n          Statement:\n          - Effect: Allow\n            Action:\n              - logs:CreateLogGroup\n              - logs:CreateLogStream\n              - logs:PutLogEvents\n            Resource: arn:aws:logs:*:*:*\n          - Effect: Allow\n            Action:\n              - organizations:DescribeOrganization \n            Resource: ") *
+        ""
+    ]
+  },
+  "cfn_template": {
+    "prefix": [
+      "cfn_template"
+    ],
+    "description": "CFN: Empty template",
+    "scope": "yaml",
+    "body": [
+      "# DEPLOY:",
+      "# aws cloudformation deploy --stack-name myteststack --template-file template.yaml --capabilities CAPABILITY_NAMED_IAM --parameter-overrides ParameterKey1=ParameterValue1",
+      "# ",
+      "# ASSETS:",
+      "# aws s3 mb s3://my-assets-bucket --region ap-southeast-2",
+      "# aws s3 ls",
+      "# aws s3 sync . s3://my-assets-bucket",
+      "AWSTemplateFormatVersion: \"2010-09-09\"",
+      "Description: A sample template",
+      "",
+      "Parameters:",
+      "",
+      "Resources:",
+      ""
+    ]
+  },
+  "cfn_parameter": {
+    "prefix": [
+      "cfn_parameter"
+    ],
+    "description": "CFN: Parameter",
+    "scope": "yaml",
+    "body": [
+      "  TestParameter: \n    Type: String\n    Default: t2.micro\n    AllowedValues: \n      - t2.micro\n      - m1.small\n      - m1.large\n    Description: Enter t2.micro, m1.small, or m1.large. Default is t2.micro."
+    ]
+  },
+  "cfn_tags": {
+    "prefix": [
+      "cfn_tags"
+    ],
+    "description": "CFN: Standard tags",
+    "scope": "yaml",
+    "body": [
+      "Tags:\n        - Key: RepositoryUrl\n          Value: \"my-repository\"\n        - Key: Version\n          Value: \"1.0\"\n        - Key: Creator\n          Value: \"creator-here\"\n        - Key: Owner\n          Value: \"owner-here\"\n        - Key: Stack\n          Value: \"Environment here e.g. Prod etc\"\n        - Key: Project\n          Value: \"my-project-name\""
+    ]
+  },
+  "cfn_custom": {
+    "prefix": [
+      "cfn_custom"
+    ],
+    "description": "CFN: Custom resource",
+    "scope": "yaml",
+    "body": [
+      "MyFrontEndTest: \n    Type: \"Custom::PingTester\"\n    Version: \"1.0\"\n    Properties: \n      ServiceToken: \"arn:aws:sns:us-east-1:84969EXAMPLE:CRTest\" # Lambda ARN or SNS ARN\n      key1: string\n      key2: \n        - list\n      key3: \n        key4: map"
+    ]
+  },
+  "cfn_nested": {
+    "prefix": [
+      "cfn_nested",
+      "cfn_nested_stack",
+      "cfn_stack"
+    ],
+    "description": "CFN: Nested stack",
+    "scope": "yaml",
+    "body": [
+      "MyNestedStack:\n    Type: AWS::CloudFormation::Stack\n    Properties: \n      TemplateURL: \"https://s3.amazonaws.com/my-cloudformation-templates-us-east-2/myTemplate.template\"\n      Parameters: \n        Key: Value\n      Tags: \n        - Key: RepositoryUrl\n          Value: \"my-repository\"\n        - Key: Version\n          Value: \"1.0\"\n        - Key: Creator\n          Value: \"creator-here\"\n        - Key: Owner\n          Value: \"owner-here\"\n        - Key: Stack\n          Value: \"Environment here e.g. Prod etc\"\n        - Key: Project\n          Value: \"my-project-name\""
+    ]
+  },
+  "cfn_code_build": {
+    "prefix": [
+      "cfn_code_build",
+      "cfn_codebuild"
+    ],
+    "description": "CFN: CodeBuild",
+    "body": [
+      "MyCodeBuild:\n  Type: AWS::CodeBuild::Project\n  Properties:\n      Name: My-CodeBuild\n      ServiceRole: !GetAtt MyCodeBuildRole.Arn\n      Source:\n        Type: CODEPIPELINE\n      Environment:\n        ComputeType: BUILD_GENERAL1_SMALL\n        Image: \"aws/codebuild/standard: 3.0\"\n        Type: LINUX_CONTAINER\n      Artifacts:\n        Type: CODEPIPELINE"
+    ]
+  },
+  "buildspec": {
+    "prefix": [
+      "buildspec",
+      "codebuild_spec"
+    ],
+    "description": "CodeBuild Spec (buildspec.yml)",
+    "scope": "yaml",
+    "body": [
+      "version: 0.2\n\nphases:\n  install:\n    runtime-versions:\n      nodejs: 10\n    commands:\n      - ./install.sh\n  build:\n    commands:\n      - ./build.sh\n  post_build:\n    commands:\n      - ./dist.sh\n        \nartifacts:\n  base-directory: .\n  name: my-build-thing\n  files:\n    - dist/**/*"
+    ]
+  },
+  "cfn_region": {
+    "prefix": [
+      "cfn_region"
+    ],
+    "description": "CFN: Region pseudo parameter",
+    "scope": "yaml",
+    "body": [
+      "AWS::Region"
+    ]
+  },
+  "cfn_account": {
+    "prefix": [
+      "cfn_account"
+    ],
+    "description": "CFN: Account pseudo parameter",
+    "scope": "yaml",
+    "body": [
+      "AWS::AccountId"
+    ]
+  },
+  "cfn_policy_document": {
+    "prefix": [
+      "cfn_policy_document"
+    ],
+    "description": "CFN: Policy document",
+    "scope": "yaml",
+    "body": [
+      "PolicyDocument:\n    Version: 2012-10-17\n    Statement:\n      - Effect: Allow\n        Action:\n          - 'cloudformation:Describe*'\n          - 'cloudformation:List*'\n          - 'cloudformation:Get*'\n        Resource: '*'"
+    ]
+  },
+  "cfn_assume_role_policy_document": {
+    "prefix": [
+      "cfn_assume_role_policy_document"
+    ],
+    "description": "CFN: Assume role policy document",
+    "scope": "yaml",
+    "body": [
+      "AssumeRolePolicyDocument:\n        Version: 2012-10-17\n        Statement:\n          - Effect: Allow\n            Principal:\n              Service:\n              - ec2.amazonaws.com\n            Action:\n              - 'sts:AssumeRole'"
+    ]
+  },
+  "cfn_policy_logs": {
+    "prefix": [
+      "cfn_policy_logs",
+      "cfn_create_logs"
+    ],
+    "description": "CFN: IAM Policy to create logs",
+    "scope": "yaml",
+    "body": [
+      "- Effect: \"Allow\"\n                Action:\n                  - \"logs:CreateLogGroup\"\n                  - \"logs:CreateLogStream\"\n                  - \"logs:PutLogEvents\"\n                Resource: \"*\""
+    ]
+  },
+  "cfn_codepipeline_cfn_action": {
+    "prefix": [
+      "cfn_codepipeline_cloudformation_action",
+      "cfn_codepipeline_cfn_action"
+    ],
+    "description": "CFN: CodePipeline CFN Deploy action",
+    "scope": "yaml",
+    "body": [
+      "Name: ExecuteChangeSet",
+      "ActionTypeId:",
+      "  Category: Deploy",
+      "  Owner: AWS",
+      "  Provider: CloudFormation",
+      "  Version: '1'",
+      "RunOrder: 2",
+      "Configuration:",
+      "  ActionMode: CHANGE_SET_EXECUTE",
+      "  Capabilities: CAPABILITY_NAMED_IAM,CAPABILITY_AUTO_EXPAND",
+      "  ChangeSetName: pipeline-changeset",
+      "  ParameterOverrides: '{\"ProjectId\": \"my-project\",\"CodeDeployRole\": \"CodeDeploy_Role_ARN\"}'",
+      "  RoleArn: CloudFormation_Role_ARN",
+      "  StackName: my-project--lambda",
+      "  TemplateConfiguration: 'my-project--BuildArtifact::template-configuration.json'",
+      "  TemplatePath: 'my-project--BuildArtifact::template-export.yml'",
+      "OutputArtifacts: []",
+      "InputArtifacts:",
+      "  - Name: my-project-BuildArtifact"
+    ]
+  },
+  "cfn_codepipeline_codebuild_action": {
+    "prefix": [
+      "cfn_codepipeline_codebuild_action"
+    ],
+    "description": "CFN: CodePipeline CodeBuild Action",
+    "scope": "yaml",
+    "body": [
+      "- Name: PackageExport",
+      "  ActionTypeId:",
+      "    Category: Build",
+      "    Owner: AWS",
+      "    Provider: CodeBuild",
+      "    Version: '1'",
+      "  RunOrder: 1",
+      "  Configuration:",
+      "    ProjectName: my-build-project",
+      "    PrimarySource: MyApplicationSource1",
+      "    EnvironmentVariables: '[{\"name\":\"TEST_VARIABLE\",\"value\":\"TEST_VALUE\",\"type\":\"PLAINTEXT\"}]'",
+      "  OutputArtifacts:",
+      "    - Name: MyPipeline-BuildArtifact",
+      "  InputArtifacts:",
+      "    - Name: MyApplicationSource1",
+      "    - Name: MyApplicationSource2"
+    ]
+  },
+  "cfn_codepipeline_codecommit_action": {
+    "prefix": [
+      "cfn_codepipeline_codecommit_action"
+    ],
+    "description": "CFN: CodePipeline CodeCommit Action",
+    "scope": "yaml",
+    "body": [
+      "- Name: Source",
+      "  OutputArtifacts:",
+      "    - Name: Artifact_MyWebsiteStack",
+      "  InputArtifacts: []",
+      "  Name: source",
+      "  Configuration:",
+      "    RepositoryName: MyWebsite",
+      "    BranchName: mainline",
+      "    PollForSourceChanges: 'false'",
+      "  RunOrder: 1",
+      "  ActionTypeId:",
+      "    Version: '1'",
+      "    Provider: CodeCommit",
+      "    Category: Source",
+      "    Owner: AWS"
+    ]
+  },
+  "cfn_kinesis_firehose_s3": {
+    "prefix": [
+      "cfn_kinesis_firehose_s3"
+    ],
+    "description": "CFN: Kinesis Firehose delivery stream to s3",
+    "scope": "yaml",
+    "body": [
+      "GoogleTrendsS3DeliveryStream:",
+      "  Type: AWS::KinesisFirehose::DeliveryStream",
+      "  Properties:",
+      "    DeliveryStreamName: GoogleTrendsS3DeliveryStream",
+      "    DeliveryStreamType: KinesisStreamAsSource",
+      "    KinesisStreamSourceConfiguration:",
+      "      KinesisStreamARN: !Ref kinesisStreamARN",
+      "      RoleARN: !Ref kinesisStreamRoleArn",
+      "    ExtendedS3DestinationConfiguration:",
+      "      BucketARN: !GetAtt GoogleTrendsBucket.Arn",
+      "      BufferingHints:",
+      "        IntervalInSeconds: 60",
+      "        SizeInMBs: 50",
+      "      CompressionFormat: UNCOMPRESSED",
+      "      Prefix: firehose/",
+      "      RoleARN: !Ref deliveryRoleArn"
+    ]
+  },
+  "cfn_event_rule_schedule": {
+    "prefix": [
+      "cfn_event_rule_schedule",
+      "cfn_schedule_lambda"
+    ],
+    "description": "CFN: Schedule Lambda via Event Rule",
+    "scope": "yaml",
+    "body": [
+      "GoogleTrendsProducerSchedule:",
+      "Type: 'AWS::Events::Rule'",
+      "Properties:",
+      "  Description: Invoke google trends lambda",
+      "  RoleArn: !GetAtt GoogleTrendsProducerScheduleExecutionRole.Arn",
+      "  ScheduleExpression: 'rate(5 minutes)'",
+      "  State: ENABLED",
+      "  Targets:",
+      "    - Id: GoogleTrendsProducerScheduleFunctionTarget",
+      "      Arn: !GetAtt GoogleTrendsProducerFunction.Arn"
+    ]
+  },
+  "cfn_user": {
+    "prefix": [
+      "cfn_user"
+    ],
+    "description": "CFN; IAM Service user",
+    "scope": "yaml",
+    "body": [
+      "${1:MyUser}:",
+      " Type: AWS::IAM::User",
+      " Properties:",
+      "   UserName: ${2:MyUserName}",
+      "   Policies:",
+      "     - PolicyName: LetsBuildGithubPolicy",
+      "       PolicyDocument:",
+      "         Version: '2012-10-17'",
+      "         Statement:",
+      "           - Action:",
+      "               - 'codecommit:*'",
+      "             Effect: Allow",
+      "             Resource: !GetAtt CodeCommitRepository.Arn"
+    ]
+  },
+}
