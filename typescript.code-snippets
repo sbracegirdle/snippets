@@ -120,6 +120,14 @@
       "function assertIsDefined<T>(val: T): asserts val is NonNullable<T> {\n    if (val === undefined || val === null) {\n        throw new Error(\n            `Expected 'val' to be defined, but received ${val}`\n        );\n    }\n}"
     ]
   },
+  "ts_utility_pick": {
+    "prefix": ["ts_pick", "ts_utility_pick"],
+    "description": "Typescript; Pick attribute utility type",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "type ${1:MyDerivedType} = Pick<${2:SourceType}, ${3:'attr1' | 'attr2'}>"
+    ]
+  },
   "ts_utility_omit": {
     "prefix": ["ts_omit", "ts_utility_omit"],
     "description": "Typescript; Omit attribute utility type",
@@ -141,6 +149,86 @@
     "body": [
       "// npm install --save @types/aws-lambda",
       "import {ScheduledHandler} from 'aws-lambda'"
+    ]
+  },
+  "ts_sequential_promise_map": {
+    "prefix": [
+      "ts_sequential_promise_map",
+      "ts_promise_chain_map",
+      "ts_promise_map"
+    ],
+    "description": "TS/JS; Map an array to promises and resolve them sequentially (where concurrency is not possible).",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "const chainMap = (arr, mapper) =>",
+      "  arr.reduce((result, item) => {",
+      "    return result.then(async resulted => resulted.concat(await mapper(item)))",
+      "  }, Promise.resolve([]))"
+    ]
+  },
+  "ts_aws_sdk_paginate": {
+    "prefix": ["ts_aws_sdk_paginate", "ts_aws_paginate"],
+    "description": "AWS SDK; Paginate through results",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "const listAccounts = async (",
+      "  orgs,",
+      "  NextToken,",
+      ") => {",
+      "  const accounts = await orgs.listAccounts({ NextToken }).promise()",
+      "",
+      "  if (!accounts.Accounts) return []",
+      "",
+      "  if (accounts.NextToken) {",
+      "    return accounts.Accounts.concat(await listAccounts(orgs, accounts.NextToken))",
+      "  } else {",
+      "    return accounts.Accounts",
+      "  }",
+      "}"
+    ]
+  },
+  "ts_axios_request": {
+    "prefix": ["ts_axios_request", "ts_http"],
+    "description": "Axios; HTTP request",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "import axios from 'axios'",
+      "",
+      "axios({",
+      "  url: 'https://slack.com/api/users.list',",
+      "  method: 'GET',",
+      "  headers: {",
+      "",
+      "  }",
+      "})"
+    ]
+  },
+  "ts_chai_expect_throw": {
+    "prefix": ["ts_chai_expect_throw"],
+    "description": "Chai; expect throws",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "expect(function () { throw new TypeError('Illegal salmon!') }).to.throw();"
+    ]
+  },
+  "ts_chai_expect_rejected": {
+    "prefix": ["ts_chai_expect_rejected", "ts_chai_promise_throw"],
+    "description": "Chai; expect rejected promise",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "// Value passed must be a promise (not a function)",
+      "await expect(myPromise('something')).to.be.rejected"
+    ]
+  },
+  "ts_sinon_stub_object": {
+    "prefix": ["ts_sinon_stub_object", "ts_sinon_mock_methods"],
+    "description": "Sinon; stub out methods in object properties",
+    "scope": "javascript,javascriptreact,typescript,typescriptreact",
+    "body": [
+      "const mockClient = {",
+      "  myMethodA: sinon.stub(),",
+      "  myMethodB: sinon.stub(),",
+      "}"
     ]
   }
 }

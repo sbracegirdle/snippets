@@ -1,10 +1,6 @@
 {
   "cfn_s3_bucket": {
-    "prefix": [
-      "cfn_bucket",
-      "cfn_s3",
-      "cfn_s3_bucket"
-    ],
+    "prefix": ["cfn_bucket", "cfn_s3", "cfn_s3_bucket"],
     "description": "CFN; S3 Bucket",
     "scope": "yaml",
     "body": [
@@ -14,16 +10,16 @@
       "  Properties:",
       "    AccessControl: Private",
       "    BucketName: !Sub 'my-source-data-store-${AWS::Region}-${AWS::AccountId}'",
+      "    VersioningConfiguration:",
+      "      Status: Enabled",
       "    BucketEncryption:",
       "      ServerSideEncryptionConfiguration:",
       "        - ServerSideEncryptionByDefault:",
-      "          SSEAlgorithm: AES256"
+      "           SSEAlgorithm: AES256"
     ]
   },
   "cfn_glue_db": {
-    "prefix": [
-      "cfn_glue_db"
-    ],
+    "prefix": ["cfn_glue_db"],
     "description": "CFN: Glue database",
     "scope": "yaml",
     "body": [
@@ -37,19 +33,13 @@
     ]
   },
   "cfn_ref_acct": {
-    "prefix": [
-      "cfn_ref_acct"
-    ],
+    "prefix": ["cfn_ref_acct"],
     "description": "CFN: Ref account ID",
     "scope": "yaml",
-    "body": [
-      "!Ref AWS::AccountId"
-    ]
+    "body": ["!Ref AWS::AccountId"]
   },
   "cfn_glue_crawler": {
-    "prefix": [
-      "cfn_glue_crawler"
-    ],
+    "prefix": ["cfn_glue_crawler"],
     "description": "CFN; Glue crawler",
     "scope": "yaml",
     "body": [
@@ -70,9 +60,7 @@
     ]
   },
   "cfn_role": {
-    "prefix": [
-      "cfn_role"
-    ],
+    "prefix": ["cfn_role"],
     "description": "CFN; IAM Role",
     "scope": "yaml",
     "body": [
@@ -103,36 +91,22 @@
     ]
   },
   "cfn_getatt": {
-    "prefix": [
-      "cfn_getatt",
-      "cfn_get_attribute"
-    ],
+    "prefix": ["cfn_getatt", "cfn_get_attribute"],
     "description": "CFN; GetAtt",
     "scope": "yaml",
-    "body": [
-      "!GetAtt ${1:MySourceCrawlerRole}.${2:Arn}"
-    ]
+    "body": ["!GetAtt ${1:MySourceCrawlerRole}.${2:Arn}"]
   },
   "cfn_get_role_arn": {
-    "prefix": [
-      "cfn_get_role_arn",
-      "cfn_iam_role_arn"
-    ],
+    "prefix": ["cfn_get_role_arn", "cfn_iam_role_arn"],
     "description": "CFN; Get IAM role ARN",
     "scope": "yaml",
-    "body": [
-      "!GetAtt ${1:MySourceCrawlerRole}.Arn"
-    ]
+    "body": ["!GetAtt ${1:MySourceCrawlerRole}.Arn"]
   },
   "cfn_sub": {
-    "prefix": [
-      "cfn_sub"
-    ],
+    "prefix": ["cfn_sub"],
     "description": "CFN; Subtstitute",
     "scope": "yaml",
-    "body": [
-      "!Sub 'my-source-data-store-${AWS::Region}-${AWS::AccountId}'"
-    ]
+    "body": ["!Sub 'my-source-data-store-${AWS::Region}-${AWS::AccountId}'"]
   },
   "cfn_lf_grant": {
     "prefix": [
@@ -158,10 +132,7 @@
     ]
   },
   "cfn_validate": {
-    "prefix": [
-      "cfn_validate",
-      "cfn_validate_template"
-    ],
+    "prefix": ["cfn_validate", "cfn_validate_template"],
     "description": "CFN; Validate Template",
     "scope": "yaml",
     "body": [
@@ -169,10 +140,7 @@
     ]
   },
   "cfn_inline_lambda": {
-    "prefix": [
-      "cfn_inline_lambda",
-      "cfn_lambda"
-    ],
+    "prefix": ["cfn_inline_lambda", "cfn_lambda"],
     "description": "CFN; Inline Lambda Function",
     "scope": "yaml",
     "body": [
@@ -180,9 +148,7 @@
     ]
   },
   "cfn_lambda_custom_resource": {
-    "prefix": [
-      "cfn_lambda_custom_resource"
-    ],
+    "prefix": ["cfn_lambda_custom_resource"],
     "description": "CFN: Lambda Custom Resource",
     "scope": "yaml",
     "body": [
@@ -190,10 +156,7 @@
     ]
   },
   "cfn_execution_role": {
-    "prefix": [
-      "cfn_execution_role",
-      "cfn_role"
-    ],
+    "prefix": ["cfn_execution_role", "cfn_role"],
     "description": "CFN: IAM role for lambda execution",
     "scope": "yaml",
     "body": [
@@ -203,9 +166,7 @@
     ]
   },
   "cfn_template": {
-    "prefix": [
-      "cfn_template"
-    ],
+    "prefix": ["cfn_template"],
     "description": "CFN: Empty template",
     "scope": "yaml",
     "body": [
@@ -226,9 +187,7 @@
     ]
   },
   "cfn_parameter": {
-    "prefix": [
-      "cfn_parameter"
-    ],
+    "prefix": ["cfn_parameter"],
     "description": "CFN: Parameter",
     "scope": "yaml",
     "body": [
@@ -236,9 +195,7 @@
     ]
   },
   "cfn_tags": {
-    "prefix": [
-      "cfn_tags"
-    ],
+    "prefix": ["cfn_tags"],
     "description": "CFN: Standard tags",
     "scope": "yaml",
     "body": [
@@ -246,9 +203,7 @@
     ]
   },
   "cfn_custom": {
-    "prefix": [
-      "cfn_custom"
-    ],
+    "prefix": ["cfn_custom"],
     "description": "CFN: Custom resource",
     "scope": "yaml",
     "body": [
@@ -256,11 +211,7 @@
     ]
   },
   "cfn_nested": {
-    "prefix": [
-      "cfn_nested",
-      "cfn_nested_stack",
-      "cfn_stack"
-    ],
+    "prefix": ["cfn_nested", "cfn_nested_stack", "cfn_stack"],
     "description": "CFN: Nested stack",
     "scope": "yaml",
     "body": [
@@ -268,20 +219,14 @@
     ]
   },
   "cfn_code_build": {
-    "prefix": [
-      "cfn_code_build",
-      "cfn_codebuild"
-    ],
+    "prefix": ["cfn_code_build", "cfn_codebuild"],
     "description": "CFN: CodeBuild",
     "body": [
       "MyCodeBuild:\n  Type: AWS::CodeBuild::Project\n  Properties:\n      Name: My-CodeBuild\n      ServiceRole: !GetAtt MyCodeBuildRole.Arn\n      Source:\n        Type: CODEPIPELINE\n      Environment:\n        ComputeType: BUILD_GENERAL1_SMALL\n        Image: \"aws/codebuild/standard: 3.0\"\n        Type: LINUX_CONTAINER\n      Artifacts:\n        Type: CODEPIPELINE"
     ]
   },
   "buildspec": {
-    "prefix": [
-      "buildspec",
-      "codebuild_spec"
-    ],
+    "prefix": ["buildspec", "codebuild_spec"],
     "description": "CodeBuild Spec (buildspec.yml)",
     "scope": "yaml",
     "body": [
@@ -289,29 +234,19 @@
     ]
   },
   "cfn_region": {
-    "prefix": [
-      "cfn_region"
-    ],
+    "prefix": ["cfn_region"],
     "description": "CFN: Region pseudo parameter",
     "scope": "yaml",
-    "body": [
-      "AWS::Region"
-    ]
+    "body": ["AWS::Region"]
   },
   "cfn_account": {
-    "prefix": [
-      "cfn_account"
-    ],
+    "prefix": ["cfn_account"],
     "description": "CFN: Account pseudo parameter",
     "scope": "yaml",
-    "body": [
-      "AWS::AccountId"
-    ]
+    "body": ["AWS::AccountId"]
   },
   "cfn_policy_document": {
-    "prefix": [
-      "cfn_policy_document"
-    ],
+    "prefix": ["cfn_policy_document"],
     "description": "CFN: Policy document",
     "scope": "yaml",
     "body": [
@@ -319,9 +254,7 @@
     ]
   },
   "cfn_assume_role_policy_document": {
-    "prefix": [
-      "cfn_assume_role_policy_document"
-    ],
+    "prefix": ["cfn_assume_role_policy_document"],
     "description": "CFN: Assume role policy document",
     "scope": "yaml",
     "body": [
@@ -329,10 +262,7 @@
     ]
   },
   "cfn_policy_logs": {
-    "prefix": [
-      "cfn_policy_logs",
-      "cfn_create_logs"
-    ],
+    "prefix": ["cfn_policy_logs", "cfn_create_logs"],
     "description": "CFN: IAM Policy to create logs",
     "scope": "yaml",
     "body": [
@@ -369,9 +299,7 @@
     ]
   },
   "cfn_codepipeline_codebuild_action": {
-    "prefix": [
-      "cfn_codepipeline_codebuild_action"
-    ],
+    "prefix": ["cfn_codepipeline_codebuild_action"],
     "description": "CFN: CodePipeline CodeBuild Action",
     "scope": "yaml",
     "body": [
@@ -394,9 +322,7 @@
     ]
   },
   "cfn_codepipeline_codecommit_action": {
-    "prefix": [
-      "cfn_codepipeline_codecommit_action"
-    ],
+    "prefix": ["cfn_codepipeline_codecommit_action"],
     "description": "CFN: CodePipeline CodeCommit Action",
     "scope": "yaml",
     "body": [
@@ -418,9 +344,7 @@
     ]
   },
   "cfn_kinesis_firehose_s3": {
-    "prefix": [
-      "cfn_kinesis_firehose_s3"
-    ],
+    "prefix": ["cfn_kinesis_firehose_s3"],
     "description": "CFN: Kinesis Firehose delivery stream to s3",
     "scope": "yaml",
     "body": [
@@ -443,10 +367,7 @@
     ]
   },
   "cfn_event_rule_schedule": {
-    "prefix": [
-      "cfn_event_rule_schedule",
-      "cfn_schedule_lambda"
-    ],
+    "prefix": ["cfn_event_rule_schedule", "cfn_schedule_lambda"],
     "description": "CFN: Schedule Lambda via Event Rule",
     "scope": "yaml",
     "body": [
@@ -463,9 +384,7 @@
     ]
   },
   "cfn_user": {
-    "prefix": [
-      "cfn_user"
-    ],
+    "prefix": ["cfn_user"],
     "description": "CFN; IAM Service user",
     "scope": "yaml",
     "body": [
@@ -483,5 +402,5 @@
       "             Effect: Allow",
       "             Resource: !GetAtt CodeCommitRepository.Arn"
     ]
-  },
+  }
 }
